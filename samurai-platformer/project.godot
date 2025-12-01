@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="SamuraiPlatformer"
+run/main_scene="uid://byilwbxgnhvmj"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
 
 [input]
 
