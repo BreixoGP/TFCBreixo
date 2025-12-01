@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://mxsmjwdj3tvw"]
+[gd_scene load_steps=77 format=3 uid="uid://mxsmjwdj3tvw"]
 
 [ext_resource type="Texture2D" uid="uid://dbcp7cx1cbf0p" path="res://assets/charachters/AfroSamurai/Attack_1_vase.png" id="1_2ch8a"]
 [ext_resource type="Script" uid="uid://li1ill2fffw1" path="res://jahmurai.gd" id="1_5s5ny"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b16dvnd5rvpv3" path="res://assets/charachters/AfroSamurai/drink.png" id="6_hpi7j"]
 [ext_resource type="Texture2D" uid="uid://bm6gt0ejlwysu" path="res://assets/charachters/AfroSamurai/Idle_vase.png" id="7_47s0o"]
 [ext_resource type="Texture2D" uid="uid://c48p2ec6f551y" path="res://assets/charachters/AfroSamurai/Jump_vase.png" id="8_qg374"]
+[ext_resource type="Texture2D" uid="uid://b4u7b3cytpl3l" path="res://assets/charachters/AfroSamurai/fall_vase.png" id="8_whbyq"]
 [ext_resource type="Texture2D" uid="uid://c5p5u35gmg13m" path="res://assets/charachters/AfroSamurai/Run_vase.png" id="9_ducs4"]
+[ext_resource type="Texture2D" uid="uid://0aiy2bqwk0wm" path="res://assets/charachters/AfroSamurai/Jump.png" id="12_43wsy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1yjrf"]
 atlas = ExtResource("1_2ch8a")
@@ -155,6 +157,14 @@ region = Rect2(128, 0, 128, 128)
 atlas = ExtResource("6_hpi7j")
 region = Rect2(256, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrlqo"]
+atlas = ExtResource("8_whbyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jl4t"]
+atlas = ExtResource("8_whbyq")
+region = Rect2(128, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_avkq4"]
 atlas = ExtResource("7_47s0o")
 region = Rect2(0, 0, 128, 128)
@@ -178,22 +188,6 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwpwx"]
 atlas = ExtResource("7_47s0o")
 region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wiej6"]
-atlas = ExtResource("8_qg374")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rueel"]
-atlas = ExtResource("8_qg374")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6x6ih"]
-atlas = ExtResource("8_qg374")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gluv2"]
-atlas = ExtResource("8_qg374")
-region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6g267"]
 atlas = ExtResource("8_qg374")
@@ -258,6 +252,14 @@ region = Rect2(768, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_v220p"]
 atlas = ExtResource("9_ducs4")
 region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rueel"]
+atlas = ExtResource("12_43wsy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x6ih"]
+atlas = ExtResource("12_43wsy")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni4o"]
 animations = [{
@@ -415,6 +417,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_nrlqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jl4t")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_avkq4")
 }, {
 "duration": 1.0,
@@ -437,18 +450,6 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wiej6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rueel")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6x6ih")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gluv2")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6g267")
 }, {
@@ -505,6 +506,23 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rueel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rueel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x6ih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x6ih")
+}],
+"loop": false,
+"name": &"wallslide",
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cu8xv"]
@@ -521,7 +539,9 @@ z_index = 10
 texture_filter = 1
 position = Vector2(1, -23)
 sprite_frames = SubResource("SpriteFrames_uni4o")
-animation = &"idle"
+animation = &"jump"
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)

@@ -3098,6 +3098,21 @@ texture = ExtResource("3_b3pde")
 sources/0 = SubResource("TileSetAtlasSource_lj644")
 sources/1 = SubResource("TileSetAtlasSource_wphk7")
 
+[sub_resource type="Animation" id="Animation_mdyhd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1716, -104)]
+}
+
 [sub_resource type="Animation" id="Animation_2v6xj"]
 resource_name = "move"
 length = 2.0
@@ -3115,7 +3130,13 @@ tracks/0/keys = {
 "values": [Vector2(1716, -104), Vector2(2020, -108)]
 }
 
-[sub_resource type="Animation" id="Animation_mdyhd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3pde"]
+_data = {
+&"RESET": SubResource("Animation_mdyhd"),
+&"move": SubResource("Animation_2v6xj")
+}
+
+[sub_resource type="Animation" id="Animation_d24es"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -3127,13 +3148,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1716, -104)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3pde"]
-_data = {
-&"RESET": SubResource("Animation_mdyhd"),
-&"move": SubResource("Animation_2v6xj")
+"values": [Vector2(3257, -329)]
 }
 
 [sub_resource type="Animation" id="Animation_hoh65"]
@@ -3153,7 +3168,13 @@ tracks/0/keys = {
 "values": [Vector2(3257, -329), Vector2(3595, -329)]
 }
 
-[sub_resource type="Animation" id="Animation_d24es"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2v6xj"]
+_data = {
+&"RESET": SubResource("Animation_d24es"),
+&"move": SubResource("Animation_hoh65")
+}
+
+[sub_resource type="Animation" id="Animation_xpv2l"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -3165,13 +3186,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3257, -329)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2v6xj"]
-_data = {
-&"RESET": SubResource("Animation_d24es"),
-&"move": SubResource("Animation_hoh65")
+"values": [Vector2(3860, -159)]
 }
 
 [sub_resource type="Animation" id="Animation_b3pde"]
@@ -3188,21 +3203,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(3860, -159), Vector2(3862, -310)]
-}
-
-[sub_resource type="Animation" id="Animation_xpv2l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3860, -159)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lj644"]
