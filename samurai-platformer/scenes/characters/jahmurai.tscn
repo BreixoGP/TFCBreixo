@@ -1,11 +1,12 @@
-[gd_scene load_steps=77 format=3 uid="uid://mxsmjwdj3tvw"]
+[gd_scene load_steps=80 format=3 uid="uid://mxsmjwdj3tvw"]
 
 [ext_resource type="Texture2D" uid="uid://dbcp7cx1cbf0p" path="res://assets/charachters/AfroSamurai/Attack_1_vase.png" id="1_2ch8a"]
-[ext_resource type="Script" uid="uid://li1ill2fffw1" path="res://jahmurai.gd" id="1_5s5ny"]
+[ext_resource type="Script" uid="uid://li1ill2fffw1" path="res://scripts/jahmurai.gd" id="1_5s5ny"]
 [ext_resource type="Texture2D" uid="uid://mqq1u77peji2" path="res://assets/charachters/AfroSamurai/Attack_2.png" id="2_5s5ny"]
 [ext_resource type="Texture2D" uid="uid://c4vywgd8c68lk" path="res://assets/charachters/AfroSamurai/Attack_3_vase.png" id="3_pnxil"]
 [ext_resource type="Texture2D" uid="uid://cepdqsw37r1a5" path="res://assets/charachters/AfroSamurai/atack_run.png" id="4_whbyq"]
 [ext_resource type="Texture2D" uid="uid://bgu2swgn4askr" path="res://assets/charachters/AfroSamurai/Dead_vase.png" id="5_43wsy"]
+[ext_resource type="Texture2D" uid="uid://cjvcf562dbnox" path="res://assets/charachters/AfroSamurai/Hurt_vase.png" id="6_43wsy"]
 [ext_resource type="Texture2D" uid="uid://b16dvnd5rvpv3" path="res://assets/charachters/AfroSamurai/drink.png" id="6_hpi7j"]
 [ext_resource type="Texture2D" uid="uid://bm6gt0ejlwysu" path="res://assets/charachters/AfroSamurai/Idle_vase.png" id="7_47s0o"]
 [ext_resource type="Texture2D" uid="uid://c48p2ec6f551y" path="res://assets/charachters/AfroSamurai/Jump_vase.png" id="8_qg374"]
@@ -132,6 +133,14 @@ region = Rect2(256, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ugv3x"]
 atlas = ExtResource("2_5s5ny")
 region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiej6"]
+atlas = ExtResource("6_43wsy")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gluv2"]
+atlas = ExtResource("6_43wsy")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_807q6"]
 atlas = ExtResource("5_43wsy")
@@ -380,6 +389,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_wiej6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gluv2")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_807q6")
 }, {
 "duration": 1.0,
@@ -529,7 +549,7 @@ animations = [{
 radius = 7.0
 height = 64.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Jahmurai" type="CharacterBody2D"]
 collision_layer = 3
 floor_max_angle = 1.3089969
 script = ExtResource("1_5s5ny")
@@ -539,8 +559,8 @@ z_index = 10
 texture_filter = 1
 position = Vector2(1, -23)
 sprite_frames = SubResource("SpriteFrames_uni4o")
-animation = &"jump"
-frame = 7
+animation = &"combo"
+frame = 8
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

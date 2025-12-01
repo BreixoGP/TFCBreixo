@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Player
+class_name Jahmurai
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
@@ -84,7 +84,7 @@ func update_animation():
 			anim.play("damage")
 			
 func get_state() -> String:
-	if life>=0:
+	if life<=0:
 		return("die")
 	if is_taking_damage:
 		return("damage")

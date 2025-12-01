@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player and !has_fallen:
+	if body is Jahmurai and !has_fallen:
 		var opacity_tween:Tween=create_tween().set_trans(Tween.TRANS_SINE)
 		var pos_tween:Tween=create_tween().set_trans(Tween.TRANS_SINE)
 		
