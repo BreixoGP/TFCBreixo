@@ -559,9 +559,7 @@ z_index = 10
 texture_filter = 1
 position = Vector2(1, -23)
 sprite_frames = SubResource("SpriteFrames_uni4o")
-animation = &"combo"
-frame = 8
-frame_progress = 1.0
+animation = &"attack3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)

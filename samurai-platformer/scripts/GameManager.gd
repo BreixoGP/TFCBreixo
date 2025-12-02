@@ -37,6 +37,12 @@ func load_level(path : String):
 	var spawn=current_level.get_node("Spawn")
 	player.global_position = spawn.global_position
 	
+	#a partir de aqui programar camra y seguimieto, falta script de camara ?
+	var cam = current_level.get_node("Camera2D")
+	cam.enabled = true 
+	cam.make_current()
+	
+	
 func add_point(value:int):
 	score+=1*value
 	print("you won "+str(value) +" points")

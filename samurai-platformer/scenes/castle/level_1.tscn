@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=24 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Texture2D" uid="uid://bg7ccn6q77lk2" path="res://assets/castle/Objects/window.png" id="2_mdyhd"]
 [ext_resource type="Texture2D" uid="uid://c7xr1pktne6j" path="res://assets/castle/eyedecoration.png" id="3_b3pde"]
 [ext_resource type="PackedScene" uid="uid://xniugj67t2f" path="res://scenes/castle/trap.tscn" id="3_hoh65"]
 [ext_resource type="PackedScene" uid="uid://bv67modj4h7vp" path="res://scenes/castle/platform.tscn" id="4_d24es"]
+[ext_resource type="Script" uid="uid://7kbs4bwb7dwf" path="res://scripts/camera.gd" id="5_mdyhd"]
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="7_xpv2l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
@@ -3239,10 +3240,14 @@ tile_map_data = PackedByteArray("AAAMAPH/AQAAAAAAAAAMAPL/AQAAAAEAAAANAPH/AQABAAA
 tile_set = SubResource("TileSet_jcfoy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(3, 0)
 limit_left = -9
 limit_top = -439
 limit_right = 4941
 limit_bottom = -2
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("5_mdyhd")
 
 [node name="Trap" parent="." instance=ExtResource("3_hoh65")]
 position = Vector2(896, -98)
