@@ -3,7 +3,7 @@ extends Node
 var levels = ["res://scenes/castle/level_1.tscn"]
 
 var level_index= 0
-var player: Node=null
+var player: Node=null #instanciamos player nulo, en main en ready se asigna
 var levelcontainer : Node = null
 var current_level : Node = null 
 var score: int = 0
@@ -15,14 +15,21 @@ var options_menu_instance:Node = null
 
 #const player_scene = preload("res://scenes/kitsune.tscn")
 #const HUD_SCENE = preload("res://scenes/lifeandpoints.tscn")
-
 #var hud_instance: LifePoints = null
+
 func _ready() -> void:
 	pass
 
 
 func load_current_level():
 		load_level(levels[level_index])
+		
+func respawn():
+		#aqui controlar el score tambien
+		await get_tree().create_timer(1.0).timeout
+		load_level(levels[level_index])
+		player.life = 10
+		player.collision.disabled = false
 		
 func load_level(path : String):
 	if current_level:
@@ -35,7 +42,7 @@ func load_level(path : String):
 	var spawn=current_level.get_node("Spawn")
 	player.global_position = spawn.global_position
 	
-		# APLICAR LÍMITES A LA CÁMARA
+	# APLICAR LÍMITES A LA CÁMARA
 	var camera = get_tree().current_scene.get_node("Camera2D")
 	if current_level.has_method("apply_camera_limits"):
 		current_level.apply_camera_limits(camera)
@@ -59,9 +66,9 @@ func add_point(value:int):
 #func get_hud():
 	#return hud_instance
 	
-func _process(_delta):
-	if Input.is_action_just_pressed("quitgame"):
-			get_tree().quit()
+#func _process(_delta):
+	#if Input.is_action_just_pressed("quitgame"):
+			#get_tree().quit()
 	#cambiar aqui si el nivel de submit score es otro distinto a 4
 	#if level <4:
 		#if Input.is_action_just_pressed("pause"):

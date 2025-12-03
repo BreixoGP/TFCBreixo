@@ -1147,11 +1147,17 @@ texture = ExtResource("1_44th0")
 33:27/0 = 0
 33:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 34:27/0 = 0
+34:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.75548, 8, 5.75548, 8, 8, -8, 8)
 35:27/0 = 0
+35:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.75548, 8, 5.75548, 8, 8, -8, 8)
 36:27/0 = 0
+36:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.75548, 8, 5.75548, 8, 8, -8, 8)
 37:27/0 = 0
+37:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.75548, 8, 5.75548, 8, 8, -8, 8)
 38:27/0 = 0
+38:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.75548, 8, 5.75548, 8, 8, -8, 8)
 39:27/0 = 0
+39:27/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 5.75548, 8, 5.75548, 8, 8, -8, 8)
 40:27/0 = 0
 41:27/0 = 0
 42:27/0 = 0
@@ -3245,7 +3251,7 @@ cam_limit_right = 4945
 [node name="torches" type="Node" parent="."]
 
 [node name="torch" parent="torches" instance=ExtResource("7_xpv2l")]
-position = Vector2(484, -96)
+position = Vector2(417, -143)
 frame_progress = 0.853357
 
 [node name="torch2" parent="torches" instance=ExtResource("7_xpv2l")]
@@ -3301,7 +3307,7 @@ libraries = {
 autoplay = "move"
 
 [node name="Spawn" type="Marker2D" parent="."]
-position = Vector2(200, -79)
+position = Vector2(202, -75)
 
 [node name="triggers" type="Node2D" parent="."]
 

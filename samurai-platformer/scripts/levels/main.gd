@@ -1,10 +1,11 @@
 extends Node2D
-@onready var jahmurai: Jahmurai = $Jahmurai
+@onready var drunkmaster: DrunkMaster = $DrunkMaster
+
 @onready var levelcontainer: Node2D = $levelcontainer
 
 
 func _ready():
-	GameManager.player = jahmurai
+	GameManager.player = drunkmaster
 	GameManager.levelcontainer=levelcontainer
 	GameManager.load_current_level()
 	

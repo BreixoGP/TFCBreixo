@@ -2,7 +2,8 @@ extends Area2D
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name=="Jahmurai":
-		var jahmurai:Jahmurai = body as Jahmurai
-		jahmurai.get_damage(jahmurai.life)
+	if body.name=="DrunkMaster":
+		var drunkmaster:DrunkMaster = body as DrunkMaster
+		drunkmaster.get_damage(drunkmaster.life)
+		
 		

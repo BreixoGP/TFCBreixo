@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Jahmurai and !has_fallen:
+	if body is DrunkMaster and !has_fallen:
 		var opacity_tween:Tween=create_tween().set_trans(Tween.TRANS_SINE)
 		var pos_tween:Tween=create_tween().set_trans(Tween.TRANS_SINE)
 		

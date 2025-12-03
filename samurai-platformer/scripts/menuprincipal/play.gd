@@ -13,4 +13,4 @@ func play():
 	GameManager.level_index = 0
 	GameManager.is_loading_game = false
 	get_tree().change_scene_to_packed(main_scene)
-	pressed.disconnect(play)
+	#pressed.disconnect(play)
