@@ -25,6 +25,9 @@ func _ready() -> void:
 
 func load_current_level():
 		load_level(levels[level_index])
+func load_next_level():
+	level_index += 1
+	load_level(levels[level_index])
 		
 func respawn():
 		#aqui controlar el score tambien

@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://btoyw8tp2yb1t"]
+
+[ext_resource type="Texture2D" uid="uid://bmvd0p2bggd4v" path="res://assets/castle/Objects/door1.png" id="1_la1wf"]
+[ext_resource type="Texture2D" uid="uid://c6ibe4x0vcfkj" path="res://assets/castle/Objects/door2.png" id="2_18pbm"]
+[ext_resource type="Texture2D" uid="uid://dvskply6b5klr" path="res://assets/castle/Objects/door4.png" id="3_q5w8r"]
+[ext_resource type="Script" uid="uid://unf7ucrc3q7e" path="res://scripts/door.gd" id="4_t58dd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ju5n0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_la1wf")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_la1wf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_la1wf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_18pbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_18pbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q5w8r")
+}],
+"loop": false,
+"name": &"open",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgbum"]
+size = Vector2(29, 42)
+
+[node name="door" type="AnimatedSprite2D"]
+position = Vector2(-1.0000019, -6)
+scale = Vector2(1.46875, 1.5625)
+sprite_frames = SubResource("SpriteFrames_ju5n0")
+animation = &"closed"
+script = ExtResource("4_t58dd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 5)
+shape = SubResource("RectangleShape2D_kgbum")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
