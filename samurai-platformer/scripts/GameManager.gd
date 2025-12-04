@@ -26,9 +26,17 @@ func load_current_level():
 		
 func respawn():
 		#aqui controlar el score tambien
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(1.5).timeout
+		player.set_physics_process(false)
 		load_level(levels[level_index])
+		
 		player.life = 10
+		
+		player.is_taking_damage = false
+		player.velocity = Vector2.ZERO
+		#player.anim.play("idle")
+		await get_tree().process_frame
+		player.set_physics_process(true)
 		player.collision.disabled = false
 		
 func load_level(path : String):

@@ -84,8 +84,6 @@ func update_animation():
 			anim.play("damage")
 			
 func get_state() -> String:
-	if life<=0:
-		return("die")
 	if is_taking_damage:
 		return("damage")
 	if is_wall_sliding:
@@ -94,10 +92,8 @@ func get_state() -> String:
 		if velocity.x==0:
 			return "idle"
 		else:
-			return "run"
-			
+			return "run"	
 	else:
-	
 		return "jump"
 		
 func get_damage(damage: int):
@@ -105,6 +101,7 @@ func get_damage(damage: int):
 		return
 	await get_tree().create_timer(0.1).timeout
 	life -= damage
+	print("getting damage")
 	#is_atacking = false
 	#GameManager.hud_instance.update_life()
 	#audiodamage.play()
