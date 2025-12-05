@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=30 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_mdyhd"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="7_xpv2l"]
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/killzone.tscn" id="8_b3pde"]
 [ext_resource type="PackedScene" uid="uid://btoyw8tp2yb1t" path="res://scenes/door.tscn" id="9_xpv2l"]
+[ext_resource type="PackedScene" uid="uid://bov7om0em5xlt" path="res://scenes/characters/oni.tscn" id="10_lj644"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("1_44th0")
@@ -3339,3 +3340,6 @@ shape = SubResource("RectangleShape2D_lj644")
 
 [node name="door" parent="." instance=ExtResource("9_xpv2l")]
 position = Vector2(4859.0005, -107.99999)
+
+[node name="Oni" parent="." instance=ExtResource("10_lj644")]
+position = Vector2(2619, -274)

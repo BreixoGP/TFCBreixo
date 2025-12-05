@@ -506,7 +506,7 @@ radius = 5.0
 height = 50.0
 
 [node name="DrunkMaster" type="CharacterBody2D"]
-collision_layer = 3
+collision_mask = 3
 floor_max_angle = 1.3089969
 script = ExtResource("1_ehg33")
 
@@ -516,7 +516,7 @@ texture_filter = 1
 position = Vector2(2.9999962, -27)
 scale = Vector2(0.79882807, 0.81640625)
 sprite_frames = SubResource("SpriteFrames_uni4o")
-animation = &"idle"
+animation = &"wallslide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cu8xv")
