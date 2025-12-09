@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bogit48m5itxx"]
+[gd_scene load_steps=20 format=4 uid="uid://bogit48m5itxx"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_lrcqy"]
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="2_lrcqy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://xniugj67t2f" path="res://scenes/castle/trap.tscn" id="6_kb5dt"]
 [ext_resource type="PackedScene" uid="uid://bv67modj4h7vp" path="res://scenes/castle/platform.tscn" id="7_5i2iw"]
 [ext_resource type="PackedScene" uid="uid://btoyw8tp2yb1t" path="res://scenes/door.tscn" id="8_anhi0"]
+[ext_resource type="PackedScene" uid="uid://bov7om0em5xlt" path="res://scenes/characters/oni.tscn" id="9_anhi0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("3_anhi0")
@@ -3219,4 +3220,11 @@ position = Vector2(1085, -104)
 position = Vector2(236, -88)
 
 [node name="door" parent="." instance=ExtResource("8_anhi0")]
-position = Vector2(4896.9995, -347)
+position = Vector2(4905.5, -338.5)
+scale = Vector2(1.2656326, 1.265625)
+
+[node name="Oni" parent="." instance=ExtResource("9_anhi0")]
+position = Vector2(1315, -224)
+
+[node name="Oni2" parent="." instance=ExtResource("9_anhi0")]
+position = Vector2(1609, -224)

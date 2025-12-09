@@ -506,6 +506,7 @@ radius = 5.0
 height = 50.0
 
 [node name="DrunkMaster" type="CharacterBody2D"]
+collision_layer = 4
 collision_mask = 3
 floor_max_angle = 1.3089969
 script = ExtResource("1_ehg33")

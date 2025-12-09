@@ -40,13 +40,12 @@ animations = [{
 size = Vector2(29, 42)
 
 [node name="door" type="AnimatedSprite2D"]
-position = Vector2(-1.0000019, -6)
-scale = Vector2(1.46875, 1.5625)
 sprite_frames = SubResource("SpriteFrames_ju5n0")
 animation = &"closed"
 script = ExtResource("4_t58dd")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.5, 5)

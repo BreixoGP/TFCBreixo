@@ -4,11 +4,13 @@ extends CharacterBody2D
 @onready var anim: AnimatedSprite2D = $Flipper/AnimatedSprite2D
 @onready var raywall: RayCast2D = $Flipper/raywall
 @onready var rayfloor: RayCast2D = $Flipper/rayfloor
+@onready var rayspikes: RayCast2D = $Flipper/rayspikes
 
 enum State { IDLE, PATROL, CHASE, ATTACK, HURT, DEAD }
 var state: State = State.IDLE
 var direction= -1
 var life = 5
+var patrol_time = 0.0
 const SPEED = 150.0
 
 
@@ -53,16 +55,23 @@ func state_idle(_delta):
 	velocity.x=0
 	
 func state_patrol(_delta):
+	if patrol_time <= 0.0:
+		patrol_time = randf_range(3.0,10.0)
+		
 	play_anim("patrol")
 	velocity.x = direction * SPEED 
 	if should_turn():
 		turn()
 	
+	patrol_time -= _delta
+	if patrol_time <= 0.0:
+		state = State.IDLE
+	
 func state_chase(_delta):
 	play_anim("chase")
 	if GameManager.player:
 		set_direction(sign(GameManager.player.global_position.x - global_position.x))
-		if rayfloor.is_colliding() and not raywall.is_colliding():
+		if rayfloor.is_colliding() and not raywall.is_colliding() and not rayspikes.is_colliding():
 			velocity.x = direction * SPEED * 1.3
 		else:
 			velocity.x = 0
@@ -102,7 +111,7 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 		state = State.PATROL
 		
 func should_turn() -> bool :
-	if raywall.is_colliding():
+	if raywall.is_colliding() or rayspikes.is_colliding():
 		return true
 	if not rayfloor.is_colliding():
 		return true

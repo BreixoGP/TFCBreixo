@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjgeo60jocqc7"]
+
+[ext_resource type="Script" uid="uid://bvaqhwx43mw7u" path="res://scripts/killzone.gd" id="1_xlapc"]
+[ext_resource type="Texture2D" uid="uid://bi141waliw02l" path="res://assets/castle/tile39.png" id="2_kl8fp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2mit"]
+size = Vector2(44, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw1oh"]
+size = Vector2(43, 7)
+
+[node name="spikes" type="StaticBody2D"]
+collision_layer = 9
+
+[node name="Killzone" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_xlapc")
+
+[node name="killzone_collision" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 18.5)
+shape = SubResource("RectangleShape2D_j2mit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 20.5)
+shape = SubResource("RectangleShape2D_mw1oh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kl8fp")
+
+[connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]

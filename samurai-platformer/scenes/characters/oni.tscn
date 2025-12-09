@@ -288,11 +288,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh407"]
-radius = 42.96886
-height = 409.88254
+radius = 55.999275
+height = 339.9344
 
 [node name="Oni" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 5
 floor_max_angle = 1.3089969
 script = ExtResource("1_lh407")
 
@@ -303,6 +304,7 @@ shape = SubResource("CapsuleShape2D_c8068")
 [node name="Flipper" type="Node2D" parent="."]
 
 [node name="attack_area" type="Area2D" parent="Flipper"]
+collision_mask = 4
 
 [node name="attack_collision" type="CollisionShape2D" parent="Flipper/attack_area"]
 position = Vector2(18, 23)
@@ -315,14 +317,20 @@ frame = 4
 frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]
-position = Vector2(0, 46)
+position = Vector2(0, 37)
 target_position = Vector2(20, 0)
 
 [node name="rayfloor" type="RayCast2D" parent="Flipper"]
-position = Vector2(36, 32)
-target_position = Vector2(1, 87)
+position = Vector2(17, 32)
+target_position = Vector2(1, 77)
+
+[node name="rayspikes" type="RayCast2D" parent="Flipper"]
+position = Vector2(37, 31)
+target_position = Vector2(1, 77)
+collision_mask = 8
 
 [node name="detection_area" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="detection_collision" type="CollisionShape2D" parent="detection_area"]
 position = Vector2(-1, 24)
