@@ -142,7 +142,7 @@ func take_damage(amount: int, from_position: Vector2,attack_type: int):
 			apply_knockback(amount,from_position,attack_type)
 
 
-func apply_knockback(amount: int,from_position: Vector2,attack_type:int, knockback_strength: float = 400.0, knockback_time: float = 0.1):
+func apply_knockback(amount: int,from_position: Vector2,attack_type:int, knockback_strength: float = 400.0, knockback_time: float = 0.2):
 	var dir = global_position - from_position
 	dir.x = sign(dir.x)  
 
@@ -155,7 +155,7 @@ func apply_knockback(amount: int,from_position: Vector2,attack_type:int, knockba
 	velocity = dir * (knockback_strength * amount) 
 	
 	# Timer para detener el knockback
-	var t = get_tree().create_timer(knockback_time)
+	var t = get_tree().create_timer(knockback_time *  amount)
 	t.connect("timeout", Callable(self, "_end_knockback"))
 
 func _end_knockback():

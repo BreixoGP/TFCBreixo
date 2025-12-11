@@ -335,7 +335,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh407"]
-radius = 55.999275
+radius = 79.00917
 height = 339.9344
 
 [node name="Oni" type="CharacterBody2D" groups=["Enemies"]]
@@ -362,9 +362,7 @@ shape = SubResource("CapsuleShape2D_krfje")
 position = Vector2(6, -9)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
-animation = &"die"
-frame = 4
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]
 position = Vector2(0, 37)
@@ -388,7 +386,7 @@ collision_mask = 4
 collision_mask = 4
 
 [node name="detection_collision" type="CollisionShape2D" parent="detection_area"]
-position = Vector2(-1, 24)
+position = Vector2(2, 39)
 rotation = 1.5758936
 shape = SubResource("CapsuleShape2D_lh407")
 
