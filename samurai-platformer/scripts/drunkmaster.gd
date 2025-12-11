@@ -20,7 +20,8 @@ const WALL_JUMP_PUSHBACK = 100.0
 const WALL_SLIDE_GRAVITY = 100.0
 
 func _ready():
-	anim.connect("frame_changed", Callable(self, "_on_frame_changed"))
+	if not anim.is_connected("frame_changed", Callable(self, "_on_frame_changed")):
+		anim.connect("frame_changed", Callable(self, "_on_frame_changed"))
 	
 func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
@@ -122,11 +123,11 @@ func _on_frame_changed():
 		kick_hitbox.monitoring = (anim.frame == 2)
 		
 # DAÑO Y KNOCKBACK
-func take_damage(damage: int, from_position: Vector2):
+func take_damage(amount: int, from_position: Vector2,attack_type: int):
 	if life <= 0:
 		return  # ya muerto
 
-	life -= damage
+	life -= amount
 	
 	if life <= 0:
 		state = State.DEAD
@@ -137,13 +138,23 @@ func take_damage(damage: int, from_position: Vector2):
 		# Aplica knockback solo si no estás ya en HURT
 		if state != State.HURT:
 			state = State.HURT
-			anim.modulate = Color(1.0, 0.494, 0.427, 0.635)
-			apply_knockback(from_position)
+			anim.modulate = Color(0.878, 0.0, 0.0, 0.682)
+			apply_knockback(amount,from_position,attack_type)
 
 
-func apply_knockback(from_position: Vector2, knockback_strength: float = 800.0, knockback_time: float = 0.1):
-	var dir = (global_position - from_position).normalized()
-	velocity = dir * knockback_strength
+func apply_knockback(amount: int,from_position: Vector2,attack_type:int, knockback_strength: float = 400.0, knockback_time: float = 0.1):
+	var dir = global_position - from_position
+	dir.x = sign(dir.x)  
+
+	if attack_type == 1:  
+		dir.y = -0.5       
+	else:
+		dir.y = 0        
+
+	dir = dir.normalized()
+	velocity = dir * (knockback_strength * amount) 
+	
+	# Timer para detener el knockback
 	var t = get_tree().create_timer(knockback_time)
 	t.connect("timeout", Callable(self, "_end_knockback"))
 
@@ -169,9 +180,9 @@ func kick():
 
 func _on_punch_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemies"):
-		body.take_damage(punch_power,global_position)
+		body.take_damage(punch_power,global_position,0)
 
 
 func _on_kick_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemies"):
-		body.take_damage(kick_power,global_position)
+		body.take_damage(kick_power,global_position,1)

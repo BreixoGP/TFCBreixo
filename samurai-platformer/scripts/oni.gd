@@ -20,37 +20,31 @@ const SPEED = 150.0
 var attack_cooldown = 1.0 
 var attack_timer = 0.0
 
+# ------------------- READY ------------------- #
 func _ready():
 	state = State.IDLE
 	play_anim("idle")
 
+# ------------------- PHYSICS ------------------- #
 func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
 		state_dead(delta)
-		move_and_slide()
-		if not is_on_floor():
-			velocity += get_gravity() * delta
-		else:
-			velocity.y = 0
-		return
+	else:
+		attack_timer = max(attack_timer - delta, 0)
+		proccess_state(delta)
 
-	attack_timer -= delta
-	if attack_timer < 0:
-		attack_timer = 0
-
-	proccess_state(delta)
 	move_and_slide()
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = 0
 
-#---------------------- Animación protegida ----------------------#
+# ------------------- Animación protegida ------------------- #
 func play_anim(anim_name: String):
 	if anim.animation != anim_name:
 		anim.play(anim_name)
 
-#---------------------- Estados ----------------------#
+# ------------------- Estados ------------------- #
 func proccess_state(delta):
 	match state:
 		State.IDLE: state_idle(delta)
@@ -77,51 +71,57 @@ func state_patrol(_delta):
 		state = State.IDLE
 
 func state_chase(_delta):
-	play_anim("chase")
-	if GameManager.player:
-		set_direction(sign(GameManager.player.global_position.x - global_position.x))
-		var can_move = rayfloor.is_colliding() and not raywall.is_colliding() and not rayspikes.is_colliding()
-		velocity.x = direction * SPEED * 1.3 if can_move else 0.0
-		if rayattack.is_colliding():
-			state = State.READY
-		if not can_move:
-			velocity.x = 0
-			state = State.IDLE
+	if state != State.HURT:  # Bloquea chase si está recibiendo knockback
+		play_anim("chase")
+		if GameManager.player:
+			set_direction(sign(GameManager.player.global_position.x - global_position.x))
+			var can_move = rayfloor.is_colliding() and not raywall.is_colliding() and not rayspikes.is_colliding()
+			velocity.x = direction * SPEED * 1.3 if can_move else 0.0
+			if rayattack.is_colliding():
+				state = State.READY
+			if not can_move:
+				velocity.x = 0
+				state = State.IDLE
 
 func state_ready(_delta):
-	velocity.x = 0
-	play_anim("ready")
-	if attack_timer == 0:
-		state = State.ATTACK
+	if state != State.HURT:
+		velocity.x = 0
+		play_anim("ready")
+		if attack_timer == 0:
+			state = State.ATTACK
 
 func state_attack(_delta):
-	velocity.x = 0
-	play_anim("attack")
-	if anim.frame == 2 or anim.frame == 6:
-		attack_hitbox.monitoring = true
-	else:
-		attack_hitbox.monitoring = false
-	var frames = anim.sprite_frames.get_frame_count("attack")
-	if anim.frame == frames - 1:
-		state = State.CHASE
-		attack_timer = attack_cooldown
+	if state != State.HURT:
+		velocity.x = 0
+		play_anim("attack")
+		if anim.frame == 2 or anim.frame == 6:
+			attack_hitbox.monitoring = true
+		else:
+			attack_hitbox.monitoring = false
+		var frames = anim.sprite_frames.get_frame_count("attack")
+		if anim.frame == frames - 1:
+			state = State.CHASE
+			attack_timer = attack_cooldown
 
 func state_hurt(_delta):
-	velocity.x = 0
 	play_anim("hurt")
+	# El knockback se aplica mientras está en HURT
+	# Bloquea cualquier movimiento hasta que toque suelo y velocidad horizontal casi 0
+	if is_on_floor() and abs(velocity.x) < 1.0:
+		print("desaciendo hurt")
+		velocity = Vector2.ZERO
+		anim.modulate = Color(1,1,1,1)
+		if state != State.DEAD:
+			state = State.CHASE
 
 func state_dead(_delta):
 	velocity = Vector2.ZERO
 	if anim.animation != "die":
-		# Desactivar colisiones
 		attack_hitbox.set_deferred("monitoring", false)
 		attack_hitbox.set_deferred("monitorable", false)
 		hurtbox.set_deferred("disabled", true)
-
-		# Reproducir animación de muerte
 		play_anim("die")
 
-		# Timer para eliminar el nodo al final de la animación
 		var frames = anim.sprite_frames.get_frame_count("die")
 		var fps = anim.sprite_frames.get_animation_speed("die")
 		if fps > 0:
@@ -132,8 +132,8 @@ func state_dead(_delta):
 			add_child(t)
 			t.start()
 
-#---------------------- Lógica ----------------------#
-func take_damage(amount, enemyposition: Vector2):
+# ------------------- Lógica ------------------- #
+func take_damage(amount, enemyposition: Vector2, attacktype: int):
 	if state == State.DEAD:
 		return
 	life -= amount
@@ -141,20 +141,23 @@ func take_damage(amount, enemyposition: Vector2):
 		state = State.DEAD
 	else:
 		state = State.HURT
-		apply_knockback(enemyposition)
+		anim.modulate = Color(0.796, 0.0, 0.0, 0.741)
+		apply_knockback(amount, enemyposition, attacktype)
 
-func apply_knockback(from_position: Vector2, knockback_strength: float = 800.0, knockback_time: float = 0.1):
-	var dir = (global_position - from_position).normalized()
-	velocity = dir * knockback_strength
-	var t = get_tree().create_timer(knockback_time)
+func apply_knockback(amount:int, from_position: Vector2, attack_type:int, knockback_strength: float = 100.0,knockback_time = 0.2):
+	var dir = global_position - from_position
+	dir.x = sign(dir.x)  
+	dir.y = -1.0 if attack_type == 1.0 else 0.0
+	dir = dir.normalized()
+	velocity = dir * (knockback_strength * amount)  # fuerza proporcional
+	var t = get_tree().create_timer(amount * knockback_time)
 	t.connect("timeout", Callable(self, "_end_knockback"))
 
 func _end_knockback():
-	anim.modulate = Color(1,1,1,1)
-	velocity.x = 0
 	if state != State.DEAD:
 		state = State.CHASE
-
+		anim.modulate = Color(1,1,1,1)
+# ------------------- Detección ------------------- #
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if state == State.DEAD: return
 	if body is DrunkMaster:
@@ -177,8 +180,7 @@ func turn():
 	set_direction(direction)
 
 func set_direction(dir):
-	if dir == 0:
-		return
+	if dir == 0: return
 	direction = dir
 	var base_scale_x = abs(flipper.scale.x)
 	flipper.scale.x = base_scale_x if dir > 0 else -base_scale_x
@@ -186,4 +188,4 @@ func set_direction(dir):
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body is DrunkMaster:
 		var drunkmaster: DrunkMaster = body as DrunkMaster
-		drunkmaster.take_damage(attack_power, global_position)
+		drunkmaster.take_damage(attack_power, global_position, 0)
