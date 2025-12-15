@@ -16,7 +16,9 @@ var is_loading_game : bool = false
 var how_to_play_instance: Node = null
 var options_menu_instance:Node = null
 
-#const player_scene = preload("res://scenes/kitsune.tscn")
+#habilidades drukmaster
+var wall_ability_unlocked: bool = false   # permanente
+var wall_ability_active: bool = false     # intento actual
 #const HUD_SCENE = preload("res://scenes/lifeandpoints.tscn")
 #var hud_instance: LifePoints = null
 

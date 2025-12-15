@@ -30,7 +30,9 @@ func _physics_process(delta: float) -> void:
 	# Aplicar gravedad siempre
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	# WALL SLIDE
+	if state == State.WALLSLIDE:
+		velocity.y = min(velocity.y, WALL_SLIDE_GRAVITY)
 	# Llamamos a handle_input que decide todo lo relacionado con inputs
 	handle_input(delta)
 
@@ -77,7 +79,7 @@ func handle_input(_delta):
 func _jump():
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	elif is_on_wall():
+	elif state == State.WALLSLIDE:
 		velocity.y = JUMP_VELOCITY
 		if Input.is_action_pressed("move_right"):
 			velocity.x = -WALL_JUMP_PUSHBACK
@@ -89,14 +91,18 @@ func _jump():
 func update_state():
 	if life <= 0:
 		state = State.DEAD
+		return
 	if state in [State.PUNCH, State.KICK]:
 		return
-	elif is_on_wall() and not is_on_floor() and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
+	if is_on_wall() and not is_on_floor() and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 		state = State.WALLSLIDE
-	elif not is_on_floor():
+		return
+	if not is_on_floor():
 		state = State.JUMP if velocity.y < 0 else State.FALL
+		return
 	else:
 		state = State.RUN if velocity.x != 0 else State.IDLE
+		return
 
 # ANIMACIONES
 func play_animation():
