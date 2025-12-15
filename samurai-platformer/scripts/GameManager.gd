@@ -31,11 +31,14 @@ func load_current_level():
 func load_next_level():
 	level_index += 1
 	load_level(levels[level_index])
+
 		
 func respawn():
 		#aqui controlar el score tambien
 		fade.fade_to_black()
 		await get_tree().create_timer(1.5).timeout
+		
+		wall_ability_active = false
 		player.set_physics_process(false)
 		player.collision.disabled = true
 		player.velocity = Vector2.ZERO
@@ -56,10 +59,9 @@ func load_level(path : String):
 	var scene = load (path)
 	current_level = scene.instantiate()
 	levelcontainer.add_child(current_level)
-	
-	var spawn=current_level.get_node("Spawn")
+	var spawn = current_level.get_node("Spawn")
 	player.global_position = spawn.global_position
-	
+
 	# APLICAR LÍMITES A LA CÁMARA
 	var camera = get_tree().current_scene.get_node("Camera2D")
 	if current_level.has_method("apply_camera_limits"):

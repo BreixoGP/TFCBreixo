@@ -94,7 +94,8 @@ func update_state():
 		return
 	if state in [State.PUNCH, State.KICK]:
 		return
-	if is_on_wall() and not is_on_floor() and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
+	if is_on_wall() and not is_on_floor() and (Input.is_action_pressed("move_left")
+	 or Input.is_action_pressed("move_right")) and GameManager.wall_ability_active:
 		state = State.WALLSLIDE
 		return
 	if not is_on_floor():
