@@ -137,6 +137,7 @@ func take_damage(amount: int, from_position: Vector2,attack_type: int):
 	life -= amount
 	if GameManager.hud:
 		GameManager.hud.update_health(life)
+		GameManager.hud.shake()
 	
 	
 	if life <= 0:

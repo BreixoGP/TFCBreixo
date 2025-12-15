@@ -160,7 +160,7 @@ offset_right = 227.0
 offset_bottom = 53.0
 mouse_filter = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer"]
+[node name="life_bottle" type="AnimatedSprite2D" parent="HBoxContainer"]
 position = Vector2(193.00002, -3.9999998)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_03o4m")
