@@ -82,6 +82,8 @@ func state_chase(_delta):
 			if not can_move:
 				velocity.x = 0
 				state = State.IDLE
+			if velocity.x == 0:
+				state = State.IDLE
 
 func state_ready(_delta):
 	if state != State.HURT:

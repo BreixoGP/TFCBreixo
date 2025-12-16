@@ -127,7 +127,7 @@ func _on_frame_changed():
 		punch_hitbox.monitoring = (anim.frame == 2 or anim.frame == 5)
 
 	if state == State.KICK:
-		kick_hitbox.monitoring = (anim.frame == 2)
+		kick_hitbox.monitoring = (anim.frame == 3)
 		
 # DAÑO Y KNOCKBACK
 func take_damage(amount: int, from_position: Vector2,attack_type: int):
@@ -179,14 +179,22 @@ func punch():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD]:
 		return
 	state = State.PUNCH
-	attack_timer = 0.466  # ajustar duracion
 	anim.play("punch")
+	
+	var frame_count = anim.sprite_frames.get_frame_count("punch")
+	var fps = anim.sprite_frames.get_animation_speed("punch")  # velocidad de la animación
+	attack_timer = frame_count / fps  # duración automática
+
 func kick():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD]:
 		return
 	state = State.KICK
-	attack_timer = 0.4  # ajustar duracion
 	anim.play("kick")
+	
+	var frame_count = anim.sprite_frames.get_frame_count("kick")
+	var fps = anim.sprite_frames.get_animation_speed("kick")
+	attack_timer = frame_count / fps
+
 
 
 func _on_punch_hitbox_body_entered(body: Node2D) -> void:

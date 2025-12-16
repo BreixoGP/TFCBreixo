@@ -154,10 +154,10 @@ animations = [{
 script = ExtResource("1_6fi6k")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 23.0
-offset_top = 21.0
-offset_right = 227.0
-offset_bottom = 53.0
+offset_left = 40.0
+offset_top = 10.0
+offset_right = 244.0
+offset_bottom = 42.0
 mouse_filter = 2
 
 [node name="life_bottle" type="AnimatedSprite2D" parent="HBoxContainer"]

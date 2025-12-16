@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://mxsmjwdj3tvw"]
+[gd_scene load_steps=67 format=3 uid="uid://mxsmjwdj3tvw"]
 
 [ext_resource type="Script" uid="uid://li1ill2fffw1" path="res://scripts/drunkmaster.gd" id="1_ehg33"]
 [ext_resource type="Texture2D" uid="uid://blb8kmm3wp6vh" path="res://assets/charachters/DrunkMaster/Attack_1Drunk.png" id="2_x3l2y"]
@@ -147,6 +147,10 @@ region = Rect2(1152, 0, 128, 128)
 atlas = ExtResource("4_qxh6c")
 region = Rect2(0, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap1qe"]
+atlas = ExtResource("10_e7mqi")
+region = Rect2(512, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7oie7"]
 atlas = ExtResource("4_qxh6c")
 region = Rect2(128, 0, 128, 128)
@@ -219,9 +223,9 @@ region = Rect2(768, 0, 128, 128)
 atlas = ExtResource("10_e7mqi")
 region = Rect2(896, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_amfnl"]
-atlas = ExtResource("3_sns30")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_p65w1"]
+atlas = ExtResource("9_1hk1y")
+region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni4o"]
 animations = [{
@@ -365,6 +369,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_ukpf2")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ap1qe")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7oie7")
 }, {
 "duration": 1.0,
@@ -434,7 +441,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_amfnl")
+"texture": SubResource("AtlasTexture_p65w1")
 }],
 "loop": false,
 "name": &"wallslide",
@@ -471,7 +478,7 @@ texture_filter = 1
 position = Vector2(2.9999962, -27)
 scale = Vector2(0.79882807, 0.81640625)
 sprite_frames = SubResource("SpriteFrames_uni4o")
-animation = &"fall"
+animation = &"kick"
 
 [node name="kick_hitbox" type="Area2D" parent="flipper"]
 collision_layer = 3

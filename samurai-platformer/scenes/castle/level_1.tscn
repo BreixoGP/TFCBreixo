@@ -3504,11 +3504,11 @@ autoplay = "move"
 position = Vector2(202, -75)
 
 [node name="door" parent="." instance=ExtResource("9_xpv2l")]
-position = Vector2(4866.5, -99)
+position = Vector2(85.00049, -143)
 scale = Vector2(1.2343674, 1.2812499)
 
 [node name="Oni" parent="." instance=ExtResource("10_lj644")]
-position = Vector2(2619, -274)
+position = Vector2(2345, -135)
 
 [node name="spikes" type="Node" parent="."]
 

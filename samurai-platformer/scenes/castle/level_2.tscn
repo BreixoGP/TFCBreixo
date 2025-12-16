@@ -3221,7 +3221,7 @@ position = Vector2(1085, -104)
 position = Vector2(236, -88)
 
 [node name="door" parent="." instance=ExtResource("8_anhi0")]
-position = Vector2(4905.5, -338.5)
+position = Vector2(112, -107)
 scale = Vector2(1.2656326, 1.265625)
 
 [node name="spikes" type="Node" parent="."]
