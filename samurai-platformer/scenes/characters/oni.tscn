@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bov7om0em5xlt"]
+[gd_scene load_steps=59 format=3 uid="uid://bov7om0em5xlt"]
 
 [ext_resource type="Texture2D" uid="uid://xbvc35twjbra" path="res://assets/charachters/Gotoku/Attack_1.png" id="1_evch6"]
 [ext_resource type="Script" uid="uid://cq40rcbw7wwht" path="res://scripts/oni.gd" id="1_lh407"]
@@ -7,11 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://db00nksmptp3q" path="res://assets/charachters/Gotoku/Hurt.png" id="4_xv7lt"]
 [ext_resource type="Texture2D" uid="uid://4q5pia1wwq6o" path="res://assets/charachters/Gotoku/Dead.png" id="5_s6rll"]
 [ext_resource type="Texture2D" uid="uid://bwhummcphmxe4" path="res://assets/charachters/Gotoku/Idle.png" id="6_jw7en"]
+[ext_resource type="Texture2D" uid="uid://ftff37adrqec" path="res://assets/charachters/Gotoku/Jump.png" id="6_xv7lt"]
 [ext_resource type="Texture2D" uid="uid://in0tf7ujpbrp" path="res://assets/charachters/Gotoku/Walk.png" id="7_l2i6h"]
 [ext_resource type="Texture2D" uid="uid://86o73ytkfdtm" path="res://assets/charachters/Gotoku/Scream.png" id="9_krfje"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8068"]
-radius = 11.0
+radius = 12.99732
 height = 72.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_krfje"]
@@ -97,6 +98,26 @@ region = Rect2(384, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_np85o"]
 atlas = ExtResource("5_s6rll")
 region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v6m6"]
+atlas = ExtResource("6_xv7lt")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8068"]
+atlas = ExtResource("6_xv7lt")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qxph"]
+atlas = ExtResource("6_xv7lt")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqfgq"]
+atlas = ExtResource("6_xv7lt")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lwqb"]
+atlas = ExtResource("6_xv7lt")
+region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ymlh"]
 atlas = ExtResource("4_xv7lt")
@@ -249,6 +270,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0v6m6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8068")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qxph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqfgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lwqb")
+}],
+"loop": false,
+"name": &"head",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_4ymlh")
 }, {
 "duration": 1.0,
@@ -334,6 +375,10 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xv7lt"]
+radius = 6.0
+height = 16.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh407"]
 radius = 79.00917
 height = 339.9344
@@ -345,7 +390,8 @@ floor_max_angle = 1.3089969
 script = ExtResource("1_lh407")
 
 [node name="hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(1, 32)
+position = Vector2(0, 32)
+rotation = -3.1442285
 shape = SubResource("CapsuleShape2D_c8068")
 
 [node name="Flipper" type="Node2D" parent="."]
@@ -362,7 +408,9 @@ shape = SubResource("CapsuleShape2D_krfje")
 position = Vector2(6, -9)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
-animation = &"idle"
+animation = &"head"
+frame = 4
+frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]
 position = Vector2(0, 37)
@@ -382,6 +430,14 @@ position = Vector2(-1, 24)
 target_position = Vector2(35, 0)
 collision_mask = 4
 
+[node name="head_hitbox" type="Area2D" parent="Flipper"]
+collision_mask = 4
+
+[node name="head_collision" type="CollisionShape2D" parent="Flipper/head_hitbox"]
+position = Vector2(-3, -14)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_xv7lt")
+
 [node name="detection_area" type="Area2D" parent="."]
 collision_mask = 4
 
@@ -391,5 +447,6 @@ rotation = 1.5758936
 shape = SubResource("CapsuleShape2D_lh407")
 
 [connection signal="body_entered" from="Flipper/attack_hitbox" to="." method="_on_attack_hitbox_body_entered"]
+[connection signal="body_entered" from="Flipper/head_hitbox" to="." method="_on_head_hitbox_body_entered"]
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

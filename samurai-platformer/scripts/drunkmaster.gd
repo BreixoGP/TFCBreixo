@@ -159,9 +159,11 @@ func apply_knockback(amount: int,from_position: Vector2,attack_type:int, knockba
 
 	if attack_type == 1:  
 		dir.y = -0.5       
-	else:
+	elif attack_type == 0:
 		dir.y = 0        
-
+	elif attack_type == 3:
+		dir.y = -1
+		dir.x *= 1.5
 	dir = dir.normalized()
 	velocity = dir * (knockback_strength * amount) 
 	

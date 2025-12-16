@@ -8,8 +8,10 @@ extends CharacterBody2D
 @onready var rayattack: RayCast2D = $Flipper/rayattack
 @onready var attack_hitbox: Area2D = $Flipper/attack_hitbox
 @onready var hurtbox: CollisionShape2D = $hurtbox
+@onready var head_hitbox: Area2D = $Flipper/head_hitbox
 
-enum State { IDLE, PATROL, CHASE, READY, ATTACK, HURT, DEAD }
+
+enum State { IDLE, PATROL, CHASE, READY, ATTACK,HEAD, HURT, DEAD }
 var state: State = State.IDLE
 var direction = -1
 var life = 5
@@ -19,7 +21,7 @@ const SPEED = 150.0
 
 var attack_cooldown = 1.0 
 var attack_timer = 0.0
-
+var head_timer_started = false
 # ------------------- READY ------------------- #
 func _ready():
 	state = State.IDLE
@@ -52,6 +54,7 @@ func proccess_state(delta):
 		State.CHASE: state_chase(delta)
 		State.READY: state_ready(delta)
 		State.ATTACK: state_attack(delta)
+		State.HEAD: state_head(delta)
 		State.HURT: state_hurt(delta)
 		State.DEAD: state_dead(delta)
 
@@ -105,6 +108,20 @@ func state_attack(_delta):
 			state = State.CHASE
 			attack_timer = attack_cooldown
 
+func state_head(_delta):
+	velocity.x = 0
+	play_anim("head")
+	
+	var frames = anim.sprite_frames.get_frame_count("head")
+	var fps = anim.sprite_frames.get_animation_speed("head")
+	if fps > 0:
+		var t = Timer.new()
+		t.wait_time = frames / fps
+		t.one_shot = true
+		t.connect("timeout", Callable(self, "_on_head_timer_timeout"))
+		add_child(t)
+		t.start()
+		
 func state_hurt(_delta):
 	play_anim("hurt")
 	# El knockback se aplica mientras está en HURT
@@ -191,3 +208,20 @@ func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body is DrunkMaster:
 		var drunkmaster: DrunkMaster = body as DrunkMaster
 		drunkmaster.take_damage(attack_power, global_position, 0)
+
+
+func _on_head_hitbox_body_entered(body: Node2D) -> void:
+	if body is DrunkMaster:
+		player_on_head(body)
+
+func player_on_head(player : DrunkMaster):
+	if state in [State.DEAD, State.HURT, State.HEAD]:
+		return
+	state = State.HEAD
+	
+	player.take_damage(1, global_position, 3)
+
+func _on_head_timer_timeout():
+	if state == State.HEAD:
+		state = State.CHASE
+		head_timer_started = false
