@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-@onready var message_label: Label = $MessageLabel
+
+@onready var message_label: Label = $HBoxContainer2/message_label
 
 @onready var points_label: Label = $HBoxContainer/points_label
 @onready var life_bottle: AnimatedSprite2D = $HBoxContainer/life_bottle

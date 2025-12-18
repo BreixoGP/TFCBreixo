@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bov7om0em5xlt"]
+[gd_scene load_steps=60 format=3 uid="uid://bov7om0em5xlt"]
 
 [ext_resource type="Texture2D" uid="uid://xbvc35twjbra" path="res://assets/charachters/Gotoku/Attack_1.png" id="1_evch6"]
 [ext_resource type="Script" uid="uid://cq40rcbw7wwht" path="res://scripts/oni.gd" id="1_lh407"]
@@ -110,6 +110,10 @@ region = Rect2(128, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3qxph"]
 atlas = ExtResource("6_xv7lt")
 region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qp13"]
+atlas = ExtResource("6_xv7lt")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqfgq"]
 atlas = ExtResource("6_xv7lt")
@@ -279,6 +283,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_3qxph")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4qp13")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_tqfgq")
 }, {
 "duration": 1.0,
@@ -409,7 +416,7 @@ position = Vector2(6, -9)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
 animation = &"head"
-frame = 4
+frame = 5
 frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]

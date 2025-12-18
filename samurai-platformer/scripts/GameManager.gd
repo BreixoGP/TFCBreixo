@@ -35,13 +35,13 @@ func load_next_level():
 	level_index += 1
 	wall_ability_active = wall_ability_unlocked
 	load_level(levels[level_index])
-
+	saved_score = score
 		
 func respawn():
 		#aqui controlar el score tambien
 		fade.fade_to_black()
 		await get_tree().create_timer(1.5).timeout
-		
+		score = saved_score
 		wall_ability_active = wall_ability_unlocked
 		player.set_physics_process(false)
 		player.collision.disabled = true
@@ -52,6 +52,7 @@ func respawn():
 		player.life = 10
 		if hud:
 			hud.update_health(player.life)
+			hud.update_points()
 		player.update_state()
 		await get_tree().process_frame
 		player.set_physics_process(true)
@@ -79,7 +80,7 @@ func add_point(value:int):
 	print("you won "+str(value) +" points")
 	print("Score: "+str(score))
 	hud.update_points()
-	#life_points.update_points()
+	
 	#necesita codigo para mensaje en pantalla de jeugo
 	
 
