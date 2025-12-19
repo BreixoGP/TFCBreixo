@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://ipyhu7ih2fca"]
+[gd_scene load_steps=46 format=4 uid="uid://ipyhu7ih2fca"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_v3skg"]
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="2_qskpp"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://xniugj67t2f" path="res://scenes/castle/trap.tscn" id="7_js14o"]
 [ext_resource type="PackedScene" uid="uid://bv67modj4h7vp" path="res://scenes/castle/platform.tscn" id="7_v3skg"]
 [ext_resource type="PackedScene" uid="uid://bov7om0em5xlt" path="res://scenes/characters/oni.tscn" id="8_qskpp"]
+[ext_resource type="PackedScene" uid="uid://bwtwdn8mhk3s7" path="res://scenes/castle/switch_platform.tscn" id="8_rfjln"]
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/spikes.tscn" id="9_jumms"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="10_njjlx"]
 
@@ -3667,6 +3668,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_77aqr")
 }
 autoplay = "move"
+
+[node name="switch_platform" parent="Platforms" instance=ExtResource("8_rfjln")]
+position = Vector2(1892, -2101)
+point_a = Vector2(1900, -2100)
+point_b = Vector2(4160, -2200)
 
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(89, -86)
