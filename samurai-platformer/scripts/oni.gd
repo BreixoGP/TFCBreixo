@@ -74,10 +74,15 @@ func state_idle(_delta):
 func state_patrol(_delta):
 	if patrol_time <= 0.0:
 		patrol_time = randf_range(5.0, 10.0)
+
 	play_anim("patrol")
-	velocity.x = direction * SPEED
+
+	var separation := apply_enemy_separation(_delta)
+	velocity.x = direction * SPEED + separation.x
+
 	if should_turn():
 		turn()
+
 	patrol_time -= _delta
 	if patrol_time <= 0.0:
 		state = State.IDLE
@@ -94,29 +99,15 @@ func state_chase(_delta):
 
 	var dx: float = GameManager.player.global_position.x - global_position.x
 	set_direction(sign(dx))
-	
-	# Detectar enemigos cercanos frente a este enemigo
-	var front_enemy = get_front_enemy()
-	var push = Vector2.ZERO
-	
-	if front_enemy:
-		# Si hay un enemigo frente, reduce velocidad y aplica repulsión lateral
-		var dir_to_enemy = (global_position - front_enemy.global_position).normalized()
-		push = dir_to_enemy * 50 * _delta  # empuje suave
-		velocity.x = sign(dx) * SPEED * 0.5  # velocidad reducida
-	else:
-		# Si no hay enemigo frente, velocidad normal
-		velocity.x = sign(dx) * SPEED * 1.3
 
-	# Aplicar repulsión lateral de todos los enemigos cercanos
-	for body in enemy_avoid_area.get_overlapping_bodies():
-		if body != self and body.is_in_group("Enemies"):
-			var push_dir = (global_position - body.global_position).normalized()
-			push += push_dir * 50 * _delta
+	# Velocidad base hacia el jugador
+	velocity.x = direction * SPEED * 1.3
 
-	velocity += push
+	#  Separación entre enemigos
+	var separation := apply_enemy_separation(_delta)
+	velocity += separation
 
-	# Revisar obstáculos
+	# Obstáculos
 	var can_move := rayfloor.is_colliding() \
 		and not raywall.is_colliding() \
 		and not rayspikes.is_colliding()
@@ -126,27 +117,9 @@ func state_chase(_delta):
 		state = State.IDLE
 		return
 
-	# Comprobar si es momento de atacar
+	# Ataque
 	if rayattack.is_colliding():
 		state = State.READY
-
-
-func get_front_enemy() -> CharacterBody2D:
-	# Retorna el enemigo más cercano directamente delante de este enemigo
-	var bodies = enemy_avoid_area.get_overlapping_bodies()
-	var closest_enemy = null
-	var closest_dist := INF
-	for body in bodies:
-		if body != self and body.is_in_group("Enemies"):
-			var horizontal_dir = sign(GameManager.player.global_position.x - global_position.x)
-			var body_dir = sign(body.global_position.x - global_position.x)
-			# Solo considerar enemigos en la misma dirección hacia el jugador
-			if horizontal_dir == body_dir:
-				var dist = abs(body.global_position.x - global_position.x)
-				if dist < closest_dist:
-					closest_dist = dist
-					closest_enemy = body
-	return closest_enemy
 
 
 
@@ -288,9 +261,14 @@ func _on_head_timer_timeout():
 	if state == State.HEAD:
 		state = State.CHASE
 		head_timer_started = false
-func is_enemy_blocking() -> bool:
-	var bodies = enemy_avoid_area.get_overlapping_bodies()
-	for body in bodies:
+		
+	
+func apply_enemy_separation(delta: float) -> Vector2:
+	var separation := Vector2.ZERO
+	for body in enemy_avoid_area.get_overlapping_bodies():
 		if body != self and body.is_in_group("Enemies"):
-			return true
-	return false
+			var diff = global_position - body.global_position
+			var dist = diff.length()
+			if dist > 0:
+				separation += diff.normalized() * (80.0 / dist) #cambiar el valor numerico mas bajo si se empujan mucho
+	return separation * delta

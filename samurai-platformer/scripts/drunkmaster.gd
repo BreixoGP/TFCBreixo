@@ -14,6 +14,7 @@ var attack_timer := 0.0
 var life = 10
 var punch_power = 5 #1
 var kick_power = 5 #2
+const MAX_KICK_TARGETS := 3
 const SPEED = 250.0
 const JUMP_VELOCITY = -330.0
 const WALL_JUMP_PUSHBACK = 100.0
@@ -123,11 +124,12 @@ func play_animation():
 		State.DEAD: anim.play("die")
 		
 func _on_frame_changed():
-	if state == State.PUNCH:
-		punch_hitbox.monitoring = (anim.frame == 2 or anim.frame == 5)
+	if state == State.PUNCH and (anim.frame == 2 or anim.frame == 5):
+		apply_punch_hit()
 
 	if state == State.KICK:
 		kick_hitbox.monitoring = (anim.frame == 3)
+
 		
 # DAÑO Y KNOCKBACK
 func take_damage(amount: int, from_position: Vector2,attack_type: int):
@@ -188,6 +190,11 @@ func punch():
 	var frame_count = anim.sprite_frames.get_frame_count("punch")
 	var fps = anim.sprite_frames.get_animation_speed("punch")  # velocidad de la animación
 	attack_timer = frame_count / fps  # duración automática
+	
+func apply_punch_hit():
+	var enemy = get_closest_enemy_in_area(punch_hitbox)
+	if enemy:
+		enemy.take_damage(punch_power, global_position, 0)
 
 func kick():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD]:
@@ -200,16 +207,35 @@ func kick():
 	attack_timer = frame_count / fps
 
 
-
-func _on_punch_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemies"):
-		body.take_damage(punch_power,global_position,0)
-
-
 func _on_kick_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemies"):
-		body.take_damage(kick_power,global_position,1)
+	if not body.is_in_group("Enemies"):
+		return
+
+	var enemies := []
+	for e in kick_hitbox.get_overlapping_bodies():
+		if e.is_in_group("Enemies"):
+			enemies.append(e)
+
+	enemies.sort_custom(func(a, b):
+		return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position)
+	)
+
+	for i in range(min(MAX_KICK_TARGETS, enemies.size())):
+		enemies[i].take_damage(kick_power, global_position, 1)
 
 func disable_attack_hitboxes():
 	punch_hitbox.monitoring = false
 	kick_hitbox.monitoring = false
+	
+func get_closest_enemy_in_area(area: Area2D) -> Node2D:
+	var closest = null
+	var closest_dist := INF
+
+	for body in area.get_overlapping_bodies():
+		if body.is_in_group("Enemies"):
+			var dist = global_position.distance_to(body.global_position)
+			if dist < closest_dist:
+				closest_dist = dist
+				closest = body
+
+	return closest

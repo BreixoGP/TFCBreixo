@@ -3732,10 +3732,10 @@ position = Vector2(2029, -131)
 position = Vector2(2068, -133)
 
 [node name="Oni5" parent="enemies" instance=ExtResource("8_qskpp")]
-position = Vector2(2139, -131)
+position = Vector2(2611, -134)
 
 [node name="Oni6" parent="enemies" instance=ExtResource("8_qskpp")]
-position = Vector2(2103, -127)
+position = Vector2(2566, -130)
 
 [node name="Oni7" parent="enemies" instance=ExtResource("8_qskpp")]
 position = Vector2(3102, -123)
