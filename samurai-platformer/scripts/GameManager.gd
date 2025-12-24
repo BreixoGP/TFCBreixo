@@ -37,7 +37,7 @@ func load_next_level():
 	wall_ability_active = wall_ability_unlocked
 	load_level(levels[level_index])
 	saved_score = score
-	has_crystal = false
+	
 func respawn():
 		#aqui controlar el score tambien
 		fade.fade_to_black()

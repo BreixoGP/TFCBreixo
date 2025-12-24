@@ -4,6 +4,8 @@ extends AnimatableBody2D
 @export var point_b: Vector2
 @export var speed: float = 100.0
 
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
 var moving_to_b = true
 var moving_enabled = false
 
@@ -12,6 +14,7 @@ func _ready() -> void:
 
 func activate():
 	moving_enabled = true
+	anim.play("on")
 
 func _process(delta: float) -> void:
 	if not moving_enabled:

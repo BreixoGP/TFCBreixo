@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bov7om0em5xlt"]
+[gd_scene load_steps=61 format=3 uid="uid://bov7om0em5xlt"]
 
 [ext_resource type="Texture2D" uid="uid://xbvc35twjbra" path="res://assets/charachters/Gotoku/Attack_1.png" id="1_evch6"]
 [ext_resource type="Script" uid="uid://cq40rcbw7wwht" path="res://scripts/oni.gd" id="1_lh407"]
@@ -386,8 +386,12 @@ animations = [{
 radius = 6.0
 height = 20.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6rll"]
+radius = 4.0
+height = 82.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lh407"]
-radius = 79.00917
+radius = 59.00433
 height = 339.9344
 
 [node name="Oni" type="CharacterBody2D" groups=["Enemies"]]
@@ -445,13 +449,29 @@ position = Vector2(0, -12)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_xv7lt")
 
+[node name="enemy_avoid_area" type="Area2D" parent="Flipper"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/enemy_avoid_area"]
+position = Vector2(16, 27)
+shape = SubResource("CapsuleShape2D_s6rll")
+
 [node name="detection_area" type="Area2D" parent="."]
 collision_mask = 4
 
 [node name="detection_collision" type="CollisionShape2D" parent="detection_area"]
-position = Vector2(2, 39)
+position = Vector2(1, 15)
 rotation = 1.5758936
 shape = SubResource("CapsuleShape2D_lh407")
+
+[node name="enemy_detection_area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_detection_area"]
+position = Vector2(-1, 27)
+shape = SubResource("CapsuleShape2D_s6rll")
 
 [connection signal="body_entered" from="Flipper/attack_hitbox" to="." method="_on_attack_hitbox_body_entered"]
 [connection signal="body_entered" from="Flipper/head_hitbox" to="." method="_on_head_hitbox_body_entered"]

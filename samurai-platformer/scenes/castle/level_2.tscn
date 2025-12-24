@@ -3339,25 +3339,34 @@ position = Vector2(1085, -104)
 position = Vector2(2354, -106)
 
 [node name="Trap5" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(2699, -261)
+position = Vector2(2699, -248)
 
 [node name="Trap6" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(2824, -283)
+position = Vector2(2818, -275)
 
 [node name="Trap7" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(2945, -306)
+position = Vector2(2939, -295)
 
 [node name="Trap8" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(3063, -335)
+position = Vector2(3059, -322)
 
 [node name="Trap9" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(3185, -289)
+position = Vector2(3178, -283)
 
 [node name="Trap10" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(3298, -310)
+position = Vector2(3296, -304)
 
 [node name="Trap11" parent="traps" instance=ExtResource("6_kb5dt")]
-position = Vector2(3438, -312)
+position = Vector2(3432, -306)
+
+[node name="Trap13" parent="traps" instance=ExtResource("6_kb5dt")]
+position = Vector2(3536, -287)
+
+[node name="Trap14" parent="traps" instance=ExtResource("6_kb5dt")]
+position = Vector2(3646, -288)
+
+[node name="Trap15" parent="traps" instance=ExtResource("6_kb5dt")]
+position = Vector2(3768, -296)
 
 [node name="Trap12" parent="traps" instance=ExtResource("6_kb5dt")]
 position = Vector2(4412, -304)
@@ -3517,13 +3526,13 @@ position = Vector2(1086, -138)
 position = Vector2(2352, -145)
 
 [node name="Coin4" parent="coins" instance=ExtResource("11_ktfxb")]
-position = Vector2(2828, -318)
+position = Vector2(2822, -305)
 
 [node name="Coin5" parent="coins" instance=ExtResource("11_ktfxb")]
-position = Vector2(3066, -370)
+position = Vector2(3060, -363)
 
 [node name="Coin6" parent="coins" instance=ExtResource("11_ktfxb")]
-position = Vector2(3300, -347)
+position = Vector2(3295, -343)
 
 [node name="Coin7" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(4088, -328)

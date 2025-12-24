@@ -16,8 +16,8 @@ radius = 5.0
 height = 50.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3l2y"]
-radius = 12.0
-height = 24.0
+radius = 7.0
+height = 21.998772
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i24ww"]
 atlas = ExtResource("6_rmwwx")
@@ -449,8 +449,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p65w1"]
-radius = 18.0
-height = 48.0
+radius = 12.0
+height = 46.0
 
 [node name="DrunkMaster" type="CharacterBody2D"]
 collision_layer = 4
@@ -470,7 +470,8 @@ collision_mask = 3
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flipper/punch_hitbox"]
-position = Vector2(17, -17)
+position = Vector2(13, -17)
+rotation = -1.5714052
 shape = SubResource("CapsuleShape2D_x3l2y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="flipper"]
@@ -489,7 +490,7 @@ collision_mask = 3
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flipper/kick_hitbox"]
-position = Vector2(17, 1)
+position = Vector2(15, 2)
 shape = SubResource("CapsuleShape2D_p65w1")
 
 [connection signal="ready" from="." to="." method="_ready"]

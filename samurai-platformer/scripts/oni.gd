@@ -6,12 +6,18 @@ extends CharacterBody2D
 @onready var rayfloor: RayCast2D = $Flipper/rayfloor
 @onready var rayspikes: RayCast2D = $Flipper/rayspikes
 @onready var rayattack: RayCast2D = $Flipper/rayattack
+@onready var enemy_detection_area: Area2D = $enemy_detection_area
+@onready var enemy_avoid_area: Area2D = $Flipper/enemy_avoid_area
+
+
 @onready var attack_hitbox: Area2D = $Flipper/attack_hitbox
 @onready var hurtbox: CollisionShape2D = $hurtbox
 @onready var head_hitbox: Area2D = $Flipper/head_hitbox
 
-var stuck_time := 0.0
-const STUCK_LIMIT := 0.4  # segundos
+
+#ESTO PERTENECE AL SISTEA DE STATE CHASE PARA EVITAR UQE SE QUEDE CONGELADO SOBRE EL PLAYER CON IMAGEN DOBLE
+#var stuck_time := 0.0
+#const STUCK_LIMIT := 0.4  # segundos BORRAR SI NO LO USO
 
 enum State { IDLE, PATROL, CHASE, READY, ATTACK,HEAD, HURT, DEAD }
 var state: State = State.IDLE
@@ -24,13 +30,14 @@ const MAX_VERTICAL_DIFF := 40.0
 var attack_cooldown = 1.0 
 var attack_timer = 0.0
 var head_timer_started = false
-# ------------------- READY ------------------- #
+
 func _ready():
 	state = State.IDLE
 	play_anim("idle")
 
-# ------------------- PHYSICS ------------------- #
+
 func _physics_process(delta: float) -> void:
+	
 	if state == State.DEAD:
 		state_dead(delta)
 	else:
@@ -43,12 +50,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 0
 
-# ------------------- Animación protegida ------------------- #
+
 func play_anim(anim_name: String):
 	if anim.animation != anim_name:
 		anim.play(anim_name)
 
-# ------------------- Estados ------------------- #
+
 func proccess_state(delta):
 	match state:
 		State.IDLE: state_idle(delta)
@@ -75,7 +82,7 @@ func state_patrol(_delta):
 	if patrol_time <= 0.0:
 		state = State.IDLE
 
-func state_chase(delta):
+func state_chase(_delta):
 	if state == State.HURT:
 		return
 
@@ -86,7 +93,30 @@ func state_chase(delta):
 		return
 
 	var dx: float = GameManager.player.global_position.x - global_position.x
+	set_direction(sign(dx))
+	
+	# Detectar enemigos cercanos frente a este enemigo
+	var front_enemy = get_front_enemy()
+	var push = Vector2.ZERO
+	
+	if front_enemy:
+		# Si hay un enemigo frente, reduce velocidad y aplica repulsión lateral
+		var dir_to_enemy = (global_position - front_enemy.global_position).normalized()
+		push = dir_to_enemy * 50 * _delta  # empuje suave
+		velocity.x = sign(dx) * SPEED * 0.5  # velocidad reducida
+	else:
+		# Si no hay enemigo frente, velocidad normal
+		velocity.x = sign(dx) * SPEED * 1.3
 
+	# Aplicar repulsión lateral de todos los enemigos cercanos
+	for body in enemy_avoid_area.get_overlapping_bodies():
+		if body != self and body.is_in_group("Enemies"):
+			var push_dir = (global_position - body.global_position).normalized()
+			push += push_dir * 50 * _delta
+
+	velocity += push
+
+	# Revisar obstáculos
 	var can_move := rayfloor.is_colliding() \
 		and not raywall.is_colliding() \
 		and not rayspikes.is_colliding()
@@ -94,28 +124,30 @@ func state_chase(delta):
 	if not can_move:
 		velocity.x = 0
 		state = State.IDLE
-		stuck_time = 0
 		return
 
-	# ⚠️ SI YA ESTÁ ALINEADO EN X → NO GIRAR NI FORZAR
-	if abs(dx) < 6:
-		velocity.x = 0
-		stuck_time += delta
-
-		# ⛔ no progresa → abandona persecución
-		if stuck_time > STUCK_LIMIT:
-			state = State.PATROL
-			stuck_time = 0
-		return
-
-	# Puede moverse
-	stuck_time = 0
-
-	set_direction(sign(dx))
-	velocity.x = direction * SPEED * 1.3
-
+	# Comprobar si es momento de atacar
 	if rayattack.is_colliding():
 		state = State.READY
+
+
+func get_front_enemy() -> CharacterBody2D:
+	# Retorna el enemigo más cercano directamente delante de este enemigo
+	var bodies = enemy_avoid_area.get_overlapping_bodies()
+	var closest_enemy = null
+	var closest_dist := INF
+	for body in bodies:
+		if body != self and body.is_in_group("Enemies"):
+			var horizontal_dir = sign(GameManager.player.global_position.x - global_position.x)
+			var body_dir = sign(body.global_position.x - global_position.x)
+			# Solo considerar enemigos en la misma dirección hacia el jugador
+			if horizontal_dir == body_dir:
+				var dist = abs(body.global_position.x - global_position.x)
+				if dist < closest_dist:
+					closest_dist = dist
+					closest_enemy = body
+	return closest_enemy
+
 
 
 func state_ready(_delta):
@@ -157,7 +189,6 @@ func state_hurt(_delta):
 	# El knockback se aplica mientras está en HURT
 	# Bloquea cualquier movimiento hasta que toque suelo y velocidad horizontal casi 0
 	if is_on_floor() and abs(velocity.x) < 1.0:
-		print("desaciendo hurt")
 		velocity = Vector2.ZERO
 		anim.modulate = Color(1,1,1,1)
 		if state != State.DEAD:
@@ -257,3 +288,9 @@ func _on_head_timer_timeout():
 	if state == State.HEAD:
 		state = State.CHASE
 		head_timer_started = false
+func is_enemy_blocking() -> bool:
+	var bodies = enemy_avoid_area.get_overlapping_bodies()
+	for body in bodies:
+		if body != self and body.is_in_group("Enemies"):
+			return true
+	return false

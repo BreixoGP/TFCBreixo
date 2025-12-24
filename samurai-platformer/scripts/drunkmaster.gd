@@ -131,6 +131,7 @@ func _on_frame_changed():
 		
 # DAÑO Y KNOCKBACK
 func take_damage(amount: int, from_position: Vector2,attack_type: int):
+	disable_attack_hitboxes()
 	if life <= 0:
 		return  # ya muerto
 
@@ -141,6 +142,7 @@ func take_damage(amount: int, from_position: Vector2,attack_type: int):
 	
 	
 	if life <= 0:
+		disable_attack_hitboxes()
 		state = State.DEAD
 		anim.play("die")
 		await get_tree().create_timer(0.5).timeout
@@ -207,3 +209,7 @@ func _on_punch_hitbox_body_entered(body: Node2D) -> void:
 func _on_kick_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemies"):
 		body.take_damage(kick_power,global_position,1)
+
+func disable_attack_hitboxes():
+	punch_hitbox.monitoring = false
+	kick_hitbox.monitoring = false
