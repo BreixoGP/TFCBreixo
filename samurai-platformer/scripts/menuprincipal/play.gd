@@ -12,13 +12,14 @@ func play():
 	GameManager.saved_score = 0
 	GameManager.level_index = 0
 	GameManager.has_crystal = false
-	
+
 	# habilidades
 	GameManager.wall_ability_unlocked = false
 	GameManager.wall_ability_active = false
-	
+
 	# spawn inicial
-	GameManager.player_spawn_tag = "Spawn_start"
-	
+	GameManager.current_checkpoint_level = GameManager.levels[GameManager.level_index]
+	GameManager.current_checkpoint_tag = "Spawn_start"
+
 	# cambiar a la escena principal
 	get_tree().change_scene_to_packed(main_scene)

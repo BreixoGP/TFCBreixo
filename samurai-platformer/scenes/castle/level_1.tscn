@@ -3586,7 +3586,7 @@ target_scene = "res://scenes/castle/level_2.tscn"
 
 [node name="Oni" parent="." instance=ExtResource("10_lj644")]
 position = Vector2(2345, -135)
-enemy_id = "oni_1"
+enemy_id = "l1_oni_1"
 
 [node name="spikes" type="Node" parent="."]
 
@@ -3780,16 +3780,16 @@ position = Vector2(4588, -61)
 
 [node name="Coin" parent="coins" instance=ExtResource("11_wphk7")]
 position = Vector2(895, -134)
-pickup_id = "coin_1"
+pickup_id = "l1_coin_1"
 
 [node name="Coin2" parent="coins" instance=ExtResource("11_wphk7")]
 position = Vector2(1498, -153)
-pickup_id = "coin_2"
+pickup_id = "l1_coin_2"
 
 [node name="Coin3" parent="coins" instance=ExtResource("11_wphk7")]
 position = Vector2(2670, -237)
-pickup_id = "coin_3"
+pickup_id = "l1_coin_3"
 
 [node name="Coin4" parent="coins" instance=ExtResource("11_wphk7")]
 position = Vector2(4558, -141)
-pickup_id = "coin_4"
+pickup_id = "l1_coin_4"

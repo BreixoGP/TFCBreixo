@@ -10,8 +10,10 @@ extends AnimatedSprite2D
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "DrunkMaster":
+		body.set_physics_process(false)  # Inactivo
 		door.play("open")
-		#aqui iria el sonido
 		await door.animation_finished
 		GameManager.player_spawn_tag = target_spawn
-		GameManager.load_level(target_scene)
+		body.set_physics_process(true)   # Reactivar
+		await GameManager.load_level(target_scene)
+		

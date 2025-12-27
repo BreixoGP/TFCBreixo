@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bogit48m5itxx"]
+[gd_scene load_steps=26 format=4 uid="uid://bogit48m5itxx"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_lrcqy"]
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="2_lrcqy"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/spikes.tscn" id="10_6w772"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="11_ktfxb"]
 [ext_resource type="PackedScene" uid="uid://k1lfxg1rck6n" path="res://scenes/life_bottle.tscn" id="13_5i2iw"]
+[ext_resource type="PackedScene" uid="uid://c7myrx3aogi6t" path="res://scenes/checkpoint.tscn" id="14_0selc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("3_anhi0")
@@ -3373,7 +3374,10 @@ position = Vector2(3768, -296)
 position = Vector2(4412, -304)
 
 [node name="Spawn_left" type="Marker2D" parent="."]
-position = Vector2(236, -88)
+position = Vector2(104, -86)
+
+[node name="Respawn" type="Marker2D" parent="."]
+position = Vector2(532, -132)
 
 [node name="Spawn_right" type="Marker2D" parent="."]
 position = Vector2(4795, -317)
@@ -3386,8 +3390,7 @@ target_spawn = "Spawn_right"
 [node name="door2" parent="." instance=ExtResource("8_anhi0")]
 position = Vector2(4885, -338)
 scale = Vector2(1.2656326, 1.265625)
-target_scene = "res://scenes/castle/level_3.tscn"
-target_spawn = "Spawn_left"
+target_spawn = "Spawn_right"
 
 [node name="spikes" type="Node" parent="."]
 
@@ -3506,68 +3509,71 @@ position = Vector2(4486, -56)
 
 [node name="Oni" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(1315, -224)
-enemy_id = "oni_1"
+enemy_id = "l2_oni_1"
 
 [node name="Oni2" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(1609, -224)
-enemy_id = "oni_2"
+enemy_id = "l2_oni_2"
 
 [node name="Oni3" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(2794, -201)
-enemy_id = "oni_3"
+enemy_id = "l2_oni_3"
 
 [node name="Oni4" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(3033, -197)
-enemy_id = "oni_4"
+enemy_id = "l2_oni_4"
 
 [node name="Oni5" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(3268, -197)
-enemy_id = "oni_5"
+enemy_id = "l2_oni_5"
 
 [node name="Oni6" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(3466, -195)
-enemy_id = "oni_6"
+enemy_id = "l2_oni_6"
 
 [node name="Oni7" parent="enemies" instance=ExtResource("9_anhi0")]
 position = Vector2(3695, -196)
-enemy_id = "oni_7"
+enemy_id = "l2_oni_7"
 
 [node name="coins" type="Node" parent="."]
 
 [node name="Coin" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(740, -185)
-pickup_id = "coin_1"
+pickup_id = "l2_coin_1"
 
 [node name="Coin2" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(1086, -138)
-pickup_id = "coin_2"
+pickup_id = "l2_coin_2"
 
 [node name="Coin3" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(2352, -145)
-pickup_id = "coin_3"
+pickup_id = "l2_coin_3"
 
 [node name="Coin4" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(2822, -305)
-pickup_id = "coin_4"
+pickup_id = "l2_coin_4"
 
 [node name="Coin5" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(3060, -363)
-pickup_id = "coin_5"
+pickup_id = "l2_coin_5"
 
 [node name="Coin6" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(3295, -343)
-pickup_id = "coin_6"
+pickup_id = "l2_coin_6"
 
 [node name="Coin7" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(4088, -328)
-pickup_id = "coin_7"
+pickup_id = "l2_coin_7"
 
 [node name="Coin8" parent="coins" instance=ExtResource("11_ktfxb")]
 position = Vector2(4360, -145)
-pickup_id = "coin_8"
+pickup_id = "l2_coin_8"
 
 [node name="bottles" type="Node" parent="."]
 
 [node name="life_bottle" parent="bottles" instance=ExtResource("13_5i2iw")]
 position = Vector2(2697, -278)
 pickup_id = "life_bottle_1"
+
+[node name="checkpoint" parent="." instance=ExtResource("14_0selc")]
+position = Vector2(633, -187)

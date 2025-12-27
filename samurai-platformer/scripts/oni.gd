@@ -32,9 +32,14 @@ var attack_timer = 0.0
 var head_timer_started = false
 
 func _ready():
-	var key = GameManager.current_level.name + ":" + enemy_id
-	if GameManager.defeated_enemies.has(key):
+	if enemy_id == "":
+		push_error("Enemy sin ID: " + name)
+		return
+
+	if GameManager.is_enemy_defeated(enemy_id):
 		queue_free()
+		return
+
 	state = State.IDLE
 	play_anim("idle")
 
@@ -172,15 +177,17 @@ func state_hurt(_delta):
 
 func state_dead(_delta):
 	velocity = Vector2.ZERO
+
 	if anim.animation != "die":
 		attack_hitbox.set_deferred("monitoring", false)
 		attack_hitbox.set_deferred("monitorable", false)
 		hurtbox.set_deferred("disabled", true)
 		play_anim("die")
-		
+
 		GameManager.add_point(50)
-		var key = GameManager.current_level.name + ":" + enemy_id
-		GameManager.defeated_enemies[key] = true
+		GameManager.defeat_enemy(enemy_id)
+
+		# Timer para desaparecer
 		var frames = anim.sprite_frames.get_frame_count("die")
 		var fps = anim.sprite_frames.get_animation_speed("die")
 		if fps > 0:
