@@ -3374,18 +3374,18 @@ position = Vector2(3768, -296)
 position = Vector2(4412, -304)
 
 [node name="Spawn_left" type="Marker2D" parent="."]
-position = Vector2(104, -86)
+position = Vector2(139, -78)
 
 [node name="Spawn_right" type="Marker2D" parent="."]
 position = Vector2(4795, -317)
 
 [node name="door" parent="." instance=ExtResource("8_anhi0")]
-position = Vector2(18.00003, -100)
+position = Vector2(29, -100)
 scale = Vector2(1.2656326, 1.265625)
 target_spawn = "Spawn_right"
 
 [node name="door2" parent="." instance=ExtResource("8_anhi0")]
-position = Vector2(4885, -338)
+position = Vector2(4865, -339)
 scale = Vector2(1.2656326, 1.265625)
 target_scene = "res://scenes/castle/level_3.tscn"
 

@@ -3302,10 +3302,10 @@ tile_map_data = PackedByteArray("AABaAO7/AgAAAAIAAABbAO3/AgABAAEAAABbAO7/AgABAAI
 tile_set = SubResource("TileSet_jcfoy")
 
 [node name="Spawn_left" type="Marker2D" parent="."]
-position = Vector2(112, -32)
+position = Vector2(134, -31)
 
 [node name="Spawn_top" type="Marker2D" parent="."]
-position = Vector2(404, -472)
+position = Vector2(440, -467)
 
 [node name="platforms" type="Node" parent="."]
 
@@ -3319,12 +3319,12 @@ libraries = {
 autoplay = "move"
 
 [node name="door" parent="." instance=ExtResource("7_sjvlk")]
-position = Vector2(18, -50.00003)
+position = Vector2(32, -58)
 target_scene = "res://scenes/castle/level_3.tscn"
 target_spawn = "Spawn_right"
 
 [node name="door2" parent="." instance=ExtResource("7_sjvlk")]
-position = Vector2(333, -481)
+position = Vector2(357, -490.00003)
 target_scene = "res://scenes/castle/level_8.tscn"
 target_spawn = "Spawn_right"
 

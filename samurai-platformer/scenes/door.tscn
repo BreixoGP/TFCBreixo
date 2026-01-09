@@ -40,7 +40,7 @@ animations = [{
 size = Vector2(29, 42)
 
 [node name="door" type="AnimatedSprite2D"]
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_ju5n0")
 animation = &"closed"
 script = ExtResource("4_t58dd")

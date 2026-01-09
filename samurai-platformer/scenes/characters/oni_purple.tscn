@@ -396,6 +396,7 @@ floor_max_angle = 1.3089969
 script = ExtResource("1_4j8b0")
 life = 5
 speed = 150.0
+point_value = 75
 
 [node name="hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(3, 27.000002)

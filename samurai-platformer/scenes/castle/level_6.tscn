@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dueqp0ewagv0m"]
+[gd_scene load_steps=34 format=4 uid="uid://dueqp0ewagv0m"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_x54t5"]
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="2_3pta4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="8_qxase"]
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/spikes.tscn" id="9_a8ynh"]
 [ext_resource type="PackedScene" uid="uid://bov7om0em5xlt" path="res://scenes/characters/oni.tscn" id="10_olya1"]
+[ext_resource type="PackedScene" uid="uid://pknrmbd7fe8b" path="res://scenes/characters/oni_purple.tscn" id="11_02yhm"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="11_3pta4"]
 [ext_resource type="PackedScene" uid="uid://k1lfxg1rck6n" path="res://scenes/life_bottle.tscn" id="12_02yhm"]
 
@@ -3415,10 +3416,10 @@ tile_map_data = PackedByteArray("AACeAOD/AAABAAAAAACeAOH/AAABAAEAAACeAOL/AAABAAI
 tile_set = SubResource("TileSet_jcfoy")
 
 [node name="Spawn_left" type="Marker2D" parent="."]
-position = Vector2(81, -35)
+position = Vector2(129, -32)
 
 [node name="Spawn_right" type="Marker2D" parent="."]
-position = Vector2(2644, -32)
+position = Vector2(2615, -31)
 
 [node name="platforms" type="Node" parent="."]
 
@@ -3459,12 +3460,12 @@ libraries = {
 autoplay = "move"
 
 [node name="door" parent="." instance=ExtResource("7_jprlg")]
-position = Vector2(13, -48)
+position = Vector2(34, -57)
 target_scene = "res://scenes/castle/level_7.tscn"
 target_spawn = "Spawn_right"
 
 [node name="door2" parent="." instance=ExtResource("7_jprlg")]
-position = Vector2(2709, -48)
+position = Vector2(2694, -57)
 target_scene = "res://scenes/castle/level_3.tscn"
 target_spawn = "Spawn_bottom"
 
@@ -3515,7 +3516,7 @@ position = Vector2(2554, -279)
 enemy_id = "l6_oni_1"
 
 [node name="Oni6" parent="enemies" instance=ExtResource("10_olya1")]
-position = Vector2(1146, -486)
+position = Vector2(1624, -497)
 enemy_id = "l6_oni_6"
 
 [node name="Oni7" parent="enemies" instance=ExtResource("10_olya1")]
@@ -3526,20 +3527,12 @@ enemy_id = "l6_oni_7"
 position = Vector2(1150, -300)
 enemy_id = "l6_oni_8"
 
-[node name="Oni9" parent="enemies" instance=ExtResource("10_olya1")]
-position = Vector2(1751, -302)
-enemy_id = "l6_oni_9"
-
-[node name="Oni10" parent="enemies" instance=ExtResource("10_olya1")]
-position = Vector2(525, -298)
-enemy_id = "l6_oni_10"
-
 [node name="Oni4" parent="enemies" instance=ExtResource("10_olya1")]
-position = Vector2(354, -491)
+position = Vector2(247, -300)
 enemy_id = "l6_oni_4"
 
 [node name="Oni5" parent="enemies" instance=ExtResource("10_olya1")]
-position = Vector2(906, -85)
+position = Vector2(1841, -90)
 enemy_id = "l6_oni_5"
 
 [node name="Oni2" parent="enemies" instance=ExtResource("10_olya1")]
@@ -3549,6 +3542,18 @@ enemy_id = "l6_oni_2"
 [node name="Oni3" parent="enemies" instance=ExtResource("10_olya1")]
 position = Vector2(1121, -488)
 enemy_id = "l6_oni_3"
+
+[node name="Oni_purple" parent="enemies" instance=ExtResource("11_02yhm")]
+position = Vector2(566, -497)
+enemy_id = "l6_onip_1"
+
+[node name="Oni_purple2" parent="enemies" instance=ExtResource("11_02yhm")]
+position = Vector2(1638, -300)
+enemy_id = "l6_onip_2"
+
+[node name="Oni_purple3" parent="enemies" instance=ExtResource("11_02yhm")]
+position = Vector2(202, -96)
+enemy_id = "l6_onip_3"
 
 [node name="coins" type="Node" parent="."]
 

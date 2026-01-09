@@ -3298,16 +3298,16 @@ tile_map_data = PackedByteArray("AAAiAN7/AgAAAAIAAAAjAN3/AgABAAEAAAAjAN7/AgABAAI
 tile_set = SubResource("TileSet_jcfoy")
 
 [node name="Spawn_left" type="Marker2D" parent="."]
-position = Vector2(117, -414)
+position = Vector2(134, -411)
 
 [node name="Spawn_right" type="Marker2D" parent="."]
-position = Vector2(1521, -30)
+position = Vector2(1507, -35)
 
 [node name="Spawn_bottom" type="Marker2D" parent="."]
-position = Vector2(1066, -289)
+position = Vector2(1118, -288)
 
 [node name="Spawn_top" type="Marker2D" parent="."]
-position = Vector2(1069, -428)
+position = Vector2(1113, -429)
 
 [node name="Respawn" type="Marker2D" parent="."]
 position = Vector2(1306, -127)
@@ -3324,21 +3324,21 @@ libraries = {
 autoplay = "move"
 
 [node name="door" parent="." instance=ExtResource("9_js14o")]
-position = Vector2(22, -432)
+position = Vector2(33, -441)
 target_scene = "res://scenes/castle/level_2.tscn"
 target_spawn = "Spawn_right"
 
 [node name="door2" parent="." instance=ExtResource("9_js14o")]
-position = Vector2(1604, -49)
+position = Vector2(1594, -58)
 target_scene = "res://scenes/castle/level_4.tscn"
 
 [node name="door3" parent="." instance=ExtResource("9_js14o")]
-position = Vector2(1005, -447.00003)
+position = Vector2(1025, -454.00003)
 target_scene = "res://scenes/castle/level_5.tscn"
 target_spawn = "Spawn_right"
 
 [node name="door4" parent="." instance=ExtResource("9_js14o")]
-position = Vector2(1005, -300)
+position = Vector2(1024, -310)
 target_scene = "res://scenes/castle/level_6.tscn"
 target_spawn = "Spawn_right"
 
@@ -3351,4 +3351,4 @@ position = Vector2(1486, -394)
 position = Vector2(1314, -142)
 
 [node name="torch2" parent="torches" instance=ExtResource("2_qskpp")]
-position = Vector2(117, -434)
+position = Vector2(111, -432)

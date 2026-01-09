@@ -107,6 +107,7 @@ script = ExtResource("1_si8oa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, 0)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_n3kel")
 animation = &"off"
 autoplay = "off"

@@ -28,6 +28,7 @@ var attack_power = 1
 var patrol_time = 0.0
 var idle_time = 0.0
 @export var speed = 130.0
+@export var point_value=50
 const MAX_VERTICAL_DIFF := 40.0
 var attack_cooldown = 1.0 
 var attack_timer = 0.0
@@ -197,7 +198,7 @@ func state_dead(_delta):
 		hurtbox.set_deferred("disabled", true)
 		play_anim("die")
 
-		GameManager.add_point(50)
+		GameManager.add_point(point_value)
 		GameManager.defeat_enemy(enemy_id)
 
 		# Timer para desaparecer

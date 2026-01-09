@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c50vcfetyl322"]
+[gd_scene load_steps=21 format=4 uid="uid://c50vcfetyl322"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_uapsa"]
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="2_2v5lf"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bov7om0em5xlt" path="res://scenes/characters/oni.tscn" id="9_7a32m"]
 [ext_resource type="PackedScene" uid="uid://pknrmbd7fe8b" path="res://scenes/characters/oni_purple.tscn" id="9_itu5u"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="10_o35qj"]
+[ext_resource type="PackedScene" uid="uid://dpemhxha3db8m" path="res://scenes/thorns.tscn" id="12_cg4et"]
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/spikes.tscn" id="12_kdk2e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
@@ -3265,15 +3266,15 @@ tile_set = SubResource("TileSet_jcfoy")
 position = Vector2(801, -31)
 
 [node name="Spawn_left" type="Marker2D" parent="."]
-position = Vector2(99, -703)
+position = Vector2(130, -715)
 
 [node name="door" parent="." instance=ExtResource("7_52yd4")]
-position = Vector2(911, -48)
+position = Vector2(899.00006, -58)
 target_scene = "res://scenes/castle/level_4.tscn"
 target_spawn = "Spawn_top"
 
 [node name="door2" parent="." instance=ExtResource("7_52yd4")]
-position = Vector2(29, -722)
+position = Vector2(38, -731)
 target_scene = "res://scenes/castle/level_3.tscn"
 target_spawn = "Spawn_right"
 
@@ -3381,3 +3382,17 @@ position = Vector2(312, -698)
 
 [node name="spikes6" parent="spikes" instance=ExtResource("12_kdk2e")]
 position = Vector2(681, -360)
+
+[node name="thorns" type="Node" parent="."]
+
+[node name="thorns" parent="thorns" instance=ExtResource("12_cg4et")]
+position = Vector2(936.99994, -716)
+rotation = 4.6785603
+
+[node name="thorns2" parent="thorns" instance=ExtResource("12_cg4et")]
+position = Vector2(728, -587.99994)
+rotation = 4.6785603
+
+[node name="thorns3" parent="thorns" instance=ExtResource("12_cg4et")]
+position = Vector2(11.000004, -388.99997)
+rotation = 1.6039071
