@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://c50vcfetyl322"]
+[gd_scene load_steps=23 format=4 uid="uid://c50vcfetyl322"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_uapsa"]
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="2_2v5lf"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dpemhxha3db8m" path="res://scenes/thorns.tscn" id="12_cg4et"]
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/spikes.tscn" id="12_kdk2e"]
 [ext_resource type="PackedScene" uid="uid://k1lfxg1rck6n" path="res://scenes/life_bottle.tscn" id="13_uapsa"]
+[ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="14_2v5lf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("2_2v5lf")
@@ -3403,3 +3404,22 @@ rotation = 1.6039071
 [node name="life_bottle" parent="liife_bottles" instance=ExtResource("13_uapsa")]
 position = Vector2(780, -369)
 pickup_id = "l8_life_bottle_1"
+
+[node name="barrels" type="Node" parent="."]
+
+[node name="barrel" parent="barrels" instance=ExtResource("14_2v5lf")]
+position = Vector2(598, -146)
+barrel_id = "l8_barrel_1"
+
+[node name="barrel2" parent="barrels" instance=ExtResource("14_2v5lf")]
+position = Vector2(270, -197)
+barrel_id = "l8_barrel_2"
+
+[node name="barrel3" parent="barrels" instance=ExtResource("14_2v5lf")]
+position = Vector2(542, -756)
+barrel_id = "l8_barrel_3"
+
+[node name="barrel4" parent="barrels" instance=ExtResource("14_2v5lf")]
+position = Vector2(542, -798)
+pickup_scene = ExtResource("10_o35qj")
+barrel_id = "l8_barrel_4"

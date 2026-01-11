@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dueqp0ewagv0m"]
+[gd_scene load_steps=35 format=4 uid="uid://dueqp0ewagv0m"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_x54t5"]
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="2_3pta4"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://pknrmbd7fe8b" path="res://scenes/characters/oni_purple.tscn" id="11_02yhm"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="11_3pta4"]
 [ext_resource type="PackedScene" uid="uid://k1lfxg1rck6n" path="res://scenes/life_bottle.tscn" id="12_02yhm"]
+[ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="14_2knu6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("2_3pta4")
@@ -3582,3 +3583,35 @@ pickup_id = "l6_life_bottle_1"
 [node name="life_bottle2" parent="life_bottles" instance=ExtResource("12_02yhm")]
 position = Vector2(1764, -438)
 pickup_id = "l6_life_bottle_2"
+
+[node name="barrels" type="Node" parent="."]
+
+[node name="barrel" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(1370, -439)
+barrel_id = "l6_barrel_1"
+
+[node name="barrel3" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(249, -437)
+barrel_id = "l6_barrel_3"
+
+[node name="barrel4" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(664, -247)
+barrel_id = "l6_barrel_4"
+
+[node name="barrel5" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(2243, -38)
+barrel_id = "l6_barrel_5"
+
+[node name="barrel6" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(617, -37)
+barrel_id = "l6_barrel_6"
+
+[node name="barrel7" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(584, -37)
+pickup_scene = ExtResource("12_02yhm")
+barrel_id = "l6_barrel_7"
+
+[node name="barrel2" parent="barrels" instance=ExtResource("14_2knu6")]
+position = Vector2(1404, -439)
+pickup_scene = ExtResource("11_3pta4")
+barrel_id = "l6_barrel2"

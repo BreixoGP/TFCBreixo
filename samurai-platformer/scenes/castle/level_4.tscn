@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://0ao74tguddrn"]
+[gd_scene load_steps=26 format=4 uid="uid://0ao74tguddrn"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_pwwhf"]
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="3_0m04a"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bov7om0em5xlt" path="res://scenes/characters/oni.tscn" id="11_1gp1f"]
 [ext_resource type="PackedScene" uid="uid://k1lfxg1rck6n" path="res://scenes/life_bottle.tscn" id="11_iqfur"]
 [ext_resource type="PackedScene" uid="uid://bjgeo60jocqc7" path="res://scenes/spikes.tscn" id="12_imiar"]
+[ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="12_pwwhf"]
 [ext_resource type="PackedScene" uid="uid://djaubrlvn4t3a" path="res://scenes/crystal.tscn" id="13_pwwhf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
@@ -3361,38 +3362,6 @@ enemy_id = "l4_oni_4"
 position = Vector2(1363, -130)
 enemy_id = "l4_oni_5"
 
-[node name="coins" type="Node" parent="."]
-
-[node name="Coin" parent="coins" instance=ExtResource("10_sjvlk")]
-position = Vector2(733, -321)
-pickup_id = "l4_coin_1"
-
-[node name="Coin2" parent="coins" instance=ExtResource("10_sjvlk")]
-position = Vector2(1242, -80)
-pickup_id = "l4_coin_2"
-
-[node name="Coin3" parent="coins" instance=ExtResource("10_sjvlk")]
-position = Vector2(1311, -80)
-pickup_id = "l4_coin_3"
-
-[node name="Coin4" parent="coins" instance=ExtResource("10_sjvlk")]
-position = Vector2(1455, -82)
-pickup_id = "l4_coin_4"
-
-[node name="Coin5" parent="coins" instance=ExtResource("10_sjvlk")]
-position = Vector2(1279, -321)
-pickup_id = "l4_coin_5"
-
-[node name="life_bottles" type="Node" parent="."]
-
-[node name="life_bottle" parent="life_bottles" instance=ExtResource("11_iqfur")]
-position = Vector2(1484, -322)
-pickup_id = "l4_life_bottle_1"
-
-[node name="life_bottle2" parent="life_bottles" instance=ExtResource("11_iqfur")]
-position = Vector2(1490, -82)
-pickup_id = "l4_life_bottle_2"
-
 [node name="spikes" type="Node" parent="."]
 
 [node name="spikes" parent="spikes" instance=ExtResource("12_imiar")]
@@ -3407,3 +3376,24 @@ position = Vector2(920, -24)
 [node name="Crystal" parent="." instance=ExtResource("13_pwwhf")]
 position = Vector2(681, -325)
 pickup_id = "l4_crystal_1"
+
+[node name="barrels" type="Node" parent="."]
+
+[node name="barrel" parent="barrels" instance=ExtResource("12_pwwhf")]
+position = Vector2(1489, -86)
+pickup_scene = ExtResource("11_iqfur")
+barrel_id = "l4_barrel_1"
+
+[node name="barrel3" parent="barrels" instance=ExtResource("12_pwwhf")]
+position = Vector2(1482, -325)
+pickup_scene = ExtResource("11_iqfur")
+barrel_id = "l4_barrel_3"
+
+[node name="barrel2" parent="barrels" instance=ExtResource("12_pwwhf")]
+position = Vector2(1454, -86)
+barrel_id = "l4_barrel_2"
+
+[node name="barrel4" parent="barrels" instance=ExtResource("12_pwwhf")]
+position = Vector2(569, -470)
+pickup_scene = ExtResource("10_sjvlk")
+barrel_id = "l4_barrel_4"

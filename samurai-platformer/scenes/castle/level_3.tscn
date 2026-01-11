@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cpg8qo4urv67x"]
+[gd_scene load_steps=23 format=4 uid="uid://cpg8qo4urv67x"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_v3skg"]
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="2_qskpp"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bk7ie3huedc2l" path="res://assets/cave_objects/cocoon_web.png" id="6_7dnee"]
 [ext_resource type="PackedScene" uid="uid://bv67modj4h7vp" path="res://scenes/castle/platform.tscn" id="7_v3skg"]
 [ext_resource type="PackedScene" uid="uid://btoyw8tp2yb1t" path="res://scenes/door.tscn" id="9_js14o"]
+[ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="10_njjlx"]
+[ext_resource type="PackedScene" uid="uid://pknrmbd7fe8b" path="res://scenes/characters/oni_purple.tscn" id="11_rfjln"]
 [ext_resource type="PackedScene" uid="uid://c7myrx3aogi6t" path="res://scenes/checkpoint.tscn" id="17_ggqu8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
@@ -3352,3 +3354,19 @@ position = Vector2(1314, -142)
 
 [node name="torch2" parent="torches" instance=ExtResource("2_qskpp")]
 position = Vector2(111, -432)
+
+[node name="barrel" parent="." instance=ExtResource("10_njjlx")]
+position = Vector2(598, -36)
+barrel_id = "l3_barrel_1"
+
+[node name="barrel2" parent="." instance=ExtResource("10_njjlx")]
+position = Vector2(631, -37)
+barrel_id = "l3_barrel_2"
+
+[node name="barrel3" parent="." instance=ExtResource("10_njjlx")]
+position = Vector2(614, -74)
+barrel_id = "l3_barrel_3"
+
+[node name="Oni_purple" parent="." instance=ExtResource("11_rfjln")]
+position = Vector2(885, -92)
+enemy_id = "l3_onip_1"

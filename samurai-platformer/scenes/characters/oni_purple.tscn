@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://cwp7cvykt7s1o" path="res://assets/charachters/Onipurple/Scream_purple.png" id="10_boaav"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8068"]
-radius = 12.99732
-height = 91.994415
+radius = 10.002602
+height = 83.994446
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_krfje"]
 radius = 17.0
@@ -372,9 +372,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bpykb")
 }],
-"loop": true,
+"loop": false,
 "name": &"ready",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xv7lt"]
@@ -399,7 +399,7 @@ speed = 150.0
 point_value = 75
 
 [node name="hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(3, 27.000002)
+position = Vector2(3, 24.000002)
 rotation = -3.1442285
 shape = SubResource("CapsuleShape2D_c8068")
 
@@ -415,10 +415,10 @@ shape = SubResource("CapsuleShape2D_krfje")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flipper"]
 position = Vector2(7, -11)
-scale = Vector2(1.3, 1.3)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
-animation = &"head"
-frame = 6
+animation = &"attack"
+frame = 7
 frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]

@@ -20,11 +20,11 @@ class_name Oni
 #var stuck_time := 0.0
 #const STUCK_LIMIT := 0.4  # segundos BORRAR SI NO LO USO
 
-enum State { IDLE, PATROL, CHASE, READY, ATTACK,HEAD, HURT, DEAD }
+enum State { IDLE, PATROL, CHASE, READY, READY_MELEE, ATTACK, ATTACK_MELEE, HEAD, HURT, DEAD }
 var state: State = State.IDLE
 var direction = -1
 @export var life = 3
-var attack_power = 1
+@export var attack_power = 1
 var patrol_time = 0.0
 var idle_time = 0.0
 @export var speed = 130.0
@@ -35,6 +35,7 @@ var attack_timer = 0.0
 var head_timer_started = false
 
 func _ready():
+	anim.animation_finished.connect(_on_anim_finished)
 	if enemy_id == "":
 		push_error("Enemy sin ID: " + name)
 		return
@@ -48,7 +49,9 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	
+	if state != State.ATTACK:
+		attack_hitbox.monitoring = false
+		
 	if state == State.DEAD:
 		state_dead(delta)
 	else:
@@ -149,17 +152,16 @@ func state_ready(_delta):
 	if state != State.HURT:
 		velocity.x = 0
 		play_anim("ready")
-		if attack_timer == 0:
-			state = State.ATTACK
+		
+		if not rayattack.is_colliding():
+			state = State.CHASE
+		
 
 func state_attack(_delta):
 	if state != State.HURT:
 		velocity.x = 0
 		play_anim("attack")
-		if anim.frame == 2 or anim.frame == 6:
-			attack_hitbox.monitoring = true
-		else:
-			attack_hitbox.monitoring = false
+		update_attack_hitbox()
 		var frames = anim.sprite_frames.get_frame_count("attack")
 		if anim.frame == frames - 1:
 			state = State.CHASE
@@ -213,6 +215,12 @@ func state_dead(_delta):
 			t.start()
 
 # ------------------- Lógica ------------------- #
+func update_attack_hitbox():
+	if anim.frame == 2 or anim.frame == 6:
+		attack_hitbox.monitoring = true
+	else:
+		attack_hitbox.monitoring = false
+
 func take_damage(amount, enemyposition: Vector2, attacktype: int):
 	if state == State.DEAD:
 		return
@@ -297,3 +305,8 @@ func apply_enemy_separation(delta: float) -> Vector2:
 			if dist > 0:
 				separation += diff.normalized() * (80.0 / dist) #cambiar el valor numerico mas bajo si se empujan mucho
 	return separation * delta
+
+func _on_anim_finished():
+	if anim.animation == "ready" and state == State.READY:
+		state = State.ATTACK
+	
