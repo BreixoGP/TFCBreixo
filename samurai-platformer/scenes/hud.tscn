@@ -422,15 +422,15 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.95686275, 0.5411765, 0, 1)
 theme_override_fonts/font = ExtResource("2_6fi6k")
 theme_override_font_sizes/font_size = 18
-text = "0"
+text = "00000"
 
 [node name="crystal" type="AnimatedSprite2D" parent="HBoxContainer"]
 position = Vector2(292.00003, 40)
 rotation = 1.5714172
 scale = Vector2(1.0309756, 0.9486122)
 sprite_frames = SubResource("SpriteFrames_uxdf7")
-animation = &"picked"
-frame_progress = 0.09036238
+animation = &"empty"
+frame_progress = 0.7275911
 
 [node name="coin" type="AnimatedSprite2D" parent="HBoxContainer"]
 self_modulate = Color(0.57996243, 0.57996243, 0.57996243, 1)
