@@ -3307,7 +3307,7 @@ autoplay = "move"
 
 [node name="door" parent="." instance=ExtResource("7_ebilj")]
 position = Vector2(1113, -474.00003)
-target_scene = "res://scenes/castle/level_2.tscn"
+target_scene = "res://scenes/castle/level_14.tscn"
 target_spawn = "Spawn_right"
 
 [node name="door2" parent="." instance=ExtResource("7_ebilj")]
