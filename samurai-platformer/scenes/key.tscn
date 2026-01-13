@@ -104,6 +104,7 @@ _data = {
 }
 
 [node name="key" type="Area2D"]
+collision_mask = 5
 script = ExtResource("1_b4qnb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -114,7 +115,7 @@ shape = SubResource("RectangleShape2D_jcln5")
 skew = -1.0454522
 sprite_frames = SubResource("SpriteFrames_11q70")
 autoplay = "default"
-frame_progress = 0.98057896
+frame_progress = 0.12802702
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
