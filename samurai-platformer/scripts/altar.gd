@@ -43,4 +43,4 @@ func _on_animation_finished():
 		anim.play("off")
 func consume_crystal():
 	GameManager.has_crystal = false
-	GameManager.hud.update_crystal()
+	GameManager.hud.update_items()

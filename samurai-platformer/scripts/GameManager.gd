@@ -48,6 +48,7 @@ var activated_platforms_temp: Array[String] = []
 var collected_pickups_perm: Array[String] = []
 var defeated_enemies_perm: Array[String] = []
 var activated_platforms_perm: Array[String] = []
+
 # ============================================================
 # HABILIDADES
 # ============================================================
@@ -56,21 +57,12 @@ var wall_ability_unlocked := false
 var wall_ability_active := false
 var has_crystal := false
 var has_crystal_saved := false
+var has_key := false
+var has_key_saved := false
+
 # ============================================================
 # NIVEL / SALAS
 # ============================================================
-
-func load_current_level() -> void:
-	await load_level(levels[level_index])
-
-func load_next_level():
-	if level_index >= levels.size() - 1:
-		return
-
-	level_index += 1
-	wall_ability_active = wall_ability_unlocked
-	saved_score = score
-	await load_level(levels[level_index])
 
 func load_level(path: String) -> void:
 	# Fade a negro instantáneo
@@ -80,8 +72,8 @@ func load_level(path: String) -> void:
 	if current_level:
 		current_level.queue_free()
 
-	var scene = load(path)
-	current_level = scene.instantiate()
+	var scene = load(path).instantiate()
+	current_level = scene
 	levelcontainer.add_child(current_level)
 
 	current_level_path = path
@@ -93,6 +85,7 @@ func load_level(path: String) -> void:
 	if spawn:
 		player.global_position = spawn.global_position
 	await get_tree().process_frame  
+
 	# Cámara
 	var camera := get_tree().current_scene.get_node_or_null("Camera2D")
 	if camera and current_level.has_method("apply_camera_limits"):
@@ -100,12 +93,11 @@ func load_level(path: String) -> void:
 
 	await get_tree().process_frame
 
-	# Ahora sí hacemos fade desde negro hacia transparente
+	# Fade desde negro a visible
 	fade.fade_from_black()
 
-
 # ============================================================
-# PICKUPS (GLOBAL)
+# PICKUPS
 # ============================================================
 
 func is_pickup_collected(id: String) -> bool:
@@ -116,7 +108,7 @@ func collect_pickup(id: String) -> void:
 		collected_pickups_temp.append(id)
 
 # ============================================================
-# ENEMIGOS (GLOBAL)
+# ENEMIGOS
 # ============================================================
 
 func is_enemy_defeated(id: String) -> bool:
@@ -125,15 +117,18 @@ func is_enemy_defeated(id: String) -> bool:
 func defeat_enemy(id: String) -> void:
 	if id not in defeated_enemies_temp:
 		defeated_enemies_temp.append(id)
+
 # ============================================================
-# PLATAFORMAS (GLOBAL)
+# PLATAFORMAS
 # ============================================================
+
 func is_platform_activated(id: String) -> bool:
 	return id in activated_platforms_temp or id in activated_platforms_perm
 
 func activate_platform(id: String) -> void:
 	if id not in activated_platforms_temp:
 		activated_platforms_temp.append(id)
+
 # ============================================================
 # CHECKPOINT
 # ============================================================
@@ -155,6 +150,7 @@ func activate_checkpoint(level_path: String, checkpoint_tag: String) -> void:
 			activated_platforms_perm.append(id)
 	
 	has_crystal_saved = has_crystal
+	has_key_saved = has_key
 	collected_pickups_temp.clear()
 	defeated_enemies_temp.clear()
 	activated_platforms_temp.clear()
@@ -162,20 +158,17 @@ func activate_checkpoint(level_path: String, checkpoint_tag: String) -> void:
 	saved_score = score
 
 # ============================================================
-# RESPAWN (MUERTE)
+# RESPAWN
 # ============================================================
 
-func respawn(is_new_game := false) -> void:
-	
-	#  perder progreso temporal
+func respawn() -> void:
 	collected_pickups_temp.clear()
 	defeated_enemies_temp.clear()
 	activated_platforms_temp.clear()
-	
-	if not is_new_game:
-		score = saved_score
-		has_crystal = has_crystal_saved
 
+	score = saved_score
+	has_crystal = has_crystal_saved
+	has_key = has_key_saved
 	wall_ability_active = wall_ability_unlocked
 
 	player.set_physics_process(false)
@@ -194,7 +187,7 @@ func respawn(is_new_game := false) -> void:
 	if hud:
 		hud.update_health(player.life)
 		hud.update_points()
-		hud.update_crystal()
+		hud.update_items()
 
 	player.update_state()
 	
@@ -202,7 +195,62 @@ func respawn(is_new_game := false) -> void:
 
 	player.set_physics_process(true)
 	player.collision.disabled = false
+
+# ============================================================
+# NEW GAME / LOAD GAME
+# ============================================================
+
+func start_new_game() -> void:
+	# Reset global
+	score = 0
+	saved_score = 0
+	level_index = 0
+
+	has_crystal = false
+	has_key = false
+	has_crystal_saved = false
+	has_key_saved = false
+
+	wall_ability_unlocked = false
+	wall_ability_active = false
+
+	collected_pickups_temp.clear()
+	collected_pickups_perm.clear()
+	defeated_enemies_temp.clear()
+	defeated_enemies_perm.clear()
+	activated_platforms_temp.clear()
+	activated_platforms_perm.clear()
+
+	# Checkpoint inicial
+	current_checkpoint_level = levels[0]
+	current_checkpoint_tag = "Spawn_start"
+	player_spawn_tag = "Spawn_start"
+
 	
+
+func load_game(saved_data: Dictionary) -> void:
+	# Carga desde un diccionario guardado
+	score = saved_data.get("score", 0)
+	saved_score = saved_data.get("saved_score", 0)
+	level_index = saved_data.get("level_index", 0)
+
+	has_crystal = saved_data.get("has_crystal", false)
+	has_key = saved_data.get("has_key", false)
+	has_crystal_saved = saved_data.get("has_crystal_saved", false)
+	has_key_saved = saved_data.get("has_key_saved", false)
+
+	wall_ability_unlocked = saved_data.get("wall_ability_unlocked", false)
+	wall_ability_active = saved_data.get("wall_ability_active", false)
+
+	collected_pickups_perm = saved_data.get("collected_pickups_perm", [])
+	defeated_enemies_perm = saved_data.get("defeated_enemies_perm", [])
+	activated_platforms_perm = saved_data.get("activated_platforms_perm", [])
+
+	current_checkpoint_level = saved_data.get("checkpoint_level", levels[0])
+	current_checkpoint_tag = saved_data.get("checkpoint_tag", "Spawn_start")
+	player_spawn_tag = saved_data.get("player_spawn_tag", "Spawn_start")
+
+	respawn()
 
 # ============================================================
 # UTILIDADES
@@ -212,6 +260,7 @@ func add_point(value: int) -> void:
 	score += value
 	if hud:
 		hud.update_points()
+
 
 	#necesita codigo para mensaje en pantalla de jeugo
 	

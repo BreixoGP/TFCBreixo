@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://receu2231nlk"]
+[gd_scene load_steps=83 format=3 uid="uid://receu2231nlk"]
 
 [ext_resource type="Script" uid="uid://dopphqk4605c8" path="res://scripts/hud.gd" id="1_6fi6k"]
 [ext_resource type="FontFile" uid="uid://bngdo3g3ydmuf" path="res://assets/fonts/PixelOperator8.ttf" id="2_6fi6k"]
@@ -35,6 +35,11 @@
 [ext_resource type="Texture2D" uid="uid://1p4daccjobj2" path="res://assets/dungeon/Items/000_0042_coin4.png" id="31_ka0sb"]
 [ext_resource type="Texture2D" uid="uid://bbdku50o0rv2c" path="res://assets/dungeon/Items/000_0043_coin3.png" id="32_7r3ka"]
 [ext_resource type="Texture2D" uid="uid://b516wo6eeretn" path="res://assets/dungeon/Items/000_0045_coin.png" id="33_snea0"]
+[ext_resource type="Texture2D" uid="uid://bgerntlf7rivh" path="res://assets/cave_objects/Key.png" id="36_qccye"]
+[ext_resource type="Texture2D" uid="uid://by6p0rugwikdr" path="res://assets/cave_objects/Key2.png" id="37_flipt"]
+[ext_resource type="Texture2D" uid="uid://dr6m48nnve5dt" path="res://assets/cave_objects/Key3.png" id="38_uorui"]
+[ext_resource type="Texture2D" uid="uid://cqdxaqk5a80gc" path="res://assets/cave_objects/Key4.png" id="39_wi3kw"]
+[ext_resource type="Texture2D" uid="uid://ce21rhmbur4ey" path="res://assets/cave_objects/Key5.png" id="40_ka0sb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qccye"]
 atlas = ExtResource("2_48y67")
@@ -398,6 +403,69 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hsw7"]
+atlas = ExtResource("36_qccye")
+region = Rect2(0, 0, 129, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj8l3"]
+atlas = ExtResource("37_flipt")
+region = Rect2(0, 0, 129, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhjt4"]
+atlas = ExtResource("38_uorui")
+region = Rect2(0, 0, 129, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8y5i"]
+atlas = ExtResource("39_wi3kw")
+region = Rect2(0, 0, 129, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ymiw"]
+atlas = ExtResource("40_ka0sb")
+region = Rect2(0, 0, 129, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pca12"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hsw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj8l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhjt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8y5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ymiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8y5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhjt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj8l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hsw7")
+}],
+"loop": true,
+"name": &"picked",
+"speed": 5.0
+}]
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_6fi6k")
 
@@ -429,8 +497,7 @@ position = Vector2(292.00003, 40)
 rotation = 1.5714172
 scale = Vector2(1.0309756, 0.9486122)
 sprite_frames = SubResource("SpriteFrames_uxdf7")
-animation = &"empty"
-frame_progress = 0.7275911
+animation = &"picked"
 
 [node name="coin" type="AnimatedSprite2D" parent="HBoxContainer"]
 self_modulate = Color(0.57996243, 0.57996243, 0.57996243, 1)
@@ -447,6 +514,11 @@ show_behind_parent = true
 position = Vector2(177, 48)
 scale = Vector2(0.4, 0.25)
 texture = ExtResource("22_084dp")
+
+[node name="key" type="AnimatedSprite2D" parent="HBoxContainer"]
+position = Vector2(352, 41)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_pca12")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 anchors_preset = 12
