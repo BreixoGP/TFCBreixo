@@ -7,7 +7,7 @@ class_name Oni
 @onready var rayfloor: RayCast2D = $Flipper/rayfloor
 @onready var rayspikes: RayCast2D = $Flipper/rayspikes
 @onready var rayattack: RayCast2D = $Flipper/rayattack
-@onready var enemy_detection_area: Area2D = $enemy_detection_area
+
 @onready var enemy_avoid_area: Area2D = $Flipper/enemy_avoid_area
 @export var enemy_id: String
 @onready var blood_particles: CPUParticles2D = $Flipper/Bloodparticles
