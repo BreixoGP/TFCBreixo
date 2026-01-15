@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends RigidBody2D
 class_name Barrel
 
 @export var life := 3

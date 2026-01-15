@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var pickup_id: String
-
+var picked := false
 
 func _ready():
 	if pickup_id == "":
@@ -12,8 +12,10 @@ func _ready():
 		queue_free()
 
 func _on_body_entered(body):
+	if picked:
+		return
 	if body is DrunkMaster:
-		#emit_signal("picked_up")
+		picked = true
 		GameManager.has_key = true
 		GameManager.hud.update_items()
 		GameManager.collect_pickup(pickup_id)

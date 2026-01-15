@@ -276,10 +276,15 @@ func set_direction(dir):
 	flipper.scale.x = base_scale_x if dir > 0 else -base_scale_x
 
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
+	
+	
+	
 	if body is DrunkMaster:
 		var drunkmaster: DrunkMaster = body as DrunkMaster
 		drunkmaster.take_damage(attack_power, global_position, 0)
-
+	elif body.is_in_group("Destructibles"):
+		if body.has_method("take_damage"):
+			body.take_damage(body.life, global_position, 0)
 
 func _on_head_hitbox_body_entered(body: Node2D) -> void:
 	if body is DrunkMaster:

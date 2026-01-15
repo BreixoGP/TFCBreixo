@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://pknrmbd7fe8b"]
+[gd_scene load_steps=63 format=3 uid="uid://pknrmbd7fe8b"]
 
 [ext_resource type="Script" uid="uid://cq40rcbw7wwht" path="res://scripts/oni.gd" id="1_4j8b0"]
 [ext_resource type="Texture2D" uid="uid://nllp7kohb76e" path="res://assets/charachters/Onipurple/Attack_1purple.png" id="2_4j8b0"]
@@ -171,19 +171,35 @@ region = Rect2(512, 0, 128, 128)
 atlas = ExtResource("9_5tpul")
 region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5tpul"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b04x6"]
 atlas = ExtResource("10_boaav")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1prln"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qmto"]
 atlas = ExtResource("10_boaav")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3lypd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tpul"]
 atlas = ExtResource("10_boaav")
 region = Rect2(256, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1prln"]
+atlas = ExtResource("10_boaav")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lypd"]
+atlas = ExtResource("10_boaav")
+region = Rect2(0, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpykb"]
+atlas = ExtResource("10_boaav")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1bhh"]
+atlas = ExtResource("10_boaav")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf2mu"]
 atlas = ExtResource("10_boaav")
 region = Rect2(384, 0, 128, 128)
 
@@ -349,16 +365,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5tpul")
+"texture": SubResource("AtlasTexture_b04x6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1prln")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3lypd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bpykb")
+"texture": SubResource("AtlasTexture_4qmto")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5tpul")
@@ -371,10 +381,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bpykb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1bhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf2mu")
 }],
 "loop": false,
 "name": &"ready",
-"speed": 10.0
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xv7lt"]
@@ -417,8 +433,8 @@ shape = SubResource("CapsuleShape2D_krfje")
 position = Vector2(7, -11)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
-animation = &"attack"
-frame = 7
+animation = &"ready"
+frame = 3
 frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]

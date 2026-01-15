@@ -63,7 +63,10 @@ func load_level(path: String, spawn_tag: String = "") -> void:
 	# Si se pasa un spawn_tag, lo usamos
 	if spawn_tag != "":
 		player_spawn_tag = spawn_tag
-
+	if player:
+		player.set_physics_process(false)
+		player.collision.disabled = true
+		player.velocity = Vector2.ZERO
 	# Fade a negro instantáneo
 	fade.modulate.a = 1.0
 	await get_tree().process_frame
@@ -96,7 +99,9 @@ func load_level(path: String, spawn_tag: String = "") -> void:
 
 	# Fade de negro a transparente
 	fade.fade_from_black()
-
+	if player:
+		player.set_physics_process(true)
+		player.collision.disabled = false
 # ============================================================
 # PICKUPS
 # ============================================================
@@ -237,6 +242,8 @@ func save_game():
 		"score": score,
 		"has_crystal": has_crystal,
 		"has_key": has_key,
+		"wall_ability_unlocked": wall_ability_unlocked,
+		"wall_ability_active": wall_ability_active,
 		"collected_pickups_perm": collected_pickups_perm,
 		"defeated_enemies_perm": defeated_enemies_perm,
 		"activated_platforms_perm": activated_platforms_perm,
@@ -260,6 +267,8 @@ func load_game():
 	score = save_data["score"]
 	has_crystal = save_data["has_crystal"]
 	has_key = save_data["has_key"]
+	wall_ability_unlocked = save_data["wall_ability_unlocked"]
+	wall_ability_active = save_data["wall_ability_active"]
 	collected_pickups_perm = save_data["collected_pickups_perm"]
 	defeated_enemies_perm = save_data["defeated_enemies_perm"]
 	activated_platforms_perm = save_data["activated_platforms_perm"]

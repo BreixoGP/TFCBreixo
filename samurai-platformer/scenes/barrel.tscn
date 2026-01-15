@@ -48,7 +48,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"break",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -75,7 +75,7 @@ height = 46.0
 radius = 15.0
 height = 46.0
 
-[node name="barrel" type="StaticBody2D" groups=["Destructibles"]]
+[node name="barrel" type="RigidBody2D" groups=["Destructibles"]]
 collision_mask = 5
 script = ExtResource("1_qowtj")
 

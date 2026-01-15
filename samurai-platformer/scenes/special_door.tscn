@@ -182,7 +182,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgbum"]
-size = Vector2(81.33333, 45.333336)
+size = Vector2(30.333334, 42)
 
 [node name="special_door" type="AnimatedSprite2D"]
 scale = Vector2(1.5, 1.5)
@@ -194,7 +194,7 @@ script = ExtResource("6_odty6")
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="special_door"]
-position = Vector2(2.666668, 4.666667)
+position = Vector2(0.66666675, 5.3333335)
 shape = SubResource("RectangleShape2D_kgbum")
 
 [connection signal="body_entered" from="special_door" to="." method="_on_area_2d_body_entered"]
