@@ -228,7 +228,7 @@ func start_new_game() -> void:
 
 	# Esperamos a que las referencias existan
 	if not player or not levelcontainer or not fade:
-		print("❌ GameManager no tiene referencias inyectadas aún")
+		print(" GameManager no tiene referencias inyectadas aún")
 		return
 
 	await load_level(current_checkpoint_level)
@@ -280,7 +280,10 @@ func load_game():
 
 	# Cargar nivel usando spawn del checkpoint
 	await load_level(current_checkpoint_level, current_checkpoint_tag)
-
+	if hud and player:
+		hud.update_points()
+		hud.update_items()
+		hud.update_health(player.life)
 # ============================================================
 # UTILIDADES
 # ============================================================

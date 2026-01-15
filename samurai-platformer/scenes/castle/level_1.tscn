@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=35 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_mdyhd"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://4p50ue5qi0n4" path="res://scenes/secretdoor.tscn" id="14_1euyu"]
 [ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="14_m757n"]
 [ext_resource type="PackedScene" uid="uid://cgo15mq3bee86" path="res://scenes/cursed_hand_wallslide.tscn" id="15_1euyu"]
+[ext_resource type="PackedScene" uid="uid://ndpjoedumc8v" path="res://scenes/key.tscn" id="16_rs5f1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("1_44th0")
@@ -3846,3 +3847,6 @@ barrel_id = "l1_barrel_3"
 position = Vector2(691, -121)
 pickup_scene = ExtResource("11_wphk7")
 barrel_id = "l1_barrel_2"
+
+[node name="key" parent="." instance=ExtResource("16_rs5f1")]
+position = Vector2(519, -134)

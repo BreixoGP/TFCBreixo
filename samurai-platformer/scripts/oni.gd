@@ -31,7 +31,7 @@ var idle_time = 0.0
 @export var speed = 130.0
 @export var point_value=50
 const MAX_VERTICAL_DIFF := 40.0
-var attack_cooldown = 1.0 
+var attack_cooldown = 0.75 
 var attack_timer = 0.0
 var head_timer_started = false
 
