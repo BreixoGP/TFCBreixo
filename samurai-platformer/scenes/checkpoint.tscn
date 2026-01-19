@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://c7ea2g05asy4e" path="res://scripts/checkpoint.gd" id="1_ywqth"]
 [ext_resource type="Texture2D" uid="uid://ddcwwexocyn5s" path="res://assets/cave_objects/demon_totem.png" id="2_vsimk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yqsag"]
-radius = 21.023796
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywqth"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c45tw"]
 atlas = ExtResource("2_vsimk")
@@ -26,7 +25,8 @@ collision_mask = 5
 script = ExtResource("1_ywqth")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_yqsag")
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_ywqth")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)

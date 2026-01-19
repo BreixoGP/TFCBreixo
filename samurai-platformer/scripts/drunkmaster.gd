@@ -6,7 +6,7 @@ class_name DrunkMaster
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var punch_hitbox: Area2D = $flipper/punch_hitbox
 @onready var kick_hitbox: Area2D = $flipper/kick_hitbox
-@onready var blood_particles: CPUParticles2D = $flipper/Bloodparticle
+@onready var blood_particles: CPUParticles2D = $flipper/Bloodparticles
 
 enum State { IDLE, RUN, JUMP, FALL, WALLSLIDE, PUNCH, KICK, HURT, DEAD }
 var state: State = State.IDLE
@@ -210,7 +210,6 @@ func apply_punch_hit():
 	var enemy = get_closest_enemy_in_area(punch_hitbox)
 	
 	if enemy:
-		print("Hit:", enemy.name)
 		enemy.take_damage(punch_power, global_position, 0)
 	#punch_hitbox.monitoring = false creo que esto aqui es innecesario y me bugea el punch 
 
