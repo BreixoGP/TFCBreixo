@@ -1,4 +1,5 @@
 extends Node2D
+class_name Base_level
 @export var cam_limit_left : int
 @export var cam_limit_top : int
 @export var cam_limit_right : int

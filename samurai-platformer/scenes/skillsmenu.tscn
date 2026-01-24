@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjvf11sssce64"]
+[gd_scene load_steps=21 format=3 uid="uid://bjvf11sssce64"]
 
 [ext_resource type="FontFile" uid="uid://chh1ubq87bkcp" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_2lm20"]
 [ext_resource type="Script" uid="uid://df38flyh6vv76" path="res://scripts/skillsmenu.gd" id="1_b5nfe"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dt6mvw7bqwcmb" path="res://assets/botella1.png" id="5_vnntv"]
 [ext_resource type="Texture2D" uid="uid://brta2ipyxvfg0" path="res://assets/botella2.png" id="6_7pa17"]
 [ext_resource type="Texture2D" uid="uid://vimyhx0hs2b2" path="res://assets/fonts/Icons/Icon_13.png" id="9_vd8cd"]
+[ext_resource type="Texture2D" uid="uid://6dl2xpxk5xfu" path="res://assets/fonts/Icons/7Social-media-icons_40.png" id="10_alvbl"]
+[ext_resource type="Texture2D" uid="uid://b1ixhf3w2ksga" path="res://assets/fonts/Icons/7Social-media-icons_38.png" id="11_wv8t4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wv8t4"]
 bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
@@ -16,11 +18,14 @@ bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wd330"]
 bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qv3l"]
+bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84scb"]
 bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt2on"]
-bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
+bg_color = Color(0.957493, 0.70045406, 0, 0.7176471)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5nfe"]
 bg_color = Color(0.1907191, 0.12856773, 7.219613e-08, 0.7176471)
@@ -30,6 +35,9 @@ bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alvbl"]
 bg_color = Color(0.19215687, 0.12941177, 0, 0.7176471)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnl2j"]
+bg_color = Color(0.95686275, 0.7019608, 0, 0.7176471)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -55,14 +63,15 @@ expand_mode = 1
 modulate = Color(0.49019608, 0.36862746, 0.08235294, 1)
 top_level = true
 layout_mode = 0
-offset_left = 671.0
-offset_top = 61.0
-offset_right = 989.0
-offset_bottom = 101.0
+offset_left = 665.0
+offset_top = 59.0
+offset_right = 943.0
+offset_bottom = 99.0
 theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_wv8t4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wd330")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5qv3l")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_84scb")
 theme_override_styles/focus = SubResource("StyleBoxFlat_lt2on")
 text = "Controls"
@@ -71,18 +80,20 @@ text = "Controls"
 modulate = Color(0.4890135, 0.368769, 0.08055892, 1)
 top_level = true
 layout_mode = 0
-offset_left = 178.0
-offset_top = 60.0
-offset_right = 496.0
-offset_bottom = 100.0
+offset_left = 277.0
+offset_top = 59.0
+offset_right = 486.0
+offset_bottom = 99.0
 theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_b5nfe")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_vd8cd")
 theme_override_styles/hover = SubResource("StyleBoxFlat_alvbl")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rnl2j")
 text = "Skills"
 
 [node name="skills_cont" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 3.0
 offset_top = -6.0
@@ -247,7 +258,6 @@ offset_bottom = 76.0
 color = Color(0.25882354, 0.1254902, 0, 0.44705883)
 
 [node name="controls_cont" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.035
@@ -268,6 +278,7 @@ theme_override_colors/font_color = Color(0.8600372, 0.5785955, 0.11791359, 1)
 theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 30
 text = "Jump"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="controls_cont/Node2D"]
 top_level = true
@@ -279,6 +290,17 @@ theme_override_colors/font_color = Color(0.85882354, 0.5803922, 0.11764706, 1)
 theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 30
 text = "Move"
+
+[node name="Label9" type="Label" parent="controls_cont/Node2D"]
+top_level = true
+offset_left = 128.0
+offset_top = 541.0
+offset_right = 241.0
+offset_bottom = 572.0
+theme_override_colors/font_color = Color(0.85882354, 0.5803922, 0.11764706, 1)
+theme_override_fonts/font = ExtResource("2_cab2a")
+theme_override_font_sizes/font_size = 30
+text = "Pause"
 
 [node name="Label3" type="Label" parent="controls_cont/Node2D"]
 top_level = true
@@ -325,12 +347,13 @@ theme_override_font_sizes/font_size = 30
 text = "Special"
 
 [node name="Label7" type="Label" parent="controls_cont/Node2D"]
-offset_left = 344.0
-offset_top = 177.0
-offset_right = 474.0
-offset_bottom = 200.0
+modulate = Color(0, 0, 0, 1)
+offset_left = 340.0
+offset_top = 172.0
+offset_right = 470.0
+offset_bottom = 196.0
 theme_override_fonts/font = ExtResource("2_cab2a")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 23
 text = "PC"
 
 [node name="Label14" type="Label" parent="controls_cont/Node2D"]
@@ -353,23 +376,25 @@ theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 20
 text = "L-Joystick"
 
-[node name="Label8" type="Label" parent="controls_cont/Node2D"]
-offset_left = 495.0
-offset_top = 177.0
-offset_right = 673.0
-offset_bottom = 200.0
+[node name="Label28" type="Label" parent="controls_cont/Node2D"]
+top_level = true
+offset_left = 543.0
+offset_top = 547.0
+offset_right = 708.0
+offset_bottom = 570.0
 theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 20
-text = "PS control"
+text = "Start"
 
-[node name="Label22" type="Label" parent="controls_cont/Node2D"]
-offset_left = 756.0
-offset_top = 180.0
-offset_right = 951.0
-offset_bottom = 203.0
+[node name="Label29" type="Label" parent="controls_cont/Node2D"]
+top_level = true
+offset_left = 808.0
+offset_top = 547.0
+offset_right = 973.0
+offset_bottom = 570.0
 theme_override_fonts/font = ExtResource("2_cab2a")
 theme_override_font_sizes/font_size = 20
-text = "XBoX control"
+text = "Start"
 
 [node name="Label10" type="Label" parent="controls_cont/Node2D"]
 top_level = true
@@ -380,6 +405,16 @@ offset_bottom = 445.0
 theme_override_fonts/font = ExtResource("1_2lm20")
 theme_override_font_sizes/font_size = 25
 text = "I"
+
+[node name="Label27" type="Label" parent="controls_cont/Node2D"]
+top_level = true
+offset_left = 352.0
+offset_top = 544.0
+offset_right = 547.0
+offset_bottom = 570.0
+theme_override_fonts/font = ExtResource("1_2lm20")
+theme_override_font_sizes/font_size = 25
+text = "P"
 
 [node name="Label11" type="Label" parent="controls_cont/Node2D"]
 top_level = true
@@ -578,6 +613,29 @@ offset_top = 537.0
 offset_right = 1087.0
 offset_bottom = 591.0
 color = Color(0.25882354, 0.1254902, 0, 0.48235294)
+
+[node name="ColorRect8" type="ColorRect" parent="controls_cont/Node2D"]
+offset_left = 114.0
+offset_top = 600.0
+offset_right = 1034.0
+offset_bottom = 643.0
+color = Color(0.25882354, 0.1254902, 0, 0.48235294)
+
+[node name="TextureRect4" type="TextureRect" parent="controls_cont/Node2D"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 541.0
+offset_top = 156.0
+offset_right = 592.0
+offset_bottom = 204.0
+texture = ExtResource("10_alvbl")
+
+[node name="TextureRect5" type="TextureRect" parent="controls_cont/Node2D"]
+modulate = Color(0, 0, 0, 1)
+offset_left = 810.0
+offset_top = 158.0
+offset_right = 861.0
+offset_bottom = 206.0
+texture = ExtResource("11_wv8t4")
 
 [connection signal="pressed" from="controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="skills" to="." method="_on_skills_pressed"]
