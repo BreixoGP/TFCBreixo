@@ -11,6 +11,7 @@ class_name Crow
 @onready var enemy_avoid_area: Area2D = $Flipper/enemy_avoid_area
 @export var enemy_id: String
 @onready var blood_particles: CPUParticles2D = $Flipper/Bloodparticles
+@onready var shadow_particles: CPUParticles2D = $Flipper/Shadowparticles
 
 @onready var attack_hitbox: Area2D = $Flipper/attack_hitbox
 @onready var hurtbox: CollisionShape2D = $hurtbox
@@ -25,7 +26,7 @@ var direction = -1
 var jump_started := false
 var patrol_time = 0.0
 var idle_time = 0.0
-@export var speed = 200.0
+@export var speed = 190.0
 @export var point_value=50
 const MAX_VERTICAL_DIFF := 40.0
 var attack_cooldown = 0.5 
@@ -125,6 +126,7 @@ func state_ready(_delta):
 		
 		if not rayattack.is_colliding():
 			state = State.CHASE
+			
 		
 
 func state_attack(_delta):
@@ -236,6 +238,8 @@ func _end_knockback():
 	if state != State.DEAD:
 		state = State.JUMP_BACK
 		anim.modulate = Color(1,1,1,1)
+		 
+		
 # ------------------- Detección ------------------- #
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if state == State.DEAD: return

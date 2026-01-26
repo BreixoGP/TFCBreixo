@@ -449,7 +449,6 @@ position = Vector2(18, 23)
 shape = SubResource("CapsuleShape2D_krfje")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flipper"]
-position = Vector2(3.9999995, -3)
 scale = Vector2(1.1, 1.1)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
 animation = &"ready"
@@ -499,7 +498,24 @@ initial_velocity_max = 100.0
 angle_max = 357.5
 color = Color(1.5480369, 0.07154224, 0, 1)
 
+[node name="Shadowparticles" type="CPUParticles2D" parent="Flipper"]
+position = Vector2(-6, 17)
+amount = 70
+lifetime = 3.0
+preprocess = 0.6
+emission_shape = 1
+emission_sphere_radius = 43.24
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 50.0
+angle_max = 357.5
+scale_amount_min = 0.0
+scale_amount_max = 3.0
+color = Color(0.15642485, 1.7429347e-05, 0.15642336, 1)
+
 [node name="detection_area" type="Area2D" parent="."]
+visible = false
 collision_mask = 4
 
 [node name="detection_collision" type="CollisionShape2D" parent="detection_area"]
