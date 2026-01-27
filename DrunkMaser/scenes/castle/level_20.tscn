@@ -3294,11 +3294,11 @@ position = Vector2(954, -304)
 position = Vector2(142, -42)
 target_scene = "res://scenes/castle/level_18.tscn"
 target_spawn = "Spawn_mid"
+door_id = "l20_door_1"
 
 [node name="boss_door2" parent="." instance=ExtResource("7_1xv1i")]
 position = Vector2(1701, -40)
-target_scene = "res://scenes/castle/level_18.tscn"
-target_spawn = "Spawn_mid"
+door_id = "l20_door_2"
 
 [node name="crow_boss" parent="." node_paths=PackedStringArray("jump_areas", "fallback_marker") instance=ExtResource("8_a6smr")]
 position = Vector2(961, -80)

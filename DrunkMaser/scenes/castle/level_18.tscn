@@ -3391,4 +3391,5 @@ target_spawn = "Spawn_right"
 [node name="special_door" parent="." instance=ExtResource("13_lgcvx")]
 position = Vector2(645, -209)
 scale = Vector2(1.8, 1.8)
+target_scene = "res://scenes/castle/level_20.tscn"
 door_id = "l18_boss_door"
