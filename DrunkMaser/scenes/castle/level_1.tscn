@@ -3403,7 +3403,7 @@ position = Vector2(417, -143)
 frame_progress = 0.853357
 
 [node name="torch2" parent="torches" instance=ExtResource("7_xpv2l")]
-position = Vector2(1868, -408)
+position = Vector2(2024, -239)
 frame_progress = 0.853357
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
