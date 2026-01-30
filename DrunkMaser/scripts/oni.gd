@@ -18,7 +18,7 @@ class_name Oni
 enum State { IDLE, PATROL, CHASE, READY, READY_MELEE, ATTACK, ATTACK_MELEE, HEAD, HURT, DEAD }
 var state: State = State.IDLE
 var direction = -1
-@export var life = 3
+@export var life = 15
 @export var attack_power = 1
 var patrol_time = 0.0
 var idle_time = 0.0
@@ -175,8 +175,9 @@ func state_attack(_delta):
 			attack_timer = attack_cooldown
 
 func state_head(_delta):
-	velocity.x = 0
 	play_anim("head")
+	velocity.x = 0
+	
 	
 	var frames = anim.sprite_frames.get_frame_count("head")
 	var fps = anim.sprite_frames.get_animation_speed("head")
@@ -282,9 +283,6 @@ func set_direction(dir):
 	flipper.scale.x = base_scale_x if dir > 0 else -base_scale_x
 
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
-	
-	
-	
 	if body is DrunkMaster:
 		var drunkmaster: DrunkMaster = body as DrunkMaster
 		drunkmaster.take_damage(attack_power, global_position, 0)

@@ -353,7 +353,6 @@ offset_bottom = 49.0
 color = Color(0.25882354, 0.1254902, 0, 0.44705883)
 
 [node name="controls_cont" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.035
@@ -429,7 +428,7 @@ offset_bottom = 442.0
 theme_override_colors/font_color = Color(0.85882354, 0.5803922, 0.11764706, 1)
 theme_override_fonts/font = ExtResource("3_alvbl")
 theme_override_font_sizes/font_size = 30
-text = "Activate"
+text = "Interact"
 
 [node name="Label6" type="Label" parent="controls_cont/Node2D"]
 top_level = true

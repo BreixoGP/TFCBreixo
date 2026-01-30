@@ -10,10 +10,10 @@ class_name DrunkMaster
 @onready var overlap_area: Area2D = $flipper/overlap_area
 
 var inside_enemy_time := 0.0
-const ENEMY_FRICTION := 0.6
+const ENEMY_FRICTION := 0.4
 const CHIP_DAMAGE_TIME := 0.6
 
-enum State { IDLE, RUN, JUMP, FALL, WALLSLIDE, PUNCH, KICK, HURT, DEAD }
+enum State { IDLE, RUN, JUMP, FALL, WALLSLIDE, PUNCH, KICK, HURT, INTERACT, DEAD }
 var state: State = State.IDLE
 var attack_timer := 0.0
 const BASE_MAX_LIFE := 30.0
@@ -41,16 +41,19 @@ func _physics_process(delta: float) -> void:
 	# Aplicar gravedad siempre
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
 	# WALL SLIDE
 	if state == State.WALLSLIDE:
 		velocity.y = min(velocity.y, WALL_SLIDE_GRAVITY)
-	# Llamamos a handle_input que decide todo lo relacionado con inputs
+
+	# Manejo de inputs y mezcla con knockback
 	handle_input(delta)
+
 	# --- Penalización por atravesar enemigos ---
 	if is_inside_enemy():
 		inside_enemy_time += delta
 
-		# Fricción horizontal
+		# Fricción horizontal si no estamos atacando ni saltando
 		if state not in [State.PUNCH, State.KICK, State.JUMP]:
 			velocity.x *= ENEMY_FRICTION
 
@@ -60,7 +63,8 @@ func _physics_process(delta: float) -> void:
 			inside_enemy_time = 0.0
 	else:
 		inside_enemy_time = 0.0
-		# Mover el personaje
+
+	# Mover el personaje
 	move_and_slide()
 
 	# Actualizar estado y animaciones
@@ -72,36 +76,41 @@ func _physics_process(delta: float) -> void:
 		attack_timer -= delta
 		if attack_timer <= 0:
 			state = State.IDLE
-			#punch_hitbox.monitoring = false
 			kick_hitbox.monitoring = false
 
 
 func handle_input(_delta):
-	if state == State.DEAD:
+	if state in [State.DEAD, State.INTERACT]:
 		return
 
 	var dir := Input.get_axis("move_left", "move_right")
 	var speed_factor = 1.0
+
 	if state == State.HURT:
-		speed_factor = 0.3  # 30% de la velocidad normal
-	# Movimiento lateral
-	if state in [State.PUNCH, State.KICK] and is_on_floor():
-		velocity.x = dir * SPEED if dir != 0 else move_toward(velocity.x, 0, SPEED)
-		velocity.x *= 0.1
+		speed_factor = 0.3
+		# 70% knockback + 30% input
+		velocity.x = velocity.x * 0.7 + dir * SPEED * speed_factor
+	elif state in [State.PUNCH, State.KICK]:
+		# 10% velocidad mientras ataca
+		velocity.x = dir * SPEED * 0.1
 	else:
-		velocity.x = dir * SPEED if dir != 0 else move_toward(velocity.x, 0, SPEED)
-		if dir != 0:
-			flipper.scale.x = abs(flipper.scale.x) if dir > 0 else -abs(flipper.scale.x)
+	# Movimiento normal
+		velocity.x = dir * SPEED * speed_factor	
+
+	# Ajuste de dirección del sprite
+	if dir != 0:
+		flipper.scale.x = abs(flipper.scale.x) if dir > 0 else -abs(flipper.scale.x)
 
 	# Saltos
 	if Input.is_action_just_pressed("jump") and state not in [State.PUNCH, State.KICK]:
 		_jump()
-
 	# Ataques
 	if Input.is_action_just_pressed("punch"):
 		punch()
 	if Input.is_action_just_pressed("kick"):
 		kick()
+	if Input.is_action_just_pressed("interact"):
+		interact()
 
 func _jump():
 	if is_on_floor():
@@ -121,7 +130,7 @@ func update_state():
 	if life <= 0:
 		state = State.DEAD
 		return
-	if state in [State.PUNCH, State.KICK, State.HURT]:
+	if state in [State.PUNCH, State.KICK, State.HURT,State.INTERACT]:
 		return
 	if is_on_wall() and not is_on_floor() and (Input.is_action_pressed("move_left")
 	 or Input.is_action_pressed("move_right")) and GameManager.wall_ability_active:
@@ -149,6 +158,7 @@ func play_animation():
 			if anim.animation != "kick":
 				anim.play("kick")
 		State.HURT: anim.play("hurt")
+		State.INTERACT: anim.play("interact")
 		State.DEAD: anim.play("die")
 		
 func _on_frame_changed():
@@ -188,22 +198,23 @@ func take_damage(amount: int, from_position: Vector2,attack_type: int):
 			apply_knockback(amount,from_position,attack_type)
 			
 
-func apply_knockback(amount: int,from_position: Vector2,attack_type:int, knockback_strength: float = 75.0, knockback_time: float = 0.1):
+func apply_knockback(amount: int,from_position: Vector2,attack_type:int):
+	var knockback_strength
+	var knockback_time: float = 0.1
 	var dir = global_position - from_position
 	dir.x = sign(dir.x)  
 
 	 
 	if attack_type == 0:
 		dir.y = 0        
-		knockback_strength=50
+		knockback_strength=250
 	elif attack_type == 1:  
-		dir.y = -0.5
-		knockback_strength=75      	
+		dir.y = -200
+		knockback_strength=500      	
 	#falta attack ype 2 tal vez un golppe mas fuerte
 	elif attack_type == 3:
 		dir.y = -1
-		dir.x *= 3
-		knockback_strength = 200
+		knockback_strength = 300
 		
 	dir = dir.normalized()
 	velocity = dir * (knockback_strength * amount) 
@@ -239,8 +250,6 @@ func apply_punch_hit():
 		enemy.take_damage(punch_power, global_position, 0)
 	
 	
-	
-
 func kick():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD]:
 		return
@@ -280,6 +289,18 @@ func get_closest_enemy_in_area(area: Area2D) -> Node2D:
 				closest = body
 
 	return closest
+func interact():
+	if state in [State.DEAD, State.HURT, State.PUNCH, State.KICK, State.INTERACT]:
+		return
+
+	state = State.INTERACT
+	velocity.x = 0  # frena al jugador
+	anim.play("interact")
+
+	# Esperamos a que termine la animación antes de continuar
+	await anim.animation_finished
+	state = State.IDLE
+
 
 func gain_life(amount: int):
 	if life >= max_life:
