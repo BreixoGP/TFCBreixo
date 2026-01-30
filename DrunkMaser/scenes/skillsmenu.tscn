@@ -61,13 +61,16 @@ texture = ExtResource("1_qtkqn")
 expand_mode = 1
 
 [node name="controls" type="Button" parent="."]
-modulate = Color(0.49019608, 0.36862746, 0.08235294, 1)
 top_level = true
 layout_mode = 0
-offset_left = 665.0
-offset_top = 59.0
-offset_right = 943.0
-offset_bottom = 99.0
+offset_left = 691.0
+offset_top = 64.0
+offset_right = 969.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
+theme_override_colors/font_focus_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_colors/font_hover_color = Color(0.3647059, 0.23137255, 0, 1)
 theme_override_fonts/font = ExtResource("3_alvbl")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_wv8t4")
@@ -79,13 +82,16 @@ text = "Controls"
 
 [node name="skills" type="Button" parent="."]
 process_mode = 3
-modulate = Color(0.4890135, 0.368769, 0.08055892, 1)
 top_level = true
 layout_mode = 0
-offset_left = 277.0
-offset_top = 59.0
-offset_right = 486.0
-offset_bottom = 99.0
+offset_left = 250.0
+offset_top = 64.0
+offset_right = 459.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
+theme_override_colors/font_focus_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_colors/font_hover_color = Color(0.3647059, 0.23137255, 0, 1)
 theme_override_fonts/font = ExtResource("3_alvbl")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_b5nfe")
@@ -95,6 +101,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_rnl2j")
 text = "Skills"
 
 [node name="skills_cont" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 3.0
 offset_top = -6.0
@@ -103,107 +110,131 @@ offset_bottom = 656.0
 
 [node name="wallslide" type="Node2D" parent="skills_cont"]
 visible = false
-position = Vector2(119, 183)
+position = Vector2(116, 134)
 
 [node name="Label" type="Label" parent="skills_cont/wallslide"]
-modulate = Color(0.11519358, 0.059227265, 1.8049032e-08, 1)
+top_level = true
 texture_filter = 1
-offset_left = 24.0
-offset_top = 10.0
-offset_right = 1052.0
-offset_bottom = 53.0
+offset_left = 134.0
+offset_top = 138.0
+offset_right = 1162.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
 theme_override_fonts/font = ExtResource("3_alvbl")
 theme_override_font_sizes/font_size = 32
 text = "Now you can climb,jump and slide walls just press left or right
 against a wall and press jump"
 
 [node name="TextureRect" type="TextureRect" parent="skills_cont/wallslide"]
-offset_left = -61.0
-offset_top = -22.0
-offset_right = 20.0
-offset_bottom = 73.0
+offset_left = -51.999996
+offset_top = 6.9999995
+offset_right = 27.000004
+offset_bottom = 102.0
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_cab2a")
 
 [node name="ColorRect" type="ColorRect" parent="skills_cont/wallslide"]
 offset_left = -57.0
-offset_top = -18.0
+offset_top = 11.0
 offset_right = 964.0
 offset_bottom = 66.0
 color = Color(0.25882354, 0.1254902, 0, 0.48235294)
 
 [node name="wallslide_locked" type="Node2D" parent="skills_cont"]
-position = Vector2(120, 184)
+position = Vector2(116, 162)
 
 [node name="ColorRect" type="ColorRect" parent="skills_cont/wallslide_locked"]
 offset_left = -57.0
 offset_top = -18.0
 offset_right = 964.0
-offset_bottom = 66.0
+offset_bottom = 38.0
 color = Color(0.25882354, 0.1254902, 0, 0.48235294)
 
 [node name="boost" type="Node2D" parent="skills_cont"]
 visible = false
-position = Vector2(124, 265)
+position = Vector2(119, 210)
 
 [node name="Label" type="Label" parent="skills_cont/boost"]
-modulate = Color(0.13096565, 0.06981277, 0, 1)
+top_level = true
 texture_filter = 1
-offset_left = 24.0
-offset_top = 10.0
-offset_right = 1052.0
-offset_bottom = 53.0
+offset_left = 134.0
+offset_top = 201.0
+offset_right = 1162.0
+offset_bottom = 256.0
+theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
 theme_override_fonts/font = ExtResource("3_alvbl")
 theme_override_font_sizes/font_size = 32
 text = "This mighty liquor boosts your punch and kicks and increases
 your hp"
 
 [node name="TextureRect" type="TextureRect" parent="skills_cont/boost"]
-offset_left = -61.0
-offset_top = -22.0
-offset_right = 20.0
-offset_bottom = 73.0
+offset_left = -57.999996
+offset_top = -12.999999
+offset_right = 21.000004
+offset_bottom = 86.0
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_sb217")
 
 [node name="ColorRect2" type="ColorRect" parent="skills_cont/boost"]
 offset_left = -60.0
 offset_top = -4.0
 offset_right = 961.0
-offset_bottom = 80.0
+offset_bottom = 54.0
 color = Color(0.25882354, 0.1254902, 0, 0.44705883)
 
 [node name="boost_looked" type="Node2D" parent="skills_cont"]
-position = Vector2(120, 184)
+position = Vector2(116, 130)
 
 [node name="ColorRect" type="ColorRect" parent="skills_cont/boost_looked"]
 offset_left = -57.0
 offset_top = 76.0
 offset_right = 964.0
-offset_bottom = 160.0
+offset_bottom = 134.0
 color = Color(0.25882354, 0.1254902, 0, 0.48235294)
 
 [node name="locked3" type="Node2D" parent="skills_cont"]
-position = Vector2(118, 192)
+position = Vector2(115, 106)
 
 [node name="ColorRect" type="ColorRect" parent="skills_cont/locked3"]
 offset_left = -56.0
 offset_top = 164.0
 offset_right = 965.0
-offset_bottom = 248.0
+offset_bottom = 222.0
 color = Color(0.25882354, 0.1254902, 0, 0.48235294)
 
 [node name="locked4" type="Node2D" parent="skills_cont"]
-position = Vector2(118, 198)
+position = Vector2(116, 79)
 
 [node name="ColorRect" type="ColorRect" parent="skills_cont/locked4"]
 offset_left = -57.0
 offset_top = 254.0
 offset_right = 964.0
-offset_bottom = 338.0
+offset_bottom = 310.0
+color = Color(0.25882354, 0.1254902, 0, 0.48235294)
+
+[node name="locked5" type="Node2D" parent="skills_cont"]
+position = Vector2(117, 141)
+
+[node name="ColorRect" type="ColorRect" parent="skills_cont/locked5"]
+offset_left = -57.0
+offset_top = 254.0
+offset_right = 964.0
+offset_bottom = 310.0
+color = Color(0.25882354, 0.1254902, 0, 0.48235294)
+
+[node name="locked6" type="Node2D" parent="skills_cont"]
+position = Vector2(117, 204)
+
+[node name="ColorRect" type="ColorRect" parent="skills_cont/locked6"]
+offset_left = -57.0
+offset_top = 254.0
+offset_right = 964.0
+offset_bottom = 310.0
 color = Color(0.25882354, 0.1254902, 0, 0.48235294)
 
 [node name="misc" type="Node2D" parent="skills_cont"]
 visible = false
-position = Vector2(121, 365)
+position = Vector2(117, 278)
 
 [node name="Label" type="Label" parent="skills_cont/misc"]
 modulate = Color(0.13096565, 0.06981277, 0, 1)
@@ -217,22 +248,23 @@ theme_override_font_sizes/font_size = 18
 text = "blabla bla bla bla bla bla bla "
 
 [node name="TextureRect" type="TextureRect" parent="skills_cont/misc"]
-offset_left = -62.0
-offset_top = -14.0
-offset_right = 19.0
+offset_left = -52.999996
+offset_top = -13.999999
+offset_right = 10.000004
 offset_bottom = 84.0
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_vnntv")
 
 [node name="ColorRect2" type="ColorRect" parent="skills_cont/misc"]
 offset_left = -58.0
 offset_top = -8.0
 offset_right = 963.0
-offset_bottom = 76.0
+offset_bottom = 50.0
 color = Color(0.25882354, 0.1254902, 0, 0.44705883)
 
 [node name="misc2" type="Node2D" parent="skills_cont"]
 visible = false
-position = Vector2(122, 459)
+position = Vector2(120, 341)
 
 [node name="Label" type="Label" parent="skills_cont/misc2"]
 modulate = Color(0.13096565, 0.06981277, 0, 1)
@@ -246,17 +278,78 @@ theme_override_font_sizes/font_size = 18
 text = "blabla bla bla bla bla bla bla "
 
 [node name="TextureRect" type="TextureRect" parent="skills_cont/misc2"]
-offset_left = -63.0
-offset_top = -21.0
-offset_right = 18.0
-offset_bottom = 77.0
+offset_left = -58.999996
+offset_top = -18.999998
+offset_right = 13.000004
+offset_bottom = 78.0
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_7pa17")
 
 [node name="ColorRect2" type="ColorRect" parent="skills_cont/misc2"]
 offset_left = -61.0
 offset_top = -8.0
 offset_right = 960.0
-offset_bottom = 76.0
+offset_bottom = 49.0
+color = Color(0.25882354, 0.1254902, 0, 0.44705883)
+
+[node name="misc3" type="Node2D" parent="skills_cont"]
+visible = false
+position = Vector2(121, 403)
+
+[node name="Label" type="Label" parent="skills_cont/misc3"]
+modulate = Color(0.13096565, 0.06981277, 0, 1)
+texture_filter = 1
+offset_left = 24.0
+offset_top = 10.0
+offset_right = 1052.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("2_cab2a")
+theme_override_font_sizes/font_size = 18
+text = "blabla bla bla bla bla bla bla "
+
+[node name="TextureRect" type="TextureRect" parent="skills_cont/misc3"]
+offset_left = -58.999996
+offset_top = -18.999998
+offset_right = 13.000004
+offset_bottom = 78.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_7pa17")
+
+[node name="ColorRect2" type="ColorRect" parent="skills_cont/misc3"]
+offset_left = -61.0
+offset_top = -8.0
+offset_right = 960.0
+offset_bottom = 49.0
+color = Color(0.25882354, 0.1254902, 0, 0.44705883)
+
+[node name="misc4" type="Node2D" parent="skills_cont"]
+visible = false
+position = Vector2(121, 466)
+
+[node name="Label" type="Label" parent="skills_cont/misc4"]
+modulate = Color(0.13096565, 0.06981277, 0, 1)
+texture_filter = 1
+offset_left = 24.0
+offset_top = 10.0
+offset_right = 1052.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("2_cab2a")
+theme_override_font_sizes/font_size = 18
+text = "blabla bla bla bla bla bla bla "
+
+[node name="TextureRect" type="TextureRect" parent="skills_cont/misc4"]
+offset_left = -58.999996
+offset_top = -18.999998
+offset_right = 13.000004
+offset_bottom = 78.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_7pa17")
+
+[node name="ColorRect2" type="ColorRect" parent="skills_cont/misc4"]
+offset_left = -61.0
+offset_top = -8.0
+offset_right = 960.0
+offset_bottom = 49.0
 color = Color(0.25882354, 0.1254902, 0, 0.44705883)
 
 [node name="controls_cont" type="VBoxContainer" parent="."]

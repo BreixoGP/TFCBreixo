@@ -77,11 +77,13 @@ func _physics_process(delta: float) -> void:
 
 
 func handle_input(_delta):
-	if state in [State.HURT, State.DEAD]:
+	if state == State.DEAD:
 		return
 
 	var dir := Input.get_axis("move_left", "move_right")
-
+	var speed_factor = 1.0
+	if state == State.HURT:
+		speed_factor = 0.3  # 30% de la velocidad normal
 	# Movimiento lateral
 	if state in [State.PUNCH, State.KICK] and is_on_floor():
 		velocity.x = dir * SPEED if dir != 0 else move_toward(velocity.x, 0, SPEED)
