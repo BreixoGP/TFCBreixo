@@ -409,6 +409,7 @@ height = 339.9344
 collision_layer = 2
 floor_max_angle = 1.3089969
 script = ExtResource("1_4j8b0")
+life = 25
 
 [node name="hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(3, 24.000002)

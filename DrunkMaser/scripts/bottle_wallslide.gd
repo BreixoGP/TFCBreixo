@@ -13,4 +13,5 @@ func _on_body_entered(body):
 	if body is DrunkMaster:
 		GameManager.wall_ability_active = true
 		GameManager.collect_pickup(pickup_id)
+		GameManager.hud.show_message("GLUP...GLUP...This taste reminds me of my days climbing walls...")
 		queue_free()

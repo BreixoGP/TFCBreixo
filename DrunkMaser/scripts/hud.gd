@@ -1,7 +1,9 @@
 extends CanvasLayer
 
 
-@onready var message_label: Label = $HBoxContainer2/message_label
+@onready var box: HBoxContainer = $CanvasLayer/HBoxContainer2
+@onready var message_label: Label = $CanvasLayer/HBoxContainer2/message_label
+
 @onready var progress_bar: TextureProgressBar = $ProgressBar
 @onready var points_label: Label = $HBoxContainer/points_label
 
@@ -18,8 +20,8 @@ var base_rot := 0.0
 
 
 func _ready():
-	if message_label:
-		message_label.visible = false
+	if box:
+		box.visible = false
 
 	message_timer = Timer.new()
 	message_timer.one_shot = true
@@ -45,11 +47,11 @@ func _process(delta: float) -> void:
 		progress_bar.rotation = base_rot
 func show_message(text: String, duration := 2.5):
 	message_label.text = text
-	message_label.visible = true
+	box.visible = true
 	message_timer.start(duration)
 
 func _hide_message():
-	message_label.visible = false
+	box.visible = false
 
 func update_points():
 	points_label.text = str(GameManager.score).pad_zeros(5)

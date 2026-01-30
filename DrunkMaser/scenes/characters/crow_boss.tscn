@@ -538,8 +538,8 @@ target_position = Vector2(1, 77)
 collision_mask = 8
 
 [node name="rayattack" type="RayCast2D" parent="Flipper"]
-position = Vector2(0, 22)
-target_position = Vector2(44, 0)
+position = Vector2(-19, 22)
+target_position = Vector2(63, 0)
 collision_mask = 4
 
 [node name="enemy_avoid_area" type="Area2D" parent="Flipper"]

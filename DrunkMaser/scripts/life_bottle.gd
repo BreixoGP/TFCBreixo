@@ -15,6 +15,6 @@ func _on_body_entered(body):
 		return
 	if body is DrunkMaster:
 		picked = true
-		body.gain_life(1)
+		body.gain_life(3)
 		GameManager.collect_pickup(pickup_id)
 		queue_free()

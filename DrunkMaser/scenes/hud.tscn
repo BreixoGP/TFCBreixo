@@ -1,7 +1,6 @@
 [gd_scene load_steps=50 format=3 uid="uid://receu2231nlk"]
 
 [ext_resource type="Script" uid="uid://dopphqk4605c8" path="res://scripts/hud.gd" id="1_6fi6k"]
-[ext_resource type="FontFile" uid="uid://bngdo3g3ydmuf" path="res://assets/fonts/PixelOperator8.ttf" id="2_6fi6k"]
 [ext_resource type="FontFile" uid="uid://ba6dspjh4hfie" path="res://assets/fonts/Bitfantasy.ttf" id="2_gltyx"]
 [ext_resource type="Texture2D" uid="uid://cluihad0bx6mw" path="res://assets/dungeon/Items/000_0044_coin2.png" id="3_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://cpde3r7qd2ky3" path="res://assets/cave_objects/rune0.png" id="15_3swnk"]
@@ -13,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cu0fsgfrdvjx4" path="res://assets/helthbar/botella_v2over.png" id="24_kp442"]
 [ext_resource type="Texture2D" uid="uid://djqaky5r4xyfv" path="res://assets/helthbar/botella_v2fill.png" id="25_gltyx"]
 [ext_resource type="Texture2D" uid="uid://btghvo7b2b0g1" path="res://assets/dungeon/Items/000_0036_coin10.png" id="25_v0qwq"]
+[ext_resource type="Texture2D" uid="uid://b6wc6q8c2rnnn" path="res://assets/helthbar/chinese_frame.png" id="26_gltyx"]
 [ext_resource type="Texture2D" uid="uid://v3y8rarv86vq" path="res://assets/dungeon/Items/000_0037_coin9.png" id="26_yawqa"]
 [ext_resource type="Texture2D" uid="uid://c0xgjfsah71yu" path="res://assets/dungeon/Items/000_0038_coin8.png" id="27_qccye"]
 [ext_resource type="Texture2D" uid="uid://r1pc7v81ak24" path="res://assets/dungeon/Items/000_0039_coin7.png" id="28_flipt"]
@@ -297,23 +297,32 @@ texture_progress = ExtResource("25_gltyx")
 texture_progress_offset = Vector2(40, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -7.0
-offset_top = -153.0
-offset_right = -7.0
-offset_bottom = -137.0
+offset_left = 101.0
+offset_top = -189.0
+offset_right = -73.0
+offset_bottom = -105.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="ChineseFrame" type="Sprite2D" parent="CanvasLayer/HBoxContainer2"]
+modulate = Color(0.6261257, 0.6261257, 0.6261257, 1)
+position = Vector2(479, 47.000008)
+scale = Vector2(1.1175889, 0.42634562)
+texture = ExtResource("26_gltyx")
 
 [node name="message_label" type="Label" parent="CanvasLayer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("2_6fi6k")
-text = "mensaje de prueba por defecto kodsv kv k kdfnbkndf lbkndfkl nbkdlfn bdfklnb kldf"
+theme_override_colors/font_color = Color(0.18189457, 0.1089006, 0.0046762396, 1)
+theme_override_fonts/font = ExtResource("2_gltyx")
+theme_override_font_sizes/font_size = 32
+text = "lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"
 horizontal_alignment = 1
+autowrap_mode = 3

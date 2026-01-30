@@ -78,6 +78,7 @@ func load_level(path: String, spawn_tag: String = "") -> void:
 		player.collision.disabled = true
 		player.velocity = Vector2.ZERO
 	# Fade a negro instantáneo
+	hud.visible = false 
 	fade.modulate.a = 1.0
 	await get_tree().process_frame
 
@@ -109,6 +110,7 @@ func load_level(path: String, spawn_tag: String = "") -> void:
 
 	# Fade de negro a transparente
 	fade.fade_from_black()
+	hud.visible = true 
 	if player:
 		player.set_physics_process(true)
 		player.collision.disabled = false
@@ -185,7 +187,7 @@ func respawn():
 	collected_pickups_temp.clear()
 	defeated_enemies_temp.clear()
 	activated_platforms_temp.clear()
-
+	
 	score = saved_score
 	has_crystal = has_crystal_saved
 	has_key = has_key_saved
@@ -193,6 +195,8 @@ func respawn():
 	upgrade_attack_temp = 0
 	upgrade_life_temp = 0
 	crow_defeated_temp = crow_defeated_perm
+	
+	hud.visible = false
 	
 	if player:
 		player.set_physics_process(false)

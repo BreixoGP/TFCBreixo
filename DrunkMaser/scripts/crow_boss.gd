@@ -28,12 +28,15 @@ var direction = -1
 var jump_started := false
 var patrol_time = 0.0
 var idle_time = 0.0
-@export var speed = 190.0
+@export var speed = 180.0
 @export var point_value=50
 const MAX_VERTICAL_DIFF := 40.0
 var attack_cooldown = 0.5 
 var attack_timer = 0.0
-
+@export var chase_offset_range := 50.0
+var chase_offset_x := 0.0
+var chase_offset_timer := 0.0
+const OFFSET_REFRESH_TIME := 1.2
 @export var vertical_attack_x_range := 24.0
 @export var vertical_attack_y_diff := 40.0
 @export var vertical_attack_delay := 0.3
@@ -45,7 +48,9 @@ func _ready():
 	if enemy_id == "":
 		push_error("Enemy sin ID: " + name)
 		return
-
+		
+	chase_offset_x = randf_range(-chase_offset_range, chase_offset_range)
+	
 	if GameManager.is_enemy_defeated(enemy_id):
 		queue_free()
 		return
@@ -101,7 +106,7 @@ func state_chase(_delta):
 	if not GameManager.player:
 		state = State.IDLE
 		return
-
+	update_chase_offset(_delta)
 	var dx: float = GameManager.player.global_position.x - global_position.x
 	set_direction(sign(dx))
 	if abs(dx) < 4.0:
@@ -349,7 +354,12 @@ func _on_area_body_exited(body: Node2D):
 			state = State.CHASE  # opcional, volvemos a chase
 			jump_started = false
 
-
 func _on_area_air_attack_body_entered(body: Node2D) -> void:
 	if body is DrunkMaster:
 		body.take_damage(1,global_position,0)
+		
+func update_chase_offset(delta):
+	chase_offset_timer += delta
+	if chase_offset_timer >= OFFSET_REFRESH_TIME:
+		chase_offset_timer = 0.0
+		chase_offset_x = randf_range(-chase_offset_range, chase_offset_range)

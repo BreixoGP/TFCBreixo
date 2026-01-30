@@ -20,7 +20,7 @@ func _on_body_entered(body):
 	# Boost total
 	GameManager.upgrade_attack_temp += attack_bonus
 	GameManager.upgrade_life_temp += life_bonus
-
+	GameManager.hud.show_message("GLUP...GLUP...GLUP... Now i feel stronger than ever!")
 	body.apply_permanent_upgrades()
 
 	queue_free()

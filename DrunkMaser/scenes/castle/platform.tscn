@@ -6,6 +6,7 @@
 size = Vector2(94, 20)
 
 [node name="platform" type="AnimatableBody2D"]
+modulate = Color(0.7019608, 0.7019608, 0.7019608, 1)
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
 position = Vector2(23, 0)

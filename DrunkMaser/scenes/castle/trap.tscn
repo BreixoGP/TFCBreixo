@@ -10,6 +10,7 @@ size = Vector2(47, 20)
 size = Vector2(50, 22.5)
 
 [node name="Trap" type="Sprite2D"]
+modulate = Color(0.7019608, 0.7019608, 0.7019608, 1)
 texture = ExtResource("1_5flst")
 script = ExtResource("2_tk2q1")
 
