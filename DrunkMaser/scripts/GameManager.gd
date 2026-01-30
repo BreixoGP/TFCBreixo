@@ -188,15 +188,16 @@ func respawn():
 	wall_ability_active = wall_ability_unlocked
 	upgrade_attack_temp = 0
 	crow_defeated_temp = crow_defeated_perm
+	
 	if player:
 		player.set_physics_process(false)
 		player.collision.disabled = true
 		player.velocity = Vector2.ZERO
 
-	await load_level(current_checkpoint_level)
-	var spawn := current_level.get_node_or_null(current_checkpoint_tag) 
-	if spawn and player: 
-		player.global_position = spawn.global_position
+	await load_level(current_checkpoint_level,current_checkpoint_tag)
+	#var spawn := current_level.get_node_or_null(current_checkpoint_tag) 
+	#if spawn and player: 
+		#player.global_position = spawn.global_position
 
 	if player:
 		player.gain_life(player.max_life)

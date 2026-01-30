@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://rglfdgaqxu0j"]
+[gd_scene load_steps=22 format=4 uid="uid://rglfdgaqxu0j"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_31an8"]
 [ext_resource type="PackedScene" uid="uid://brtyiwdi261p7" path="res://scenes/castle/torch.tscn" id="2_73vy2"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://c7myrx3aogi6t" path="res://scenes/checkpoint.tscn" id="9_m5qrv"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="9_sacwm"]
 [ext_resource type="PackedScene" uid="uid://4p50ue5qi0n4" path="res://scenes/secretdoor.tscn" id="10_ipbac"]
-[ext_resource type="PackedScene" uid="uid://bc04s7hve7pwn" path="res://scenes/bottle_strength.tscn" id="12_q1nnk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("3_q1nnk")
@@ -6656,6 +6655,3 @@ barrel_id = "l12_barrel_1"
 position = Vector2(843, -277)
 pickup_scene = ExtResource("9_sacwm")
 barrel_id = "l12_barrel_2"
-
-[node name="bottle_strength" parent="." instance=ExtResource("12_q1nnk")]
-position = Vector2(313, -178)

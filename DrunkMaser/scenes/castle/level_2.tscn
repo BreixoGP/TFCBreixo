@@ -3317,6 +3317,15 @@ position = Vector2(3258, -325)
 [node name="spikes12" parent="spikes" instance=ExtResource("10_6w772")]
 position = Vector2(1018, -56)
 
+[node name="spikes20" parent="spikes" instance=ExtResource("10_6w772")]
+position = Vector2(2824, -184)
+
+[node name="spikes21" parent="spikes" instance=ExtResource("10_6w772")]
+position = Vector2(2870, -184)
+
+[node name="spikes22" parent="spikes" instance=ExtResource("10_6w772")]
+position = Vector2(2918, -184)
+
 [node name="spikes13" parent="spikes" instance=ExtResource("10_6w772")]
 position = Vector2(1064, -56)
 
@@ -3337,15 +3346,6 @@ position = Vector2(1808, -56)
 
 [node name="spikes19" parent="spikes" instance=ExtResource("10_6w772")]
 position = Vector2(1846, -56)
-
-[node name="spikes34" parent="spikes" instance=ExtResource("10_6w772")]
-position = Vector2(2826, -184)
-
-[node name="spikes35" parent="spikes" instance=ExtResource("10_6w772")]
-position = Vector2(2873, -184)
-
-[node name="spikes36" parent="spikes" instance=ExtResource("10_6w772")]
-position = Vector2(2920, -184)
 
 [node name="enemies" type="Node" parent="."]
 
