@@ -64,3 +64,11 @@ func update_skills_display():
 		boost_icon.modulate = Color()
 		boost_label.visible = false
 		
+
+
+func _on_resume_pressed() -> void:
+	GameManager.resume_game()
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
