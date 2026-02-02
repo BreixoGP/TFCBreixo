@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cpkov5n40b35i"]
+[gd_scene load_steps=46 format=3 uid="uid://cpkov5n40b35i"]
 
 [ext_resource type="Script" uid="uid://bh7uxb2j572fq" path="res://scripts/skillsmenu_scroll.gd" id="1_xuufn"]
 [ext_resource type="Texture2D" uid="uid://b6wc6q8c2rnnn" path="res://assets/helthbar/chinese_frame.png" id="2_myc5q"]
@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c88dsoac88t41" path="res://assets/KEYBOARD/KEYS/J.png" id="14_ab2ls"]
 [ext_resource type="Texture2D" uid="uid://dfmvovjchmfnr" path="res://assets/KEYBOARD/KEYS/K.png" id="15_67vl3"]
 [ext_resource type="Texture2D" uid="uid://ry87y2xiyx6s" path="res://assets/KEYBOARD/KEYS/I.png" id="16_1osux"]
-[ext_resource type="Texture2D" uid="uid://bdjqmvciuvhfs" path="res://assets/KEYBOARD/KEYS/U.png" id="17_itvgb"]
+[ext_resource type="Texture2D" uid="uid://kt8481ojqbgt" path="res://assets/KEYBOARD/KEYS/L.png" id="17_xuufn"]
 [ext_resource type="Texture2D" uid="uid://dwiyap53s0mpc" path="res://assets/KEYBOARD/KEYS/P.png" id="18_105hr"]
 [ext_resource type="Texture2D" uid="uid://dfid4jnabcp4b" path="res://assets/PS4/LEFTSTICK.png" id="19_xuufn"]
 [ext_resource type="Texture2D" uid="uid://celshbwrq8hon" path="res://assets/PS4/X.png" id="20_wrglp"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://y3evrl7i7pxm" path="res://assets/XBOX/X.png" id="28_n6tqi"]
 [ext_resource type="Texture2D" uid="uid://dsdqn1agnsv8q" path="res://assets/XBOX/R.png" id="29_d08e8"]
 [ext_resource type="Texture2D" uid="uid://nr35ehsr5rqp" path="res://assets/XBOX/Y.png" id="30_agb0q"]
+[ext_resource type="Texture2D" uid="uid://c3dhepswp53se" path="res://assets/XBOX/LEFTSTICK.png" id="30_wrglp"]
 [ext_resource type="Texture2D" uid="uid://chvt4avldw28t" path="res://assets/XBOX/START.png" id="31_bp55e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wv8t4"]
@@ -240,20 +241,22 @@ text = "Iron Gourd of the Sword Immortal— Lu Dongbin
 Pain fades with every drink.
 The body hardens, the blows grow heavier."
 
-[node name="misc" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
-visible = false
+[node name="flip" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="TextureRect" type="TextureRect" parent="skills_scroll/VBoxContainer/misc"]
+[node name="flip_icon" type="TextureRect" parent="skills_scroll/VBoxContainer/flip"]
 layout_mode = 2
 texture = ExtResource("7_gng1a")
 
-[node name="Label" type="Label" parent="skills_scroll/VBoxContainer/misc"]
+[node name="flip_label" type="Label" parent="skills_scroll/VBoxContainer/flip"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 32
-text = "  baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
+text = "Spinning Gourd of the Flute Immortal — Han Xiangzi
+One sip turns the world upside down.
+What seems like a fall becomes a sweeping kick."
 
 [node name="misc2" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
 visible = false
@@ -339,7 +342,6 @@ offset_bottom = 463.0
 color = Color(0.2509804, 0.105882354, 0, 0.5137255)
 
 [node name="controls_display" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -412,7 +414,7 @@ layout_mode = 0
 offset_left = 41.0
 offset_top = 166.0
 offset_right = 1104.0
-offset_bottom = 443.0
+offset_bottom = 450.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="controls_display/pc_controls_scroll"]
 layout_mode = 2
@@ -504,9 +506,31 @@ layout_mode = 2
 texture = ExtResource("16_1osux")
 expand_mode = 2
 
+[node name="box8" type="HBoxContainer" parent="controls_display/pc_controls_scroll/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="label" type="Label" parent="controls_display/pc_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 48
+text = "SLIDE/CLIMB          "
+
+[node name="TextureRect2" type="TextureRect" parent="controls_display/pc_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+texture = ExtResource("12_im5wy")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="controls_display/pc_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+texture = ExtResource("13_mi1ng")
+expand_mode = 2
+
 [node name="box6" type="HBoxContainer" parent="controls_display/pc_controls_scroll/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 284
+theme_override_constants/separation = 255
 alignment = 1
 
 [node name="label" type="Label" parent="controls_display/pc_controls_scroll/VBoxContainer/box6"]
@@ -514,11 +538,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 48
-text = "SPECIAL"
+text = "FLIP KICK"
 
 [node name="TextureRect2" type="TextureRect" parent="controls_display/pc_controls_scroll/VBoxContainer/box6"]
 layout_mode = 2
-texture = ExtResource("17_itvgb")
+texture = ExtResource("17_xuufn")
 expand_mode = 2
 
 [node name="box7" type="HBoxContainer" parent="controls_display/pc_controls_scroll/VBoxContainer"]
@@ -545,7 +569,7 @@ layout_mode = 0
 offset_left = 41.0
 offset_top = 166.0
 offset_right = 1104.0
-offset_bottom = 443.0
+offset_bottom = 452.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="controls_display/ps_controls_scroll"]
 layout_mode = 2
@@ -637,9 +661,31 @@ layout_mode = 2
 texture = ExtResource("23_syh76")
 expand_mode = 2
 
+[node name="box8" type="HBoxContainer" parent="controls_display/ps_controls_scroll/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="label" type="Label" parent="controls_display/ps_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 48
+text = "SLIDE/CLIMB          "
+
+[node name="TextureRect2" type="TextureRect" parent="controls_display/ps_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+texture = ExtResource("19_xuufn")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="controls_display/ps_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+texture = ExtResource("20_wrglp")
+expand_mode = 2
+
 [node name="box6" type="HBoxContainer" parent="controls_display/ps_controls_scroll/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 284
+theme_override_constants/separation = 256
 alignment = 1
 
 [node name="label" type="Label" parent="controls_display/ps_controls_scroll/VBoxContainer/box6"]
@@ -647,7 +693,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 48
-text = "SPECIAL"
+text = "FLIP KICK"
 
 [node name="TextureRect2" type="TextureRect" parent="controls_display/ps_controls_scroll/VBoxContainer/box6"]
 layout_mode = 2
@@ -678,7 +724,7 @@ layout_mode = 0
 offset_left = 41.0
 offset_top = 166.0
 offset_right = 1104.0
-offset_bottom = 443.0
+offset_bottom = 446.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="controls_display/xbox_controls_scroll"]
 layout_mode = 2
@@ -770,9 +816,31 @@ layout_mode = 2
 texture = ExtResource("29_d08e8")
 expand_mode = 2
 
+[node name="box8" type="HBoxContainer" parent="controls_display/xbox_controls_scroll/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="label" type="Label" parent="controls_display/xbox_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 48
+text = "SLIDE/CLIMB          "
+
+[node name="TextureRect2" type="TextureRect" parent="controls_display/xbox_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+texture = ExtResource("30_wrglp")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="controls_display/xbox_controls_scroll/VBoxContainer/box8"]
+layout_mode = 2
+texture = ExtResource("26_34ejy")
+expand_mode = 2
+
 [node name="box6" type="HBoxContainer" parent="controls_display/xbox_controls_scroll/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 284
+theme_override_constants/separation = 256
 alignment = 1
 
 [node name="label" type="Label" parent="controls_display/xbox_controls_scroll/VBoxContainer/box6"]
@@ -780,7 +848,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 48
-text = "SPECIAL"
+text = "FLIP KICK"
 
 [node name="TextureRect2" type="TextureRect" parent="controls_display/xbox_controls_scroll/VBoxContainer/box6"]
 layout_mode = 2

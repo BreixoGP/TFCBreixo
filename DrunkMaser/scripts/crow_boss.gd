@@ -7,13 +7,19 @@ class_name Crow
 @onready var rayfloor: RayCast2D = $Flipper/rayfloor
 @onready var rayspikes: RayCast2D = $Flipper/rayspikes
 @onready var rayattack: RayCast2D = $Flipper/rayattack
-@onready var rayhead: RayCast2D = $Flipper/rayhead
+
 
 @onready var enemy_avoid_area: Area2D = $Flipper/enemy_avoid_area
 @export var enemy_id: String
 @onready var blood_particles: CPUParticles2D = $Flipper/Bloodparticles
 @onready var shadow_particles: CPUParticles2D = $Flipper/Shadowparticles
 @export var jump_areas: Array[Area2D] = []
+@export var crow_phase2_scene: PackedScene
+@export var clone_scene: PackedScene
+@export var explosion_scene: PackedScene
+@export var spawn_points: Array[Node2D] = [] # 5 puntos del mapa
+@export var summon_points: Array[Node2D] = []
+@export var hp_pickup_point: Node2D
 @export var fallback_marker: Node2D  # nodo al que ir si el player sale del área
 @onready var attack_hitbox: Area2D = $Flipper/attack_hitbox
 @onready var hurtbox: CollisionShape2D = $hurtbox
@@ -23,7 +29,7 @@ class_name Crow
 enum State { IDLE, PATROL, CHASE, READY, READY_MELEE, ATTACK, ATTACK_MELEE, HURT, DEAD, JUMP_BACK }
 var state: State = State.IDLE
 var direction = -1
-@export var life = 20
+@export var life = 30
 @export var attack_power = 1
 var jump_started := false
 var patrol_time = 0.0
@@ -37,6 +43,7 @@ var attack_timer = 0.0
 var chase_offset_x := 0.0
 var chase_offset_timer := 0.0
 const OFFSET_REFRESH_TIME := 1.2
+var phase2_spawned := false
 @export var vertical_attack_x_range := 24.0
 @export var vertical_attack_y_diff := 40.0
 @export var vertical_attack_delay := 0.3
@@ -162,6 +169,8 @@ func state_ready(_delta):
 func state_attack(_delta):
 	if state != State.HURT:
 		velocity.x = 0
+		
+			
 		play_anim("attack")
 		update_attack_hitbox()
 		var frames = anim.sprite_frames.get_frame_count("attack")
@@ -229,7 +238,7 @@ func state_hurt(_delta):
 
 func state_dead(_delta):
 	velocity = Vector2.ZERO
-	anim.modulate = Color(0.085, 0.085, 0.085, 1.0)
+	anim.modulate = Color(0.3, 0.0, 0.257, 1.0)
 	if anim.animation != "die":
 		attack_hitbox.set_deferred("monitoring", false)
 		attack_hitbox.set_deferred("monitorable", false)
@@ -238,7 +247,7 @@ func state_dead(_delta):
 
 		#GameManager.add_point(point_value)
 		GameManager.defeat_enemy(enemy_id)
-
+		spawn_phase2_with_clones()
 		# Timer para desaparecer
 		var frames = anim.sprite_frames.get_frame_count("die")
 		var fps = anim.sprite_frames.get_animation_speed("die")
@@ -363,3 +372,38 @@ func update_chase_offset(delta):
 	if chase_offset_timer >= OFFSET_REFRESH_TIME:
 		chase_offset_timer = 0.0
 		chase_offset_x = randf_range(-chase_offset_range, chase_offset_range)
+
+func spawn_phase2_with_clones():
+	if phase2_spawned:
+		return
+	phase2_spawned = true
+	if spawn_points.size() < 5:
+		push_error("No spawns asignated to crow")
+		return
+
+	for pos_node in spawn_points:
+		var explosion = explosion_scene.instantiate()
+		explosion.global_position = pos_node.global_position
+		get_parent().add_child(explosion)
+
+	# Elegimos aleatoriamente el índice del boss
+	var boss_index = randi() % spawn_points.size()
+
+	# Spawn del boss original
+	var original_pos = spawn_points[boss_index].global_position
+	var crow2_original = crow_phase2_scene.instantiate()
+	crow2_original.summon_points = summon_points
+	crow2_original.hp_pickup_point = hp_pickup_point
+	crow2_original.global_position = original_pos
+	get_parent().add_child(crow2_original)
+
+	# Spawn de clones en los demás puntos
+	for i in range(spawn_points.size()):
+		if i == boss_index:
+			continue # ya colocamos al boss
+		var pos = spawn_points[i].global_position
+		var crow2_clone = clone_scene.instantiate()
+		crow2_clone.global_position = pos
+		crow2_clone.boss_node = crow2_original
+		crow2_clone.connect("clone_hit", Callable(crow2_original, "_on_clone_hit"))
+		get_parent().add_child(crow2_clone)

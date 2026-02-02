@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=28 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_mdyhd"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cgo15mq3bee86" path="res://scenes/bottle_wallside.tscn" id="16_hj34y"]
 [ext_resource type="PackedScene" uid="uid://pknrmbd7fe8b" path="res://scenes/characters/oni_purple.tscn" id="16_rs5f1"]
 [ext_resource type="Texture2D" uid="uid://brevtewbtyw78" path="res://assets/castle/Dungeon_brick_wall_purple.png.png" id="17_hj34y"]
+[ext_resource type="PackedScene" uid="uid://dcp8thn41vkwa" path="res://scenes/bottle_flip.tscn" id="18_nyii5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("1_44th0")
@@ -3580,3 +3581,6 @@ modulate = Color(0.39215687, 0.39215687, 0.39215687, 1)
 show_behind_parent = true
 position = Vector2(2823, -57)
 texture = ExtResource("17_hj34y")
+
+[node name="bottle_flip" parent="." instance=ExtResource("18_nyii5")]
+position = Vector2(346, -117)

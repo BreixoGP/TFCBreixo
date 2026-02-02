@@ -6,7 +6,8 @@ class_name DrunkMaster
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var punch_hitbox: Area2D = $flipper/punch_hitbox
 @onready var kick_hitbox: Area2D = $flipper/kick_hitbox
-@onready var blood_particles: CPUParticles2D = $flipper/Bloodparticles
+@onready var blood_particles: CPUParticles2D = $flipper/CanvasLayer/Bloodparticles
+
 @onready var overlap_area: Area2D = $flipper/overlap_area
 @onready var flip_hitbox: Area2D = $flipper/flip_hitbox
 
@@ -91,7 +92,7 @@ func handle_input(_delta):
 		speed_factor = 0.3
 		# 70% knockback + 30% input
 		velocity.x = velocity.x * 0.7 + dir * SPEED * speed_factor
-	elif state in [State.PUNCH, State.KICK ,State.FLIP]:
+	elif state in [State.PUNCH, State.KICK ,State.FLIP] and is_on_floor():
 		# 10% velocidad mientras ataca
 		velocity.x = dir * SPEED * 0.1
 	else:
@@ -174,7 +175,7 @@ func _on_frame_changed():
 	if state == State.KICK:
 		kick_hitbox.monitoring = (anim.frame == 3)
 	if state == State.FLIP:
-		flip_hitbox.monitoring = (anim.frame == 3)
+		flip_hitbox.monitoring = (anim.frame == 5)
 		
 # DAÑO Y KNOCKBACK
 func take_damage(amount: int, from_position: Vector2,attack_type: int):
@@ -270,7 +271,8 @@ func kick():
 func flip():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD, State.FLIP]:
 		return
-		
+	if not GameManager.flip_ability_active:
+		return
 	state = State.FLIP
 	anim.play("flip")
 	
@@ -351,4 +353,4 @@ func apply_permanent_upgrades():
 func _on_flip_hitbox_body_entered(body: Node2D) -> void:
 	if not (body.is_in_group("Enemies") or body.is_in_group("Destructibles")):
 		return
-	body.take_damage(3,global_position,3)
+	body.take_damage(30,global_position,3) #de moemnto hardcodeado falta variable

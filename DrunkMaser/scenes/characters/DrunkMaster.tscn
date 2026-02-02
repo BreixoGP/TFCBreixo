@@ -68,13 +68,13 @@ region = Rect2(1024, 0, 128, 128)
 atlas = ExtResource("9_1hk1y")
 region = Rect2(1152, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oa0o5"]
-atlas = ExtResource("6_sns30")
-region = Rect2(0, 0, 134, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1vrx"]
 atlas = ExtResource("6_sns30")
 region = Rect2(134, 0, 134, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oa0o5"]
+atlas = ExtResource("6_sns30")
+region = Rect2(0, 0, 134, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8p2ct"]
 atlas = ExtResource("6_sns30")
@@ -323,10 +323,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_t1vrx")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_oa0o5")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t1vrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oa0o5")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8p2ct")
@@ -572,7 +578,7 @@ position = Vector2(2.9999962, -27)
 scale = Vector2(0.79882807, 0.81640625)
 sprite_frames = SubResource("SpriteFrames_uni4o")
 animation = &"flip"
-frame = 6
+frame = 8
 frame_progress = 1.0
 
 [node name="kick_hitbox" type="Area2D" parent="flipper"]

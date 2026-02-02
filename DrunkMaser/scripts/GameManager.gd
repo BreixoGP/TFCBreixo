@@ -52,6 +52,8 @@ var activated_platforms_perm: Array[String] = []
 # ============================================================
 var wall_ability_unlocked := false
 var wall_ability_active := false
+var flip_ability_active:= false
+var flip_ability_unlocked:= false
 var has_crystal := false
 var has_crystal_saved := false
 var has_key := false
@@ -166,6 +168,7 @@ func activate_checkpoint(level_path: String, checkpoint_tag: String) -> void:
 	has_crystal_saved = has_crystal
 	has_key_saved = has_key
 	wall_ability_unlocked = wall_ability_active 
+	flip_ability_unlocked = flip_ability_active
 	upgrade_attack_perm = upgrade_attack_temp
 	crow_defeated_perm = crow_defeated_temp
 	upgrade_attack_temp = 0
@@ -192,6 +195,7 @@ func respawn():
 	has_crystal = has_crystal_saved
 	has_key = has_key_saved
 	wall_ability_active = wall_ability_unlocked
+	flip_ability_active = flip_ability_unlocked
 	upgrade_attack_temp = 0
 	upgrade_life_temp = 0
 	crow_defeated_temp = crow_defeated_perm
@@ -235,6 +239,8 @@ func start_new_game() -> void:
 	has_key_saved = false
 	wall_ability_unlocked = false
 	wall_ability_active = false
+	flip_ability_unlocked = false
+	flip_ability_unlocked = false
 
 	collected_pickups_temp.clear()
 	defeated_enemies_temp.clear()
@@ -265,6 +271,8 @@ func save_game():
 		"has_key": has_key,
 		"wall_ability_unlocked": wall_ability_unlocked,
 		"wall_ability_active": wall_ability_active,
+		"flip_ability_unlocked": flip_ability_unlocked,
+		"flip_ability_active": flip_ability_active,
 		"collected_pickups_perm": collected_pickups_perm,
 		"defeated_enemies_perm": defeated_enemies_perm,
 		"activated_platforms_perm": activated_platforms_perm,
@@ -295,6 +303,8 @@ func load_game():
 	has_key = save_data["has_key"]
 	wall_ability_unlocked = save_data["wall_ability_unlocked"]
 	wall_ability_active = save_data["wall_ability_active"]
+	flip_ability_unlocked = save_data["flip_ability_unlocked"]
+	flip_ability_active = save_data["flip_ability_active"]
 	collected_pickups_perm = save_data["collected_pickups_perm"]
 	defeated_enemies_perm = save_data["defeated_enemies_perm"]
 	activated_platforms_perm = save_data["activated_platforms_perm"]

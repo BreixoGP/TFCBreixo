@@ -1,6 +1,7 @@
-[gd_scene load_steps=81 format=3 uid="uid://streydfmk15f"]
+[gd_scene load_steps=85 format=3 uid="uid://streydfmk15f"]
 
 [ext_resource type="Script" uid="uid://cqoy317gsrc4b" path="res://scripts/crow_boss.gd" id="1_quhp5"]
+[ext_resource type="PackedScene" uid="uid://ygafxmef8v38" path="res://scenes/shadow_explosion.tscn" id="2_7wjmp"]
 [ext_resource type="Texture2D" uid="uid://cw5w6nqivlauj" path="res://assets/charachters/Karasu_tengu/Attack_1.png" id="2_e42k6"]
 [ext_resource type="Texture2D" uid="uid://cijjnic08vjpj" path="res://assets/charachters/Karasu_tengu/Attack_2.png" id="3_1qycf"]
 [ext_resource type="Texture2D" uid="uid://cie84hbkuntlm" path="res://assets/charachters/Karasu_tengu/Walk.png" id="3_jyf6x"]
@@ -36,6 +37,18 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vq3l8"]
 atlas = ExtResource("2_e42k6")
 region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpbnx"]
+atlas = ExtResource("3_1qycf")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3o51"]
+atlas = ExtResource("3_1qycf")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30e5y"]
+atlas = ExtResource("3_1qycf")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_np0nr"]
 atlas = ExtResource("3_1qycf")
@@ -275,6 +288,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_rpbnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3o51")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30e5y")
+}],
+"loop": false,
+"name": &"attack2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_np0nr")
 }, {
 "duration": 1.0,
@@ -464,6 +491,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_buday")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buday")
 }],
 "loop": false,
 "name": &"ready",
@@ -500,6 +530,7 @@ height = 88.0
 collision_layer = 2
 floor_max_angle = 1.3089969
 script = ExtResource("1_quhp5")
+explosion_scene = ExtResource("2_7wjmp")
 vertical_attack_delay = 0.8
 
 [node name="hurtbox" type="CollisionShape2D" parent="."]
@@ -521,7 +552,7 @@ shape = SubResource("CapsuleShape2D_krfje")
 scale = Vector2(1.1, 1.1)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
 animation = &"ready"
-frame = 2
+frame = 3
 frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]
@@ -569,7 +600,7 @@ color = Color(1.5480369, 0.07154224, 0, 1)
 
 [node name="Shadowparticles" type="CPUParticles2D" parent="Flipper"]
 position = Vector2(-6, 17)
-amount = 70
+amount = 100
 lifetime = 3.0
 preprocess = 0.6
 emission_shape = 1

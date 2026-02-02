@@ -1,6 +1,6 @@
 extends CharacterBody2D
 class_name Oni
-
+signal died
 @onready var flipper: Node2D = $Flipper
 @onready var anim: AnimatedSprite2D = $Flipper/AnimatedSprite2D
 @onready var raywall: RayCast2D = $Flipper/raywall
@@ -212,6 +212,7 @@ func state_dead(_delta):
 		GameManager.defeat_enemy(enemy_id)
 
 		# Timer para desaparecer
+		emit_signal("died", self)
 		var frames = anim.sprite_frames.get_frame_count("die")
 		var fps = anim.sprite_frames.get_animation_speed("die")
 		if fps > 0:
