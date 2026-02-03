@@ -9,6 +9,8 @@ extends Control
 @onready var boost_label: Label = $skills_scroll/VBoxContainer/boost/boost_label
 @onready var flip_icon: TextureRect = $skills_scroll/VBoxContainer/flip/flip_icon
 @onready var flip_label: Label = $skills_scroll/VBoxContainer/flip/flip_label
+@onready var dash_icon: TextureRect = $skills_scroll/VBoxContainer/dash/dash_icon
+@onready var dash_label: Label = $skills_scroll/VBoxContainer/dash/dash_label
 @onready var wallslide_xbox: HBoxContainer = $controls_display/xbox_controls_scroll/VBoxContainer/box8
 @onready var flip_xbox: HBoxContainer = $controls_display/xbox_controls_scroll/VBoxContainer/box6
 @onready var flip_play: HBoxContainer = $controls_display/ps_controls_scroll/VBoxContainer/box6
@@ -26,7 +28,11 @@ The body hardens, the blows grow heavier."
 var flip_txt = "Gourd of the Backward Immortal— Zhang Guolao
 A retreat twists into a drunken turn.
 Those before and behind share the same fate."
-
+var dash_txt = "Drunken Breeze— Han Xiangzi
+Feet lose their way,
+the body follows the wind.
+What looked like escape
+becomes the strike."
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -99,7 +105,12 @@ func update_skills_display():
 		flip_pc.visible = false
 		flip_play.visible = false
 		flip_xbox.visible = false
-	
+	if GameManager.dash_upgrade_active:
+		dash_icon.modulate = Color(1,1,1,1)
+		dash_label.text = wallslide_txt
+	else:
+		dash_icon.modulate = Color()
+		dash_label.text = "???????"
 
 func _on_resume_pressed() -> void:
 	GameManager.resume_game()

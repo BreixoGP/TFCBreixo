@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://es0ys77byjg0"]
+
+[ext_resource type="Script" uid="uid://c6jfr8k2mdhsj" path="res://scripts/bottle_dash_upgrade.gd" id="1_q2iq1"]
+[ext_resource type="Texture2D" uid="uid://1s0vr6xevvd4" path="res://assets/botella3.png" id="2_egt70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8wb1"]
+atlas = ExtResource("2_egt70")
+region = Rect2(0, 0, 71, 95)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tywad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8wb1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_j2d6n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_07ttx"]
+resource_name = "blink"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.4512115, 1.4512115, 1.4512115, 1), Color(2.184344, 2.184344, 2.184344, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.13613568, 0.13613568]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wqn27"]
+_data = {
+&"RESET": SubResource("Animation_j2d6n"),
+&"blink": SubResource("Animation_07ttx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx30f"]
+size = Vector2(15, 22)
+
+[node name="bottle_dash_upgrade" type="Area2D"]
+collision_mask = 5
+script = ExtResource("1_q2iq1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_tywad")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_wqn27")
+}
+autoplay = "blink"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_jx30f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=28 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_mdyhd"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://btoyw8tp2yb1t" path="res://scenes/door.tscn" id="15_rs5f1"]
 [ext_resource type="PackedScene" uid="uid://cgo15mq3bee86" path="res://scenes/bottle_wallside.tscn" id="16_hj34y"]
 [ext_resource type="Texture2D" uid="uid://brevtewbtyw78" path="res://assets/castle/Dungeon_brick_wall_purple.png.png" id="17_hj34y"]
+[ext_resource type="PackedScene" uid="uid://es0ys77byjg0" path="res://scenes/bottle_dash_upgrade.tscn" id="18_byc85"]
 [ext_resource type="PackedScene" uid="uid://dcp8thn41vkwa" path="res://scenes/bottle_flip.tscn" id="18_nyii5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
@@ -3584,3 +3585,6 @@ texture = ExtResource("17_hj34y")
 
 [node name="bottle_flip" parent="." instance=ExtResource("18_nyii5")]
 position = Vector2(346, -117)
+
+[node name="bottle_dash_upgrade" parent="." instance=ExtResource("18_byc85")]
+position = Vector2(290, -101)

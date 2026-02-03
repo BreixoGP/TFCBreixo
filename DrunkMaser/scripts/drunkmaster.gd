@@ -127,7 +127,7 @@ func handle_input(_delta):
 
 	# Botón de dash en gamepad
 	if Input.is_action_just_pressed("dash_gamepad"):
-		if is_on_floor() and state not in [State.DASH, State.HURT, State.DEAD]:
+		if is_on_floor()or GameManager.dash_upgrade_active and state not in [State.DASH, State.DEAD]:
 			start_dash()
 
 	if Input.is_action_just_pressed("interact"):
@@ -147,7 +147,7 @@ func _jump():
 func _check_double_tap(dir_pressed: int):
 	var current_time = Time.get_ticks_msec() / 1000.0
 	if last_input_dir == dir_pressed and (current_time - last_input_time) <= double_tap_max_time:
-		if is_on_floor() and state not in [State.DASH, State.HURT, State.DEAD]:
+		if is_on_floor() or GameManager.dash_upgrade_active and state not in [State.DASH, State.DEAD]:
 			start_dash()
 			last_input_time = 0.0  # reset
 	else:
@@ -325,7 +325,7 @@ func start_dash():
 	dash_direction = dir.normalized()
 
 	anim.play("dash")
-
+	
 func end_dash():
 	collision_mask = original_mask  # restaurar máscara
 	state = State.IDLE

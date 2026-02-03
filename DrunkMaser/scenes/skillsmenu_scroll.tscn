@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cpkov5n40b35i"]
+[gd_scene load_steps=48 format=3 uid="uid://cpkov5n40b35i"]
 
 [ext_resource type="Script" uid="uid://bh7uxb2j572fq" path="res://scripts/skillsmenu_scroll.gd" id="1_xuufn"]
 [ext_resource type="Texture2D" uid="uid://b6wc6q8c2rnnn" path="res://assets/helthbar/chinese_frame.png" id="2_myc5q"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://c88dsoac88t41" path="res://assets/KEYBOARD/KEYS/J.png" id="14_ab2ls"]
 [ext_resource type="Texture2D" uid="uid://dfmvovjchmfnr" path="res://assets/KEYBOARD/KEYS/K.png" id="15_67vl3"]
 [ext_resource type="Texture2D" uid="uid://ry87y2xiyx6s" path="res://assets/KEYBOARD/KEYS/I.png" id="16_1osux"]
-[ext_resource type="Texture2D" uid="uid://cfv3w623ix555" path="res://assets/KEYBOARD/KEYS/SPACE.png" id="16_syh76"]
 [ext_resource type="Texture2D" uid="uid://kt8481ojqbgt" path="res://assets/KEYBOARD/KEYS/L.png" id="17_xuufn"]
 [ext_resource type="Texture2D" uid="uid://dwiyap53s0mpc" path="res://assets/KEYBOARD/KEYS/P.png" id="18_105hr"]
 [ext_resource type="Texture2D" uid="uid://dfid4jnabcp4b" path="res://assets/PS4/LEFTSTICK.png" id="19_xuufn"]
@@ -205,7 +204,7 @@ layout_mode = 0
 offset_left = 41.0
 offset_top = 153.0
 offset_right = 1104.0
-offset_bottom = 462.0
+offset_bottom = 448.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="skills_scroll"]
 layout_mode = 2
@@ -261,20 +260,18 @@ text = "Spinning Gourd of the Flute Immortal — Han Xiangzi
 One sip turns the world upside down.
 What seems like a fall becomes a sweeping kick."
 
-[node name="misc2" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
-visible = false
+[node name="dash" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="skills_scroll/VBoxContainer/misc2"]
+[node name="dash_icon" type="TextureRect" parent="skills_scroll/VBoxContainer/dash"]
 layout_mode = 2
 texture = ExtResource("7_3vmnd")
 
-[node name="Label" type="Label" parent="skills_scroll/VBoxContainer/misc2"]
+[node name="dash_label" type="Label" parent="skills_scroll/VBoxContainer/dash"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 32
-text = "baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
 
 [node name="misc3" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
 visible = false
@@ -494,7 +491,7 @@ expand_mode = 2
 
 [node name="box9" type="HBoxContainer" parent="controls_display/pc_controls_scroll/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 303
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="label" type="Label" parent="controls_display/pc_controls_scroll/VBoxContainer/box9"]
@@ -502,11 +499,16 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 48
-text = "DASH"
+text = "DASH                   "
 
 [node name="TextureRect2" type="TextureRect" parent="controls_display/pc_controls_scroll/VBoxContainer/box9"]
 layout_mode = 2
-texture = ExtResource("16_syh76")
+texture = ExtResource("12_im5wy")
+expand_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="controls_display/pc_controls_scroll/VBoxContainer/box9"]
+layout_mode = 2
+texture = ExtResource("12_im5wy")
 expand_mode = 3
 
 [node name="box5" type="HBoxContainer" parent="controls_display/pc_controls_scroll/VBoxContainer"]
