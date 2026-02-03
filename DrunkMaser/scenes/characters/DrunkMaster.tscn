@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://mxsmjwdj3tvw"]
+[gd_scene load_steps=84 format=3 uid="uid://mxsmjwdj3tvw"]
 
 [ext_resource type="Script" uid="uid://li1ill2fffw1" path="res://scripts/drunkmaster.gd" id="1_ehg33"]
 [ext_resource type="Texture2D" uid="uid://blb8kmm3wp6vh" path="res://assets/charachters/DrunkMaster/Attack_1Drunk.png" id="2_x3l2y"]
@@ -19,6 +19,18 @@ height = 50.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3l2y"]
 radius = 7.0
 height = 23.999998
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcocl"]
+atlas = ExtResource("6_rmwwx")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yytgj"]
+atlas = ExtResource("9_1hk1y")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqmp6"]
+atlas = ExtResource("9_1hk1y")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i24ww"]
 atlas = ExtResource("6_rmwwx")
@@ -87,6 +99,18 @@ region = Rect2(402, 0, 134, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ustq8"]
 atlas = ExtResource("6_sns30")
 region = Rect2(536, 0, 134, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2ibx"]
+atlas = ExtResource("9_1hk1y")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plpbs"]
+atlas = ExtResource("6_rmwwx")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjdi3"]
+atlas = ExtResource("6_rmwwx")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0om53"]
 atlas = ExtResource("6_x3l2y")
@@ -172,13 +196,13 @@ region = Rect2(1024, 0, 128, 128)
 atlas = ExtResource("9_1hk1y")
 region = Rect2(1152, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukpf2"]
-atlas = ExtResource("4_qxh6c")
-region = Rect2(0, 0, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ap1qe"]
 atlas = ExtResource("10_e7mqi")
 region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukpf2"]
+atlas = ExtResource("4_qxh6c")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7oie7"]
 atlas = ExtResource("4_qxh6c")
@@ -194,10 +218,6 @@ region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gp5ia"]
 atlas = ExtResource("2_x3l2y")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qcocl"]
-atlas = ExtResource("3_sns30")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hk1y"]
@@ -258,6 +278,20 @@ region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni4o"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcocl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yytgj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqmp6")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i24ww")
@@ -329,12 +363,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_oa0o5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t1vrx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oa0o5")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_8p2ct")
 }, {
 "duration": 1.0,
@@ -348,6 +376,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t1vrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2ibx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plpbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjdi3")
 }],
 "loop": false,
 "name": &"flip",
@@ -444,10 +481,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ukpf2")
+"texture": SubResource("AtlasTexture_ap1qe")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ap1qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukpf2")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7oie7")
@@ -465,9 +505,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gp5ia")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qcocl")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1hk1y")
@@ -534,8 +571,8 @@ height = 46.0
 radius = 37.215588
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sns30"]
-radius = 8.0
-height = 60.0
+radius = 5.0
+height = 50.0
 
 [sub_resource type="GDScript" id="GDScript_x3l2y"]
 script/source = "extends CPUParticles2D
@@ -551,8 +588,13 @@ func _process(delta: float) -> void:
 	pass
 "
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qxh6c"]
+radius = 7.0
+height = 42.0
+
 [node name="DrunkMaster" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 3
 floor_max_angle = 1.0471976
 script = ExtResource("1_ehg33")
 
@@ -577,8 +619,8 @@ texture_filter = 1
 position = Vector2(2.9999962, -27)
 scale = Vector2(0.79882807, 0.81640625)
 sprite_frames = SubResource("SpriteFrames_uni4o")
-animation = &"flip"
-frame = 8
+animation = &"dash"
+frame = 2
 frame_progress = 1.0
 
 [node name="kick_hitbox" type="Area2D" parent="flipper"]
@@ -605,7 +647,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flipper/overlap_area"]
-position = Vector2(1, -4)
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_sns30")
 debug_color = Color(0.92472935, 0.09640942, 0.6315626, 0.41960785)
 
@@ -631,6 +673,14 @@ angle_max = 357.5
 color = Color(1.5480369, 0.07154224, 0, 1)
 script = SubResource("GDScript_x3l2y")
 
+[node name="dash_hitbox" type="Area2D" parent="flipper"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flipper/dash_hitbox"]
+shape = SubResource("CapsuleShape2D_qxh6c")
+
 [connection signal="ready" from="." to="." method="_ready"]
 [connection signal="body_entered" from="flipper/kick_hitbox" to="." method="_on_kick_hitbox_body_entered"]
 [connection signal="body_entered" from="flipper/flip_hitbox" to="." method="_on_flip_hitbox_body_entered"]
+[connection signal="body_entered" from="flipper/dash_hitbox" to="." method="_on_dash_hitbox_body_entered"]

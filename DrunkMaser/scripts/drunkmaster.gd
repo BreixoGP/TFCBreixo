@@ -6,18 +6,22 @@ class_name DrunkMaster
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var punch_hitbox: Area2D = $flipper/punch_hitbox
 @onready var kick_hitbox: Area2D = $flipper/kick_hitbox
+@onready var dash_hitbox: Area2D = $flipper/dash_hitbox
+
 @onready var blood_particles: CPUParticles2D = $flipper/CanvasLayer/Bloodparticles
+@onready var drunk_master: DrunkMaster = $"."
 
 @onready var overlap_area: Area2D = $flipper/overlap_area
 @onready var flip_hitbox: Area2D = $flipper/flip_hitbox
 
-var inside_enemy_time := 0.0
-const ENEMY_FRICTION := 0.4
-const CHIP_DAMAGE_TIME := 0.6
 
-enum State { IDLE, RUN, JUMP, FALL, WALLSLIDE, PUNCH, KICK, FLIP, HURT, INTERACT, DEAD }
+enum State { IDLE, RUN, JUMP, FALL, WALLSLIDE, PUNCH, KICK, FLIP, DASH, HURT, INTERACT, DEAD }
 var state: State = State.IDLE
 var attack_timer := 0.0
+var attack_cooldown_timer := 0.0
+var attack_cooldown := 0.0
+var punch_cooldown = 0.1
+var kick_cooldown = 0.25
 const BASE_MAX_LIFE := 30.0
 var max_life := BASE_MAX_LIFE
 var life := BASE_MAX_LIFE
@@ -25,7 +29,15 @@ const BASE_PUNCH_POWER := 1
 const BASE_KICK_POWER := 2
 var punch_power = BASE_PUNCH_POWER
 var kick_power = BASE_KICK_POWER
+var dash_power = 0
 var kick_targets_hit: Array = []
+var dash_speed := 600.0 
+var dash_time := 0.2
+var dash_timer := 0.0
+var dash_cooldown := 0.5 
+var dash_cooldown_timer := 0.0
+var dash_direction := Vector2.ZERO
+var original_mask := 0  
 const MAX_KICK_TARGETS := 3
 const SPEED = 220.0
 const JUMP_VELOCITY = -330.0
@@ -39,48 +51,42 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if state == State.DEAD:
 		return
+	if state == State.DASH:
+		velocity = dash_direction * dash_speed
+		dash_timer -= delta
+		if dash_timer <= 0:
+			end_dash()
 
-	# Aplicar gravedad siempre
-	if not is_on_floor():
+	# ---------------- Timers de ataque ---------------- #
+	if attack_timer > 0:
+		attack_timer -= delta
+		if attack_timer <= 0:
+			attack_timer = 0
+			# Animación terminó: volver a IDLE y empezar cooldown
+			if state in [State.PUNCH, State.KICK, State.FLIP]:
+				state = State.IDLE
+			attack_cooldown_timer = attack_cooldown
+
+	if attack_cooldown_timer > 0:
+		attack_cooldown_timer -= delta
+		if attack_cooldown_timer < 0:
+			attack_cooldown_timer = 0
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
+		if dash_cooldown_timer < 0:
+			dash_cooldown_timer = 0
+	# ---------------- Física ---------------- #
+	if state != State.DASH and not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# WALL SLIDE
 	if state == State.WALLSLIDE:
 		velocity.y = min(velocity.y, WALL_SLIDE_GRAVITY)
 
-	# Manejo de inputs y mezcla con knockback
 	handle_input(delta)
-
-	# --- Penalización por atravesar enemigos ---
-	if is_inside_enemy():
-		inside_enemy_time += delta
-
-		# Fricción horizontal si no estamos atacando ni saltando
-		if state not in [State.PUNCH, State.KICK, State.JUMP ,State.FLIP]:
-			velocity.x *= ENEMY_FRICTION
-
-		# Daño suave si se queda demasiado
-		if inside_enemy_time >= CHIP_DAMAGE_TIME:
-			take_damage(1, global_position, 0)
-			inside_enemy_time = 0.0
-	else:
-		inside_enemy_time = 0.0
-
-	# Mover el personaje
 	move_and_slide()
-
-	# Actualizar estado y animaciones
 	update_state()
 	play_animation()
-
-	# Manejo de ataque por timer
-	if state in [State.PUNCH, State.KICK ,State.FLIP]:
-		attack_timer -= delta
-		if attack_timer <= 0:
-			state = State.IDLE
-			kick_hitbox.monitoring = false
-
-
+			
 func handle_input(_delta):
 	if state in [State.DEAD, State.INTERACT]:
 		return
@@ -96,8 +102,8 @@ func handle_input(_delta):
 		# 10% velocidad mientras ataca
 		velocity.x = dir * SPEED * 0.1
 	else:
-	# Movimiento normal
-		velocity.x = dir * SPEED * speed_factor	
+		# Movimiento normal
+		velocity.x = dir * SPEED * speed_factor
 
 	# Ajuste de dirección del sprite
 	if dir != 0:
@@ -106,15 +112,19 @@ func handle_input(_delta):
 	# Saltos
 	if Input.is_action_just_pressed("jump") and state not in [State.PUNCH, State.KICK]:
 		_jump()
-	# Ataques
-	if Input.is_action_just_pressed("punch"):
+
+	# ATAQUES: solo si no hay cooldown ni animación en curso
+	if Input.is_action_just_pressed("punch") and attack_timer == 0 and attack_cooldown_timer == 0:
 		punch()
-	if Input.is_action_just_pressed("kick"):
+	if Input.is_action_just_pressed("kick") and attack_timer == 0 and attack_cooldown_timer == 0:
 		kick()
-	if Input.is_action_just_pressed("flip"):
-		flip()
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer == 0 and state not in [State.DASH, State.HURT, State.DEAD]:
+		if GameManager.dash_upgrade_active or is_on_floor():
+			start_dash()
+
 	if Input.is_action_just_pressed("interact"):
 		interact()
+
 
 func _jump():
 	if is_on_floor():
@@ -126,15 +136,12 @@ func _jump():
 		elif Input.is_action_pressed("move_left"):
 			velocity.x = WALL_JUMP_PUSHBACK
 
-func is_inside_enemy() -> bool:
-	return overlap_area.get_overlapping_bodies().size() > 0
-
 # ESTADOS
 func update_state():
 	if life <= 0:
 		state = State.DEAD
 		return
-	if state in [State.PUNCH, State.KICK, State.HURT,State.INTERACT, State.FLIP]:
+	if state in [State.PUNCH, State.KICK, State.HURT,State.INTERACT, State.FLIP, State.DASH]:
 		return
 	if is_on_wall() and not is_on_floor() and (Input.is_action_pressed("move_left")
 	 or Input.is_action_pressed("move_right")) and GameManager.wall_ability_active:
@@ -171,16 +178,19 @@ func play_animation():
 func _on_frame_changed():
 	if state == State.PUNCH and (anim.frame == 2 or anim.frame == 5):
 		apply_punch_hit()
-
 	if state == State.KICK:
-		kick_hitbox.monitoring = (anim.frame == 3)
+		kick_hitbox.monitoring = (anim.frame == 4)
 	if state == State.FLIP:
-		flip_hitbox.monitoring = (anim.frame == 5)
-		
+		flip_hitbox.monitoring = (anim.frame == 3)
+	if state == State.DASH and anim.frame == 1:  # por ejemplo, el frame donde quieres golpear
+		dash_hitbox.monitoring = true
+	else:
+		dash_hitbox.monitoring = false
 # DAÑO Y KNOCKBACK
 func take_damage(amount: int, from_position: Vector2,attack_type: int):
 	disable_attack_hitboxes()
-	if life <= 0:
+	if life <= 0 or state == State.DASH:
+		end_dash()
 		return  # ya muerto
 
 	life -= amount
@@ -211,8 +221,7 @@ func apply_knockback(amount: int,from_position: Vector2,attack_type:int):
 	var knockback_time: float = 0.1
 	var dir = global_position - from_position
 	dir.x = sign(dir.x)  
-
-	 
+	
 	if attack_type == 0:
 		dir.y = 0        
 		knockback_strength=250
@@ -244,13 +253,15 @@ func _end_knockback():
 func punch():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD, State.FLIP]:
 		return
+	if attack_timer > 0:
+		return
 	state = State.PUNCH
 	anim.play("punch")
 	
 	var frame_count = anim.sprite_frames.get_frame_count("punch")
 	var fps = anim.sprite_frames.get_animation_speed("punch")  # velocidad de la animación
 	attack_timer = frame_count / fps  # duración automática
-	
+	attack_cooldown=punch_cooldown
 func apply_punch_hit():
 	punch_hitbox.monitoring = true
 	var enemy = get_closest_enemy_in_area(punch_hitbox)
@@ -261,12 +272,14 @@ func apply_punch_hit():
 func kick():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD, State.FLIP]:
 		return
-		
+	if attack_timer > 0:
+		return
 	state = State.KICK
 	anim.play("kick")
 	
 	attack_timer = anim.sprite_frames.get_frame_count("kick") / anim.sprite_frames.get_animation_speed("kick")
 	kick_targets_hit.clear()
+	attack_cooldown=kick_cooldown
 
 func flip():
 	if state in [State.PUNCH, State.KICK, State.HURT, State.DEAD, State.FLIP]:
@@ -277,6 +290,29 @@ func flip():
 	anim.play("flip")
 	
 	attack_timer = anim.sprite_frames.get_frame_count("flip") / anim.sprite_frames.get_animation_speed("flip")
+
+func start_dash():
+	state = State.DASH
+	dash_timer = dash_time
+	dash_cooldown_timer = dash_cooldown
+
+	# Guardar mask original y desactivar colisión con enemigos (layer 2)
+	original_mask = collision_mask
+	collision_mask &= ~(1 << 1)
+	if GameManager.dash_upgrade_active:
+		dash_power=2
+	# Dirección del dash: horizontal
+	var dir := Vector2(Input.get_axis("move_left", "move_right"), 0)
+	if dir == Vector2.ZERO:
+		dir.x = sign(flipper.scale.x)
+	dash_direction = dir.normalized()
+
+	anim.play("dash")
+
+func end_dash():
+	collision_mask = original_mask  # restaurar máscara
+	state = State.IDLE
+	velocity = Vector2.ZERO
 
 func _on_kick_hitbox_body_entered(body: Node2D) -> void:
 	if not (body.is_in_group("Enemies") or body.is_in_group("Destructibles")):
@@ -354,3 +390,10 @@ func _on_flip_hitbox_body_entered(body: Node2D) -> void:
 	if not (body.is_in_group("Enemies") or body.is_in_group("Destructibles")):
 		return
 	body.take_damage(30,global_position,3) #de moemnto hardcodeado falta variable
+
+
+func _on_dash_hitbox_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("Enemies") or dash_power == 0:
+		return
+	
+	body.take_damage(dash_power, global_position, 1)

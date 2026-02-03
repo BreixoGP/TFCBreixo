@@ -30,7 +30,7 @@ enum State { IDLE, PATROL, CHASE, READY, READY_MELEE, ATTACK, ATTACK_MELEE, HURT
 var state: State = State.IDLE
 var direction = -1
 @export var life = 30
-@export var attack_power = 1
+@export var attack_power = 2
 var jump_started := false
 var patrol_time = 0.0
 var idle_time = 0.0

@@ -28,6 +28,7 @@ const MAX_VERTICAL_DIFF := 40.0
 var attack_cooldown = 0.75 
 var attack_timer = 0.0
 var head_timer_started = false
+var _death_processed := false
 @export var chase_offset_range := 35.0
 var chase_offset_x := 0.0
 var chase_offset_timer := 0.0
@@ -36,7 +37,7 @@ const OFFSET_REFRESH_TIME := 1.2
 func _ready():
 	anim.animation_finished.connect(_on_anim_finished)
 	if enemy_id == "":
-		push_error("Enemy sin ID: " + name)
+		print("Enemy sin ID: " + name)
 		return
 
 	if GameManager.is_enemy_defeated(enemy_id):
@@ -200,28 +201,35 @@ func state_hurt(_delta):
 			state = State.CHASE
 
 func state_dead(_delta):
+	if _death_processed:
+		return
+	_death_processed = true
 	velocity = Vector2.ZERO
 
 	if anim.animation != "die":
 		attack_hitbox.set_deferred("monitoring", false)
 		attack_hitbox.set_deferred("monitorable", false)
-		hurtbox.set_deferred("disabled", true)
-		play_anim("die")
-
+		#hurtbox.set_deferred("disabled", true)
+		
+	play_anim("die")
+	var chance = randf()
+	if chance < 0.25:
+		if enemy_id != "":
+			GameManager.defeat_enemy(enemy_id)
 		#GameManager.add_point(point_value)
-		GameManager.defeat_enemy(enemy_id)
+		
 
-		# Timer para desaparecer
-		emit_signal("died", self)
-		var frames = anim.sprite_frames.get_frame_count("die")
-		var fps = anim.sprite_frames.get_animation_speed("die")
-		if fps > 0:
-			var t = Timer.new()
-			t.wait_time = frames / fps
-			t.one_shot = true
-			t.connect("timeout", Callable(self, "queue_free"))
-			add_child(t)
-			t.start()
+	# Timer para desaparecer
+	emit_signal("died", self)
+	var frames = anim.sprite_frames.get_frame_count("die")
+	var fps = anim.sprite_frames.get_animation_speed("die")
+	if fps > 0:
+		var t = Timer.new()
+		t.wait_time = frames / fps
+		t.one_shot = true
+		t.connect("timeout", Callable(self, "queue_free"))
+		add_child(t)
+		t.start()
 
 # ------------------- Lógica ------------------- #
 func update_attack_hitbox():
@@ -242,7 +250,7 @@ func take_damage(amount, enemyposition: Vector2, attacktype: int):
 		anim.modulate = Color(0.796, 0.0, 0.0, 0.741)
 		apply_knockback(amount, enemyposition, attacktype)
 
-func apply_knockback(amount:int, from_position: Vector2, attack_type:int, knockback_strength: float = 100.0,knockback_time = 0.2):
+func apply_knockback(amount:int, from_position: Vector2, attack_type:int, knockback_strength: float = 75.0,knockback_time = 0.2):
 	var dir = global_position - from_position
 	dir.x = sign(dir.x)  
 	dir.y = -1.0 if attack_type == 1.0 else 0.0

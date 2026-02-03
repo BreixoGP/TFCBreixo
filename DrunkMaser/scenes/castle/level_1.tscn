@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=27 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_mdyhd"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="14_m757n"]
 [ext_resource type="PackedScene" uid="uid://btoyw8tp2yb1t" path="res://scenes/door.tscn" id="15_rs5f1"]
 [ext_resource type="PackedScene" uid="uid://cgo15mq3bee86" path="res://scenes/bottle_wallside.tscn" id="16_hj34y"]
-[ext_resource type="PackedScene" uid="uid://pknrmbd7fe8b" path="res://scenes/characters/oni_purple.tscn" id="16_rs5f1"]
 [ext_resource type="Texture2D" uid="uid://brevtewbtyw78" path="res://assets/castle/Dungeon_brick_wall_purple.png.png" id="17_hj34y"]
 [ext_resource type="PackedScene" uid="uid://dcp8thn41vkwa" path="res://scenes/bottle_flip.tscn" id="18_nyii5"]
 
@@ -3543,7 +3542,11 @@ enemy_id = "l1_oni_2"
 
 [node name="Oni3" parent="enemies" instance=ExtResource("10_lj644")]
 position = Vector2(2563, -191)
-enemy_id = "l1_oni_2"
+enemy_id = "l1_oni3"
+
+[node name="Oni4" parent="enemies" instance=ExtResource("10_lj644")]
+position = Vector2(1988, -276)
+enemy_id = "l1_oni_4"
 
 [node name="barrels" type="Node" parent="."]
 
@@ -3566,9 +3569,6 @@ target_scene = "res://scenes/castle/level_20.tscn"
 
 [node name="bottle_wallslide" parent="." instance=ExtResource("16_hj34y")]
 position = Vector2(321, -116)
-
-[node name="Oni_purple" parent="." instance=ExtResource("16_rs5f1")]
-position = Vector2(597, -154)
 
 [node name="DungeonBrickWallPurple_png" type="Sprite2D" parent="."]
 modulate = Color(0.39256206, 0.39256206, 0.39256206, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bov7om0em5xlt"]
+[gd_scene load_steps=61 format=3 uid="uid://bov7om0em5xlt"]
 
 [ext_resource type="Texture2D" uid="uid://xbvc35twjbra" path="res://assets/charachters/Gotoku/Attack_1.png" id="1_evch6"]
 [ext_resource type="Script" uid="uid://cq40rcbw7wwht" path="res://scripts/oni.gd" id="1_lh407"]
@@ -195,22 +195,6 @@ region = Rect2(256, 0, 128, 128)
 atlas = ExtResource("9_krfje")
 region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kdr1x"]
-atlas = ExtResource("9_krfje")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yequy"]
-atlas = ExtResource("9_krfje")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_myy0b"]
-atlas = ExtResource("9_krfje")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8tfhy"]
-atlas = ExtResource("9_krfje")
-region = Rect2(384, 0, 128, 128)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_0v6m6"]
 animations = [{
 "frames": [{
@@ -380,22 +364,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l2i6h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kdr1x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yequy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_myy0b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8tfhy")
 }],
 "loop": false,
 "name": &"ready",
-"speed": 15.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xv7lt"]
@@ -434,7 +406,9 @@ shape = SubResource("CapsuleShape2D_krfje")
 position = Vector2(3.9999995, -3)
 scale = Vector2(1.1, 1.1)
 sprite_frames = SubResource("SpriteFrames_0v6m6")
-animation = &"chase"
+animation = &"ready"
+frame = 3
+frame_progress = 1.0
 
 [node name="raywall" type="RayCast2D" parent="Flipper"]
 position = Vector2(0, 37)

@@ -54,6 +54,7 @@ var wall_ability_unlocked := false
 var wall_ability_active := false
 var flip_ability_active:= false
 var flip_ability_unlocked:= false
+var dash_upgrade_active := true
 var has_crystal := false
 var has_crystal_saved := false
 var has_key := false
