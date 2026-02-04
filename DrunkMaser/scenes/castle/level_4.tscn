@@ -3315,6 +3315,9 @@ texture = ExtResource("6_e5n5g")
 [node name="Spawn_left" type="Marker2D" parent="."]
 position = Vector2(134, -31)
 
+[node name="Spawn_right" type="Marker2D" parent="."]
+position = Vector2(1260, -97)
+
 [node name="Spawn_top" type="Marker2D" parent="."]
 position = Vector2(440, -467)
 
@@ -3333,6 +3336,10 @@ autoplay = "move"
 position = Vector2(357, -490.00003)
 target_scene = "res://scenes/castle/level_8.tscn"
 target_spawn = "Spawn_right"
+
+[node name="door" parent="." instance=ExtResource("7_sjvlk")]
+position = Vector2(1356, -106.00001)
+target_scene = "res://scenes/castle/level_21.tscn"
 
 [node name="torches" type="Node" parent="."]
 
@@ -3366,6 +3373,10 @@ enemy_id = "l4_oni_4"
 [node name="Oni5" parent="enemies" instance=ExtResource("11_1gp1f")]
 position = Vector2(1363, -130)
 enemy_id = "l4_oni_5"
+
+[node name="Oni6" parent="enemies" instance=ExtResource("11_1gp1f")]
+position = Vector2(1018, -86)
+enemy_id = "l4_oni_6"
 
 [node name="spikes" type="Node" parent="."]
 
