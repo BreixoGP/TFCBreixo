@@ -230,7 +230,7 @@ func respawn():
 	if hud:
 		hud.update_health(player.life)
 		hud.update_points()
-		hud.update_items()
+		#hud.update_items()
 
 # ============================================================
 # NUEVA PARTIDA
@@ -344,7 +344,7 @@ func load_game():
 	await load_level(current_checkpoint_level, current_checkpoint_tag)
 	if hud and player:
 		hud.update_points()
-		hud.update_items()
+		#hud.update_items()
 		hud.update_health(player.life)
 		player.apply_permanent_upgrades()
 # ============================================================
@@ -370,6 +370,7 @@ func pause_game():
 		get_tree().paused = true
 		hud.visible = false 
 		pause_menu.update_skills_display()
+		pause_menu.update_items_display()
 		pause_menu.visible = true
 	
 func resume_game():

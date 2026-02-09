@@ -17,7 +17,8 @@ func _on_body_entered(body):
 	if body is DrunkMaster:
 		picked = true
 		GameManager.has_crystal = true
-		GameManager.hud.update_items()
+		#GameManager.hud.update_items()
+		GameManager.hud.show_message("Cursed Brewery altar crystal picked...")
 		GameManager.collect_pickup(pickup_id)
 
 		queue_free()

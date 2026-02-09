@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dejw52703ep8x"]
+[gd_scene load_steps=32 format=4 uid="uid://dejw52703ep8x"]
 
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="1_44th0"]
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_mdyhd"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://k1lfxg1rck6n" path="res://scenes/life_bottle.tscn" id="18_qhmr6"]
 [ext_resource type="PackedScene" uid="uid://cnndvnengu371" path="res://scenes/bottle_dash_basic.tscn" id="19_byc85"]
 [ext_resource type="Texture2D" uid="uid://f11lam58fcyu" path="res://assets/castle/Cold Corridors Files/Assets/Layers/foreground.png" id="21_shhje"]
+[ext_resource type="PackedScene" uid="uid://djaubrlvn4t3a" path="res://scenes/crystal.tscn" id="23_koucx"]
+[ext_resource type="PackedScene" uid="uid://ndpjoedumc8v" path="res://scenes/key.tscn" id="24_emeqx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("1_44th0")
@@ -2286,3 +2288,9 @@ position = Vector2(290, -101)
 
 [node name="bottle_dash_basic" parent="." instance=ExtResource("19_byc85")]
 position = Vector2(309, -180)
+
+[node name="Crystal" parent="." instance=ExtResource("23_koucx")]
+position = Vector2(492, -140)
+
+[node name="key" parent="." instance=ExtResource("24_emeqx")]
+position = Vector2(462, -183)

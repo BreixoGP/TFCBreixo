@@ -21,8 +21,22 @@ extends Control
 @onready var dash_ps: HBoxContainer = $controls_display/ps_controls_scroll/VBoxContainer/box9
 @onready var dash_xbox: HBoxContainer = $controls_display/xbox_controls_scroll/VBoxContainer/box9
 
+@onready var crystal_icon: TextureRect = $items_scroll/VBoxContainer/crystal/crystal_icon
+@onready var crystal_label: Label = $items_scroll/VBoxContainer/crystal/crystal_label
+@onready var key_icon: TextureRect = $items_scroll/VBoxContainer/key/key_icon
+@onready var key_label: Label = $items_scroll/VBoxContainer/key/key_label
+
+
 @onready var skills_scroll: ScrollContainer = $skills_scroll
 @onready var controls_display: Control = $controls_display
+@onready var items_scroll: ScrollContainer = $items_scroll
+
+var crystal_text = "Cursed Brewery Altar Crystal
+Set it in the altar.
+The platforms awaken."
+var key_text = "Golden Key
+The golden face watches.
+It opens the matching door."
 var wallslide_txt = "Drunken Crane’s Embrace— Lan Caihe
 Cling to the wall and the fall slows.
 Step toward it, then rise in a drunken leap."
@@ -53,18 +67,17 @@ func _on_skills_pressed() -> void:
 	update_skills_display()
 	controls_display.visible = false
 	skills_scroll.visible = true
+	items_scroll.visible = false
 	
-
-
 func _on_controls_pressed() -> void:
 	skills_scroll.visible = false
 	controls_display.visible = true
+	items_scroll.visible = false
 
 func _on_xbox_pressed() -> void:
 	pc_controls_scroll.visible = false
 	ps_controls_scroll.visible = false
 	xbox_controls_scroll.visible = true
-
 
 func _on_ps_pressed() -> void:
 	pc_controls_scroll.visible = false
@@ -76,6 +89,21 @@ func _on_pc_pressed() -> void:
 	xbox_controls_scroll.visible = false
 	pc_controls_scroll.visible = true
 	
+
+func _on_resume_pressed() -> void:
+	GameManager.resume_game()
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_items_pressed() -> void:
+	skills_scroll.visible = false
+	controls_display.visible = false
+	items_scroll.visible = true
+
+
 func update_skills_display():
 	if GameManager.wall_ability_active:
 		wallslide_icon.modulate = Color(1,1,1,1)
@@ -125,10 +153,16 @@ func update_skills_display():
 		dash_pc.visible = false
 		dash_ps.visible = false
 		dash_xbox.visible = false
-
-func _on_resume_pressed() -> void:
-	GameManager.resume_game()
-
-
-func _on_quit_pressed() -> void:
-	get_tree().quit()
+func update_items_display():
+	if GameManager.has_crystal:
+		crystal_icon.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		crystal_label.text = crystal_text
+	else:
+		crystal_icon.modulate = Color()
+		crystal_label.text = "???????"
+	if GameManager.has_key:
+		key_icon.modulate = Color(1,1,1,1)
+		key_label.text = key_text
+	else:
+		key_icon.modulate = Color()
+		key_label.text = "???????"

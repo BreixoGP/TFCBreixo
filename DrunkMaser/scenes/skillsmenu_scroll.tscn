@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cpkov5n40b35i"]
+[gd_scene load_steps=50 format=3 uid="uid://cpkov5n40b35i"]
 
 [ext_resource type="Script" uid="uid://bh7uxb2j572fq" path="res://scripts/skillsmenu_scroll.gd" id="1_xuufn"]
 [ext_resource type="Texture2D" uid="uid://b6wc6q8c2rnnn" path="res://assets/helthbar/chinese_frame.png" id="2_myc5q"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dt6mvw7bqwcmb" path="res://assets/botella1.png" id="7_gng1a"]
 [ext_resource type="Texture2D" uid="uid://brta2ipyxvfg0" path="res://assets/botella2.png" id="8_im5wy"]
 [ext_resource type="Texture2D" uid="uid://b5hh6vnjlvp4o" path="res://assets/botella4.png" id="9_g3pw1"]
+[ext_resource type="Texture2D" uid="uid://cpde3r7qd2ky3" path="res://assets/cave_objects/rune0.png" id="10_s3i36"]
+[ext_resource type="Texture2D" uid="uid://bgerntlf7rivh" path="res://assets/cave_objects/Key.png" id="11_uovor"]
 [ext_resource type="Texture2D" uid="uid://7qvn53u46ccb" path="res://assets/KEYBOARD/KEYS/ARROWRIGHT.png" id="12_im5wy"]
 [ext_resource type="Texture2D" uid="uid://6dl2xpxk5xfu" path="res://assets/fonts/Icons/7Social-media-icons_40.png" id="12_ngi6a"]
 [ext_resource type="Texture2D" uid="uid://b1ixhf3w2ksga" path="res://assets/fonts/Icons/7Social-media-icons_38.png" id="13_1kxw7"]
@@ -99,9 +101,9 @@ expand_mode = 1
 [node name="controls" type="Button" parent="."]
 top_level = true
 layout_mode = 0
-offset_left = 691.0
+offset_left = 724.0
 offset_top = 64.0
-offset_right = 969.0
+offset_right = 935.0
 offset_bottom = 96.0
 theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
 theme_override_colors/font_focus_color = Color(0.3647059, 0.23137255, 0, 1)
@@ -197,6 +199,26 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_alvbl")
 theme_override_styles/focus = SubResource("StyleBoxFlat_rnl2j")
 text = "Skills"
 
+[node name="Items" type="Button" parent="."]
+process_mode = 3
+top_level = true
+layout_mode = 0
+offset_left = 487.0
+offset_top = 64.0
+offset_right = 696.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
+theme_override_colors/font_focus_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_colors/font_hover_color = Color(0.3647059, 0.23137255, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_b5nfe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vd8cd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_alvbl")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rnl2j")
+text = "Items"
+
 [node name="skills_scroll" type="ScrollContainer" parent="."]
 visible = false
 top_level = true
@@ -217,6 +239,7 @@ layout_mode = 2
 [node name="wallslide_icon" type="TextureRect" parent="skills_scroll/VBoxContainer/wallslide"]
 layout_mode = 2
 texture = ExtResource("4_1kxw7")
+stretch_mode = 2
 
 [node name="wallslide_label" type="Label" parent="skills_scroll/VBoxContainer/wallslide"]
 layout_mode = 2
@@ -229,6 +252,7 @@ Step toward it, then rise in a drunken leap."
 
 [node name="dash" type="HBoxContainer" parent="skills_scroll/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="dash_icon" type="TextureRect" parent="skills_scroll/VBoxContainer/dash"]
 layout_mode = 2
@@ -335,6 +359,117 @@ theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 32
 text = "baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
 
+[node name="items_scroll" type="ScrollContainer" parent="."]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 60.0
+offset_top = 153.0
+offset_right = 1104.0
+offset_bottom = 443.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="items_scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="crystal" type="HBoxContainer" parent="items_scroll/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 101
+
+[node name="crystal_icon" type="TextureRect" parent="items_scroll/VBoxContainer/crystal"]
+layout_mode = 2
+texture = ExtResource("10_s3i36")
+stretch_mode = 3
+
+[node name="crystal_label" type="Label" parent="items_scroll/VBoxContainer/crystal"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 32
+text = "Cursed Brewery Altar Crystal
+Set it in the altar.
+The platforms awaken."
+
+[node name="key" type="HBoxContainer" parent="items_scroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="key_icon" type="TextureRect" parent="items_scroll/VBoxContainer/key"]
+layout_mode = 2
+localize_numeral_system = false
+texture = ExtResource("11_uovor")
+stretch_mode = 5
+
+[node name="key_label" type="Label" parent="items_scroll/VBoxContainer/key"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 32
+text = "Golden Key
+The golden face watches.
+It opens the matching door."
+
+[node name="misc3" type="HBoxContainer" parent="items_scroll/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="items_scroll/VBoxContainer/misc3"]
+layout_mode = 2
+texture = ExtResource("8_im5wy")
+
+[node name="Label" type="Label" parent="items_scroll/VBoxContainer/misc3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 32
+text = "baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
+
+[node name="misc4" type="HBoxContainer" parent="items_scroll/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="items_scroll/VBoxContainer/misc4"]
+layout_mode = 2
+texture = ExtResource("9_g3pw1")
+
+[node name="Label" type="Label" parent="items_scroll/VBoxContainer/misc4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 32
+text = "baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
+
+[node name="misc5" type="HBoxContainer" parent="items_scroll/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="items_scroll/VBoxContainer/misc5"]
+layout_mode = 2
+texture = ExtResource("4_1kxw7")
+
+[node name="Label" type="Label" parent="items_scroll/VBoxContainer/misc5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 32
+text = "baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
+
+[node name="misc6" type="HBoxContainer" parent="items_scroll/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="items_scroll/VBoxContainer/misc6"]
+layout_mode = 2
+texture = ExtResource("4_1kxw7")
+
+[node name="Label" type="Label" parent="items_scroll/VBoxContainer/misc6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16743919, 0.026655294, 0, 1)
+theme_override_fonts/font = ExtResource("3_ngi6a")
+theme_override_font_sizes/font_size = 32
+text = "baihbejksbnesklfjbklefsjdbklfdjbkldfjbkldfjbkldfjkbljdfklxxb"
+
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 41.0
@@ -356,7 +491,7 @@ layout_mode = 0
 offset_left = 772.0
 offset_top = 107.0
 offset_right = 807.0
-offset_bottom = 137.0
+offset_bottom = 138.0
 theme_override_colors/font_color = Color(0.12941177, 0.07058824, 0, 1)
 theme_override_fonts/font = ExtResource("3_ngi6a")
 theme_override_font_sizes/font_size = 16
@@ -934,6 +1069,7 @@ expand_mode = 2
 [connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="skills" to="." method="_on_skills_pressed"]
+[connection signal="pressed" from="Items" to="." method="_on_items_pressed"]
 [connection signal="pressed" from="controls_display/pc" to="." method="_on_pc_pressed"]
 [connection signal="pressed" from="controls_display/ps" to="." method="_on_ps_pressed"]
 [connection signal="pressed" from="controls_display/xbox" to="." method="_on_xbox_pressed"]

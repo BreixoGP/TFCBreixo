@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 	else:
 		progress_bar.position = base_pos
 		progress_bar.rotation = base_rot
+		
 func show_message(text: String, duration := 2.5):
 	message_label.text = text
 	
@@ -72,11 +73,11 @@ func update_points():
 	
 func set_max_health(hp: int):
 	progress_bar.max_value = hp
-	print(progress_bar.max_value)
+
 
 func update_health(life):
 	progress_bar.value = life
-	print(life)
+
 
 	
 func shake():

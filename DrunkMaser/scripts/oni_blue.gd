@@ -43,6 +43,7 @@ const OFFSET_REFRESH_TIME := 1.2
 @export var vertical_attack_y_diff := 40.0
 @export var vertical_attack_delay := 0.3
 var vertical_attack_timer := 0.0
+var message ="A powerful relic dropped..."
 
 func _ready():
 	anim.animation_finished.connect(_on_anim_finished)
@@ -247,6 +248,7 @@ func state_dead(_delta):
 			t.connect("timeout", Callable(self, "queue_free"))
 			add_child(t)
 			spawn_pickup()
+			GameManager.hud.show_message(message,1.5)
 			t.start()
 
 # ------------------- Lógica ------------------- #
