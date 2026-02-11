@@ -637,8 +637,6 @@ position = Vector2(2.9999962, -27)
 scale = Vector2(0.79882807, 0.81640625)
 sprite_frames = SubResource("SpriteFrames_uni4o")
 animation = &"dash"
-frame = 5
-frame_progress = 1.0
 
 [node name="kick_hitbox" type="Area2D" parent="flipper"]
 collision_layer = 3

@@ -2990,7 +2990,7 @@ barrel_id = "l1_barrel_2"
 
 [node name="door" parent="." instance=ExtResource("15_rs5f1")]
 position = Vector2(178, -253)
-target_scene = "res://scenes/field/level_1_field.tscn"
+target_scene = "res://scenes/castle/level_26.tscn"
 
 [node name="bottle_wallslide" parent="." instance=ExtResource("16_hj34y")]
 position = Vector2(80, -115)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://vv5acks3xarm"]
+[gd_scene load_steps=24 format=4 uid="uid://vv5acks3xarm"]
 
 [ext_resource type="Script" uid="uid://c7r4lk3jbcgfm" path="res://scripts/levels/level.gd" id="1_lu4p0"]
 [ext_resource type="Texture2D" uid="uid://dp3uj811uwiid" path="res://assets/castle/Medieval_tiles_free2.png" id="2_1g0c3"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://wq4hxd3afdra" path="res://scenes/barrel.tscn" id="9_ubpn4"]
 [ext_resource type="PackedScene" uid="uid://cms37xt3taisc" path="res://scenes/coin.tscn" id="11_uovb0"]
 [ext_resource type="PackedScene" uid="uid://4p50ue5qi0n4" path="res://scenes/secretdoor.tscn" id="12_sfhop"]
+[ext_resource type="PackedScene" uid="uid://btoyw8tp2yb1t" path="res://scenes/door.tscn" id="13_1g0c3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f3glw"]
 texture = ExtResource("2_1g0c3")
@@ -3642,7 +3643,7 @@ scale = Vector2(2.5, 2.5)
 target_scene = "res://scenes/castle/level_18.tscn"
 
 [node name="checkpoint" parent="." instance=ExtResource("7_q4oot")]
-position = Vector2(95, -47)
+position = Vector2(297, -44)
 
 [node name="barrel" parent="." instance=ExtResource("9_ubpn4")]
 position = Vector2(421, -35)
@@ -3667,3 +3668,7 @@ position = Vector2(873, -47)
 
 [node name="torch2" parent="." instance=ExtResource("6_pgo1p")]
 position = Vector2(657, -47)
+
+[node name="door" parent="." instance=ExtResource("13_1g0c3")]
+position = Vector2(109, -58)
+target_scene = "res://scenes/castle/level_25.tscn"
